@@ -1,1 +1,1 @@
-# CHA-hockey
+# CHA-hockey-admin

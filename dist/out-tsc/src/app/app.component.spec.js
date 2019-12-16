@@ -13,16 +13,16 @@ describe('AppComponent', () => {
         const app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();
     });
-    it(`should have as title 'CHA-hockey'`, () => {
+    it(`should have as title 'CHA-hockey-admin'`, () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('CHA-hockey');
+        expect(app.title).toEqual('CHA-hockey-admin');
     });
     it('should render title in a h1 tag', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('Welcome to CHA-hockey!');
+        expect(compiled.querySelector('h1').textContent).toContain('Welcome to CHA-hockey-admin!');
     });
 });
 //# sourceMappingURL=app.component.spec.js.map
