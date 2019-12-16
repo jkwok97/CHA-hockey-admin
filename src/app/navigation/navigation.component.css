@@ -1,0 +1,137 @@
+.main-container {
+    background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url("../../assets/images/hockey_rink.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+.header-container {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.header-text {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.title {
+    font-size: 50px;
+    color: white;
+    font-weight: 100;
+    margin: 0 20px;
+}
+
+.sub-title {
+    font-size: small;
+    color: white;
+    font-weight: 300;
+    margin: 0;
+}
+
+.body-container {
+    height: 90%;
+    width: 100%;
+}
+
+.home-button {
+    position: absolute;
+    left: 50px;
+    top: 20px;
+}
+
+
+/* *************************** MEDIA QUERIES **************************** */
+
+/* *************************** iPhone X **************************** */
+@media screen and (max-width: 812px) and (max-height: 375px) and (orientation: landscape) {
+    .header-container {
+        height: 20%;
+    }
+    .home-button {
+        left: 20px;
+    }
+}
+
+@media screen and (max-width: 807px) {
+    .header-container {
+        height: 10%;
+    }
+    .header-text {
+        height: 100%;
+        align-items: center;
+    }
+    .sub-title {
+        display: none;
+    }
+    .home-button {
+        left: 20px;
+    }
+}
+
+@media screen and (max-width: 756px) {
+    .header-container {
+        height: 15%;
+    }
+}
+
+/* *************************** iPhone 6/7/8 plus **************************** */
+@media screen and (max-width: 736px) and (max-height: 414px) and (orientation: landscape) {
+    .header-container {
+        height: 20%;
+    }
+    .home-button {
+        left: 10px;
+    }
+}
+
+@media screen and (max-width: 483px) {
+    .header-container {
+        height: 10%;
+    }
+    .title {
+        font-size: 30px;
+    }
+}
+
+/* *************************** iPhone 6/7/8 Plus **************************** */
+@media screen and (max-width: 414px) and (max-height: 812px) and (orientation: portrait) {
+    .header-container {
+        height: 10%;
+        margin-top: 20px;
+    }
+    .title {
+        font-size: 30px;
+    }
+}
+
+/* *************************** iPhone X **************************** */
+@media screen and (max-width: 375px) and (max-height: 812px) and (orientation: portrait) {
+    .header-container {
+        height: 10%;
+    }
+    .home-button {
+        left: 20px;
+    }
+}
+
+/* *************************** iPhone 6/7/8 **************************** */
+@media screen and (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+    .header-container {
+        height: 10%;
+        margin-top: 20px;
+    }
+}
+
+
+

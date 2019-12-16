@@ -1,0 +1,12 @@
+<div class="container">
+
+    <div class="welcome">
+        <mat-form-field color="accent">
+            <mat-label>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</mat-label>
+            <mat-select>
+                <mat-option (click)="logout()">Logout</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</div>
