@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MainService } from 'src/app/main/main.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -32,7 +32,8 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
 
   constructor(
     private _mainService: MainService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) {
     this.position = this._mainService.playerPosition;
     this.hits = this._mainService.playerHits;
@@ -122,7 +123,7 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.setPlayerCard();
+    this._router.navigate(['/main']);
   }
 
   ngOnDestroy() {
