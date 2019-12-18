@@ -11,13 +11,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthService } from './main/auth.service';
+import { PlayerCardComponent } from './players/player-card/player-card.component';
+import { PlayersComponent } from './players/players.component';
+import { GoaliesComponent } from './goalies/goalies.component';
+import { MessagePopperComponent } from './message-popper/message-popper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    PlayerCardComponent,
+    PlayersComponent,
+    GoaliesComponent,
+    MessagePopperComponent
   ],
   imports: [
     BrowserModule,

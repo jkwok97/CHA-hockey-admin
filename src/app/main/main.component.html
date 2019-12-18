@@ -1,12 +1,23 @@
 <div class="container">
 
-    <div class="welcome">
-        <mat-form-field color="accent">
-            <mat-label>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</mat-label>
-            <mat-select>
-                <mat-option (click)="logout()">Logout</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <div class="player-search" *ngIf="!isMobile">
+        <div class="players-container">
+            <app-players></app-players>
+        </div>
+        <div class="players-container">
+            <app-goalies></app-goalies>
+        </div>
     </div>
+
+    <!-- <div class="player-search" *ngIf="isMobile"> -->
+        <mat-tab-group color="accent" *ngIf="isMobile">
+            <mat-tab label="Players">
+                <app-players></app-players>
+            </mat-tab>
+            <mat-tab label="Goalies">
+                <app-goalies></app-goalies>
+            </mat-tab>
+        </mat-tab-group>
+    <!-- </div> -->
 
 </div>

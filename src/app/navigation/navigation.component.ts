@@ -3,6 +3,8 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { takeWhile, filter } from 'rxjs/operators';
 import { AuthService } from '../main/auth.service';
 import { User } from '../_models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MainService } from '../main/main.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,11 +18,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   currentUser: User;
 
+  duration = 5;
+
   route: string;
 
   constructor(
     private _router: Router, 
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _mainService: MainService,
+    private _popper: MatSnackBar
   ) { 
 
     // redirect to home if already logged in
@@ -28,7 +34,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       // console.log(this._authService.currentUserValue)
       this.loggedIn = true;
       // console.log(this.loggedIn);
-      this._router.navigate(['login']);
+      this._router.navigate(['main']);
     } else {
       // console.log(this.loggedIn);
 
@@ -39,6 +45,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._router.navigate(['login']);
+    this._mainService.popupListener().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let message = resp as string;
+      this.openPopup(message, "Update");
+    });
+  }
+
+  openPopup(message, action) {
+    this._popper.open(message, action, {
+      duration: this.duration * 1000,
+    });
   }
 
   ngOnDestroy() {

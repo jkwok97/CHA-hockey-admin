@@ -49,9 +49,8 @@ export class MainComponent implements OnInit, OnDestroy {
         }
   }
 
-  openTeam(shortName, season, type) {
-    this._router.navigate([`/teams/${shortName}/${season}/${type}`]);
-    window.scrollTo(0,0);
+  onTabChange(event) {
+    console.log(event);
   }
 
   logout() {
