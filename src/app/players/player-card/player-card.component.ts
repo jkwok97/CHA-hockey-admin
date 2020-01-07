@@ -22,6 +22,8 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
   hits: string;
   seasonType: string;
   selected: string;
+  type: string;
+  prevTeam: string;
 
   player: any;
   team: any;
@@ -66,6 +68,8 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
       this._mainService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         this.player = resp[0];
+        this.prevTeam = this.player.team_name;
+        // console.log(this.prevTeam);
         this.team = this.findLogo(this.player.team_name);
         this.selected = this.team.short;
         this.isLoading = false;
@@ -74,6 +78,7 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
       this._mainService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         this.player = resp[0];
+        this.prevTeam = this.player.team_name;
         this.team = this.findLogo(this.player.team_name);
         this.selected = this.team.short;
         this.isLoading = false;
@@ -97,8 +102,15 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
 
   onSave() {
     this.isSaving = true;
+    if (this.prevTeam === "FA") {
+      this.type = "Waiver Pick Up"
+    } else if (this.player.team_name === "FA") {
+      this.type = "Waiver Drop"
+    } else {
+      this.type = "Trade"
+    }
     if (this.isGoalie) {
-      this._mainService.tradeGoalie(this.selected, this.player.id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._mainService.tradeGoalie(this.selected, this.player.id, this.player, this.type, this.prevTeam).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.setPlayerCard();
         this._mainService.popupTrigger(resp);
         this.isSaving = false;
@@ -109,7 +121,7 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
         this.isSaving = false;
       });
     } else {
-      this._mainService.tradePlayer(this.selected, this.player.id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._mainService.tradePlayer(this.selected, this.player.id, this.player, this.type, this.prevTeam).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.setPlayerCard();
         this._mainService.popupTrigger(resp);
         this.isSaving = false;

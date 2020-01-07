@@ -183,13 +183,23 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/goalies/${name}`, options);
   }
 
-  tradePlayer(team, id) {
-    let body = {'team_name': team};
+  tradePlayer(team, id, player, type, prevTeam) {
+    let body = {
+      'team_name': team,
+      'player': player,
+      'type': type,
+      'prevTeam': prevTeam
+    };
     return this._http.patch(`${environment.back_end_url}/players-stats/${id}`, body)
   }
 
-  tradeGoalie(team, id) {
-    let body = {'team_name': team};
+  tradeGoalie(team, id, player, type, prevTeam) {
+    let body = {
+      'team_name': team,
+      'player': player,
+      'type': type,
+      'prevTeam': prevTeam
+    };
     return this._http.patch(`${environment.back_end_url}/goalies-stats/${id}`, body)
   }
   
