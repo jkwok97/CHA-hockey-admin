@@ -202,6 +202,26 @@ export class MainService {
     };
     return this._http.patch(`${environment.back_end_url}/goalies-stats/${id}`, body)
   }
+
+  tradePick(teamName, prevTeamId, round, prevTeam) {
+    let body = {
+      'team': teamName,
+      'round': round,
+      'type': "Trade",
+      'prevTeam': prevTeam
+    };
+    return this._http.patch(`${environment.back_end_url}/draft-table/${prevTeamId}`, body)
+  }
+
+  getDraftTable() {
+    return this._http.get(`${environment.back_end_url}/draft-table/`);
+  }
+
+  getLeagueTeamsStats() {
+    let options = {params: new HttpParams()
+      .set('year', this.currentSeason)}
+    return this._http.get(`${environment.back_end_url}/team-stats/`, options);
+  }
   
   popupListener(): Observable<any> {
     return this._subjectPopup.asObservable();

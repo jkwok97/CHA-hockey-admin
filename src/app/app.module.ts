@@ -15,6 +15,7 @@ import { PlayerCardComponent } from './players/player-card/player-card.component
 import { PlayersComponent } from './players/players.component';
 import { GoaliesComponent } from './goalies/goalies.component';
 import { MessagePopperComponent } from './message-popper/message-popper.component';
+import { DraftComponent } from './draft/draft.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MessagePopperComponent } from './message-popper/message-popper.componen
     PlayerCardComponent,
     PlayersComponent,
     GoaliesComponent,
-    MessagePopperComponent
+    MessagePopperComponent,
+    DraftComponent
   ],
   imports: [
     BrowserModule,

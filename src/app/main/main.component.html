@@ -1,23 +1,33 @@
 <div class="container">
 
-    <div class="player-search" *ngIf="!isMobile">
-        <div class="players-container">
-            <app-players></app-players>
-        </div>
-        <div class="players-container">
-            <app-goalies></app-goalies>
-        </div>
-    </div>
+    <mat-tab-group color="accent" *ngIf="!isMobile">
+        <mat-tab label="Players">
+            <div class="player-search">
+                <div class="players-container">
+                    <app-players></app-players>
+                </div>
+                <div class="players-container">
+                    <app-goalies></app-goalies>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Draft">
+            <div class="draft-container">
+                <app-draft></app-draft>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 
-    <!-- <div class="player-search" *ngIf="isMobile"> -->
-        <mat-tab-group color="accent" *ngIf="isMobile">
-            <mat-tab label="Players">
-                <app-players></app-players>
-            </mat-tab>
-            <mat-tab label="Goalies">
-                <app-goalies></app-goalies>
-            </mat-tab>
-        </mat-tab-group>
-    <!-- </div> -->
+    <mat-tab-group color="accent" *ngIf="isMobile">
+        <mat-tab label="Skaters">
+            <app-players></app-players>
+        </mat-tab>
+        <mat-tab label="Goalies">
+            <app-goalies></app-goalies>
+        </mat-tab>
+        <mat-tab label="Draft">
+            <app-draft></app-draft>
+        </mat-tab>
+    </mat-tab-group>
 
 </div>
