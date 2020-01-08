@@ -1,12 +1,7 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '../_models/user';
-import { Router, ActivatedRoute } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
-import { Chart } from 'chart.js';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MainService } from './main.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -19,13 +14,13 @@ export class MainComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isMobile: boolean;
 
+  selected: number = 0;
+
   currentUser: User;
 
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private _mainService: MainService,
-    private _route: ActivatedRoute,
   ) {
     this._authService.currentUser.subscribe(x => this.currentUser = x);
     if (!this.currentUser) {
@@ -47,10 +42,6 @@ export class MainComponent implements OnInit, OnDestroy {
         } else {
           this.isMobile = false;
         }
-  }
-
-  onTabChange(event) {
-    console.log(event);
   }
 
   logout() {

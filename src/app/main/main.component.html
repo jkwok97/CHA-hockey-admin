@@ -1,6 +1,9 @@
 <div class="container">
 
-    <mat-tab-group color="accent" *ngIf="!isMobile">
+    <mat-tab-group 
+        color="accent" 
+        *ngIf="!isMobile"
+    >
         <mat-tab label="Players">
             <div class="player-search">
                 <div class="players-container">
@@ -16,9 +19,17 @@
                 <app-draft></app-draft>
             </div>
         </mat-tab>
+        <mat-tab label="Salary">
+            <div class="draft-container">
+                <app-salary></app-salary>
+            </div>
+        </mat-tab>
     </mat-tab-group>
 
-    <mat-tab-group color="accent" *ngIf="isMobile">
+    <mat-tab-group 
+        color="accent" 
+        *ngIf="isMobile"
+    >
         <mat-tab label="Skaters">
             <app-players></app-players>
         </mat-tab>
@@ -27,6 +38,9 @@
         </mat-tab>
         <mat-tab label="Draft">
             <app-draft></app-draft>
+        </mat-tab>
+        <mat-tab label="Salary">
+            <app-salary></app-salary>
         </mat-tab>
     </mat-tab-group>
 

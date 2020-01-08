@@ -222,6 +222,41 @@ export class MainService {
       .set('year', this.currentSeason)}
     return this._http.get(`${environment.back_end_url}/team-stats/`, options);
   }
+
+  getSalaries(position, type, year) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+      .set('type', type)
+      .set('year', year)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/`, options);
+  }
+
+  getAllSalaries(position) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/all`, options);
+  }
+
+  getSalary(id, position) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/${id}`, options);
+  }
+
+  saveSalary(id, type, current, two, three, four, five) {
+    let body = {
+      'type': type,
+      'current': current,
+      'two': two,
+      'three': three,
+      'four': four,
+      'five': five
+  }
+    return this._http.put(`${environment.back_end_url}/salaries/${id}`, body);
+  }
   
   popupListener(): Observable<any> {
     return this._subjectPopup.asObservable();

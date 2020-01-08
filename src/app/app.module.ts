@@ -16,6 +16,11 @@ import { PlayersComponent } from './players/players.component';
 import { GoaliesComponent } from './goalies/goalies.component';
 import { MessagePopperComponent } from './message-popper/message-popper.component';
 import { DraftComponent } from './draft/draft.component';
+import { SalaryComponent } from './salary/salary.component';
+import { SalaryCardComponent } from './salary/salary-card/salary-card.component';
+import { ForwardSalaryComponent } from './salary/forward-salary/forward-salary.component';
+import { DefenseSalaryComponent } from './salary/defense-salary/defense-salary.component';
+import { GoalieSalaryComponent } from './salary/goalie-salary/goalie-salary.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import { DraftComponent } from './draft/draft.component';
     PlayersComponent,
     GoaliesComponent,
     MessagePopperComponent,
-    DraftComponent
+    DraftComponent,
+    SalaryComponent,
+    SalaryCardComponent,
+    ForwardSalaryComponent,
+    DefenseSalaryComponent,
+    GoalieSalaryComponent
   ],
   imports: [
     BrowserModule,
