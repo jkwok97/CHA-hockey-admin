@@ -10,11 +10,14 @@
         <div class="tableHeader">
             <p>Forward Salaries</p>
         </div>
-    
-        <mat-form-field color="accent" class="filtering">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
 
+        <div class="button-container">
+            <button mat-raised-button color="accent" (click)="addPlayer()">Add Forward</button>
+            <mat-form-field color="accent" class="filtering">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+            </mat-form-field>
+        </div>
+    
         <div class="table">
             
             <table mat-table [dataSource]="allSalaries" matSort class="mat-elevation-z8 full-width" matSortActive="player_name" matSortDirection="asc">

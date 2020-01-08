@@ -10,10 +10,13 @@
         <div class="tableHeader">
             <p>Goalie Salaries</p>
         </div>
-    
-        <mat-form-field color="accent" class="filtering">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
+
+        <div class="button-container">
+            <button mat-raised-button color="accent" (click)="addPlayer()">Add Goalie</button>
+            <mat-form-field color="accent" class="filtering">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+            </mat-form-field>
+        </div>
 
         <div class="table">
             

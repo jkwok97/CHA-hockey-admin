@@ -66,6 +66,11 @@ export class DefenseSalaryComponent implements OnInit, OnDestroy {
     }
   }
 
+  addPlayer() {
+    this._router.navigate([`/salary/add/defense`]);
+    window.scrollTo(0,0);
+  }
+
   openPlayer(name, position, hits, id) {
     this._router.navigate([`/salary/${name}/edit/${id}`]);
     this._mainService.setPlayerPosition("RD");

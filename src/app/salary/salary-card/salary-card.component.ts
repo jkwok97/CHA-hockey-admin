@@ -131,6 +131,15 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
     this._router.navigate(['/main']);
   }
 
+  onDelete(id) {
+    this.isSaving = true;
+    this._mainService.deleteSalary(id, this.type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.isSaving = false;
+      this._mainService.popupTrigger(resp);
+      this._router.navigate(['/main']);
+    });
+  }
+
   ngOnDestroy() {
     this._alive = false;
   }

@@ -66,6 +66,11 @@ export class GoalieSalaryComponent implements OnInit, OnDestroy {
     }
   }
 
+  addPlayer() {
+    this._router.navigate([`/salary/add/goalie`]);
+    window.scrollTo(0,0);
+  }
+
   openPlayer(name, position, hits, id) {
     this._router.navigate([`/salary/${name}/edit/${id}`]);
     this._mainService.setPlayerPosition("G");

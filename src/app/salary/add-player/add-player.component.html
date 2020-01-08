@@ -6,11 +6,13 @@
 
     <mat-card [ngClass]="{'player-card-mobile': isMobile, 'player-card': !isMobile}">
 
-        <mat-card-header *ngIf="playerSalary">
-            <mat-card-title>{{playerSalary.player_name}}</mat-card-title>
+        <mat-card-header>
+            <mat-card-title>
+                Add {{type}}
+            </mat-card-title>
         </mat-card-header>
 
-        <mat-card-content *ngIf="playerSalary">
+        <mat-card-content>
 
             <div class="edit-row">
                 <div class="row-description">
@@ -18,18 +20,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="playerName" value="{{playerSalary.player_name}}" color="accent" readonly>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="edit-row">
-                <div class="row-description">
-                    <p>Player Id</p>
-                </div>
-                <div class="row-output">
-                    <mat-form-field color="accent">
-                        <input matInput [formControl]="playerName" value="{{playerSalary.id}}" color="accent" readonly>
+                        <input matInput [formControl]="playerName" placeholder="Last Name, First Name" color="accent">
                     </mat-form-field>
                 </div>
             </div>
@@ -40,7 +31,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="currentSalary" value="{{playerSalary.current_season_salary}}" color="accent">
+                        <input matInput [formControl]="currentSalary" placeholder="2019 Salary" color="accent">
                     </mat-form-field>
                 </div>
             </div>
@@ -51,7 +42,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="year_two" value="{{playerSalary.year_two}}" color="accent">
+                        <input matInput [formControl]="year_two" placeholder="2020 Salary" color="accent">
                     </mat-form-field>
                 </div>
             </div>
@@ -62,7 +53,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="year_three" value="{{playerSalary.year_three}}" color="accent">
+                        <input matInput [formControl]="year_three" placeholder="2021 Salary" color="accent">
                     </mat-form-field>
                 </div>
             </div>
@@ -73,7 +64,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="year_four" value="{{playerSalary.year_four}}" color="accent">
+                        <input matInput [formControl]="year_four" placeholder="2022 Salary" color="accent">
                     </mat-form-field>
                 </div>
             </div>
@@ -84,7 +75,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="year_five" value="{{playerSalary.year_five}}" color="accent">
+                        <input matInput [formControl]="year_five" placeholder="2023 Salary" color="accent">
                     </mat-form-field>
                 </div>
             </div>
@@ -92,12 +83,12 @@
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="onSave(playerSalary.id)" *ngIf="!isSaving">Save</button>
+            <button mat-raised-button color="accent" (click)="onSave(type)" *ngIf="!isSaving">Save</button>
             <button mat-raised-button color="primary" (click)="onCancel()" *ngIf="!isSaving">Cancel</button>
-            <button mat-raised-button color="warn" (click)="onDelete(playerSalary.id)" *ngIf="!isSaving">Delete</button>
             <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
         </mat-card-actions>
 
     </mat-card>
 
 </div>
+

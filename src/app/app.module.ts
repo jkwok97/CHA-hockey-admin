@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material-module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { SalaryCardComponent } from './salary/salary-card/salary-card.component'
 import { ForwardSalaryComponent } from './salary/forward-salary/forward-salary.component';
 import { DefenseSalaryComponent } from './salary/defense-salary/defense-salary.component';
 import { GoalieSalaryComponent } from './salary/goalie-salary/goalie-salary.component';
+import { AddPlayerComponent } from './salary/add-player/add-player.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { GoalieSalaryComponent } from './salary/goalie-salary/goalie-salary.comp
     SalaryCardComponent,
     ForwardSalaryComponent,
     DefenseSalaryComponent,
-    GoalieSalaryComponent
+    GoalieSalaryComponent,
+    AddPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { GoalieSalaryComponent } from './salary/goalie-salary/goalie-salary.comp
     MaterialModule, 
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

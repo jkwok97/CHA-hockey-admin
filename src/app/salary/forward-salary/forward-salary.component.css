@@ -90,6 +90,13 @@
     text-align: center;
 }
 
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px 0;
+}
+
 
 /* *************************** MEDIA QUERIES **************************** */
 

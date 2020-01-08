@@ -257,6 +257,22 @@ export class MainService {
   }
     return this._http.put(`${environment.back_end_url}/salaries/${id}`, body);
   }
+
+  deleteSalary(id, type) {
+    return this._http.delete(`${environment.back_end_url}/salaries/${id}/${type}`);
+  }
+
+  addNewPlayer(type, name, current, two, three, four, five) {
+    let body = {
+      'name': name,
+      'current': current,
+      'two': two,
+      'three': three,
+      'four': four,
+      'five': five
+  }
+    return this._http.post(`${environment.back_end_url}/salaries/${type}`, body);
+  }
   
   popupListener(): Observable<any> {
     return this._subjectPopup.asObservable();
