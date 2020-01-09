@@ -3,6 +3,7 @@ import { FormControl, Validators, FormsModule } from '@angular/forms';
 import { MainService } from 'src/app/main/main.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Component({
   selector: 'app-add-player',
@@ -47,6 +48,19 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    this.checkMobile();
+  }
+
+  checkMobile() {
+    if ( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i) ) {
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+        }
   }
 
   onSave(type) {
@@ -56,6 +70,10 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
       this._mainService.popupTrigger(resp);
       this._router.navigate(['/main']);
     });
+  }
+
+  onCancel() {
+    this._router.navigate(['/main']);
   }
 
   ngOnDestroy() {
