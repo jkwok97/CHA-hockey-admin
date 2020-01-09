@@ -288,6 +288,17 @@ export class MainService {
   }
     return this._http.post(`${environment.back_end_url}/salaries/${type}`, body);
   }
+
+  getWaiverTeams() {
+    return this._http.get(`${environment.back_end_url}/waivers/`);
+  }
+
+  updateWaiverTeam(id, number) {
+    let body = {
+      'number': number,
+    };
+    return this._http.patch(`${environment.back_end_url}/waivers/${id}`, body)
+  }
   
   popupListener(): Observable<any> {
     return this._subjectPopup.asObservable();
