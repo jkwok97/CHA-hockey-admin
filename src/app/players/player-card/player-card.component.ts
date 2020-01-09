@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MainService } from 'src/app/main/main.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, NgControlStatus } from '@angular/forms';
 
 @Component({
   selector: 'app-player-card',
@@ -30,6 +30,7 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
   teams: any[];
 
   playerName = new FormControl('', [Validators.required])
+  playerId = new FormControl('', [Validators.required])
   teamName = new FormControl('', [Validators.required])
 
   constructor(
@@ -68,6 +69,7 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
       this._mainService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         this.player = resp[0];
+        this.playerName.setValue(this.player.player_name);
         this.prevTeam = this.player.team_name;
         // console.log(this.prevTeam);
         this.team = this.findLogo(this.player.team_name);
@@ -78,7 +80,9 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
       this._mainService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         this.player = resp[0];
+        this.playerName.setValue(this.player.player_name);
         this.prevTeam = this.player.team_name;
+        // console.log(this.prevTeam);
         this.team = this.findLogo(this.player.team_name);
         this.selected = this.team.short;
         this.isLoading = false;
@@ -98,6 +102,26 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
   onSelectChange(event) {
     this.team = this._mainService.getTeamInfo(event.value);
     this.player.team_name = event.value;
+  }
+
+  changePlayerName() {
+    this.isSaving = true;
+    if (this.isGoalie) {
+      this._mainService.updateGoalieName(this.player.id, this.playerName.value).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        // console.log(resp);
+        this._mainService.popupTrigger(resp);
+        this.isSaving = false;
+      });
+    } else {
+      // console.log(this.playerName.value);
+      this._mainService.updateSkaterName(this.player.id, this.playerName.value).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        // console.log(resp);
+        this._mainService.popupTrigger(resp);
+        this.isSaving = false;
+      });
+    }
+    this._router.navigate([`/player/${this.playerName.value}/edit`]);
+    setTimeout(() => { this.setPlayerCard(); }, 350);
   }
 
   onSave() {
@@ -121,16 +145,16 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
         this.isSaving = false;
       });
     } else {
-      this._mainService.tradePlayer(this.selected, this.player.id, this.player, this.type, this.prevTeam).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        this.setPlayerCard();
-        this._mainService.popupTrigger(resp);
-        this.isSaving = false;
-      }, error => {
-        console.log(error);
-        this._mainService.popupTrigger(error.error);
-        this.hasError = true;
-        this.isSaving = false;
-      });
+        this._mainService.tradePlayer(this.selected, this.player.id, this.player, this.type, this.prevTeam).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          this.setPlayerCard();
+          this._mainService.popupTrigger(resp);
+          this.isSaving = false;
+        }, error => {
+          console.log(error);
+          this._mainService.popupTrigger(error.error);
+          this.hasError = true;
+          this.isSaving = false;
+        });
     }
   }
 

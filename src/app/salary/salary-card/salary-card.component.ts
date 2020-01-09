@@ -32,7 +32,7 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
   teams: any[];
 
   playerName = new FormControl('', [Validators.required])
-  teamName = new FormControl('', [Validators.required])
+  playerNumber = new FormControl('', [Validators.required])
   currentSalary = new FormControl('', [Validators.required])
   year_two = new FormControl('', [Validators.required])
   year_three = new FormControl('', [Validators.required])
@@ -97,6 +97,7 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
   }
 
   setValues(player) {
+    this.playerName.setValue(player.player_name);
     this.currentSalary.setValue(player.current_season_salary);
     this.year_two.setValue(player.year_two);
     this.year_three.setValue(player.year_three);
@@ -120,7 +121,7 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
   }
 
   saveSalary(id, type) {
-    this._mainService.saveSalary(id, type, this.currentSalary.value, this.year_two.value, this.year_three.value, this.year_four.value, this.year_five.value).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._mainService.saveSalary(id, type, this.playerName.value, this.currentSalary.value, this.year_two.value, this.year_three.value, this.year_four.value, this.year_five.value).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.isSaving = false;
       this._mainService.popupTrigger(resp);
       this._router.navigate(['/main']);

@@ -183,6 +183,20 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/goalies/${name}`, options);
   }
 
+  updateSkaterName(id, name) {
+    let body = {
+      'player_name': name
+    };
+    return this._http.patch(`${environment.back_end_url}/players-stats/name/${id}`, body)
+  }
+
+  updateGoalieName(id, name) {
+    let body = {
+      'player_name': name
+    };
+    return this._http.patch(`${environment.back_end_url}/goalies-stats/name/${id}`, body)
+  }
+
   tradePlayer(team, id, player, type, prevTeam) {
     let body = {
       'team_name': team,
@@ -246,9 +260,10 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/salaries/${id}`, options);
   }
 
-  saveSalary(id, type, current, two, three, four, five) {
+  saveSalary(id, type, name, current, two, three, four, five) {
     let body = {
       'type': type,
+      'name': name,
       'current': current,
       'two': two,
       'three': three,

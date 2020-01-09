@@ -16,14 +16,31 @@
         </mat-card-header>
 
         <mat-card-content *ngIf="player">
-
+            
             <div class="edit-row">
                 <div class="row-description">
                     <p>Player Name</p>
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="playerName" value="{{player.player_name}}" color="accent" readonly>
+                        <input 
+                            matInput 
+                            [formControl]="playerName" 
+                            value="{{player.player_name}}" 
+                            color="accent" 
+                            (blur)="changePlayerName()"
+                        >
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row">
+                <div class="row-description">
+                    <p>Player Id</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <input matInput [formControl]="playerId" value="{{player.id}}" color="accent" readonly>
                     </mat-form-field>
                 </div>
             </div>
