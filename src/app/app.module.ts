@@ -23,6 +23,7 @@ import { DefenseSalaryComponent } from './salary/defense-salary/defense-salary.c
 import { GoalieSalaryComponent } from './salary/goalie-salary/goalie-salary.component';
 import { AddPlayerComponent } from './salary/add-player/add-player.component';
 import { WaiversComponent } from './waivers/waivers.component';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { WaiversComponent } from './waivers/waivers.component';
     DefenseSalaryComponent,
     GoalieSalaryComponent,
     AddPlayerComponent,
-    WaiversComponent
+    WaiversComponent,
+    GamesComponent
   ],
   imports: [
     BrowserModule,

@@ -299,6 +299,24 @@ export class MainService {
     };
     return this._http.patch(`${environment.back_end_url}/waivers/${id}`, body)
   }
+
+  getAllSchedule() {
+    return this._http.get(`${environment.back_end_url}/schedule/`);
+  }
+
+  updateGameScore(id, score, team) {
+    if (team === "visitor") {
+      let body = {
+        'vis_team_score': score
+      }
+      return this._http.patch(`${environment.back_end_url}/schedule/${id}`, body);
+    } else if (team === "home") {
+      let body = {
+        'home_team_score': score
+      }
+      return this._http.patch(`${environment.back_end_url}/schedule/${id}`, body);
+    }
+  }
   
   popupListener(): Observable<any> {
     return this._subjectPopup.asObservable();
