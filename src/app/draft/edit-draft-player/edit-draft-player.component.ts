@@ -117,6 +117,16 @@ export class EditDraftPlayerComponent implements OnInit, OnDestroy {
     })
   }
 
+  onDelete(id) {
+    this.isSaving = true;
+    this._draftsService.deletePlayer(id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
+      this._mainService.popupTrigger(resp);
+      this._draftsService.showEditDraftPlayerTrigger(false);
+      this.isSaving = false;
+    });
+  }
+
   onCancel() {
     this._draftsService.showEditDraftPlayerTrigger(false);
   }

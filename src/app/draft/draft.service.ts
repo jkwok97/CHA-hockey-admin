@@ -40,6 +40,16 @@ export class DraftService {
     this._subjectShowEditDraftPlayer.next(bool);
   }
 
+  deletePlayer(id) {
+    return this._http.delete(`${environment.back_end_url}/drafts/${id}`);
+  }
+
+  addPlayer(player) {
+    // console.log(player);
+    let body = player;
+    return this._http.post(`${environment.back_end_url}/drafts/`, body);
+  }
+
   showEditDraftPlayerListener(): Observable<any> {
     return this._subjectShowEditDraftPlayer.asObservable();
   }

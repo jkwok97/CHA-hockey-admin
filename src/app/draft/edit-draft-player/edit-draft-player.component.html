@@ -108,6 +108,7 @@
         <mat-card-actions>
             <button mat-raised-button color="accent" (click)="onSave()" *ngIf="!isSaving">Save</button>
             <button mat-raised-button color="primary" (click)="onCancel()" *ngIf="!isSaving">Cancel</button>
+            <button mat-raised-button color="warn" (click)="onDelete(player[0].id)" *ngIf="!isSaving">Delete</button>
             <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
         </mat-card-actions>
 
