@@ -124,6 +124,42 @@ export class MainService {
     ]
   }
 
+  archivedLeague = {
+    teams: [
+      { name: "Mississippi Mudbugs", shortName: "MIS", image: "../../assets/team_logos/mudbugs.png", owner: "Jeff Kwok", color: '#000122', fontColor: 'white' },
+      { name: "Charlotte Storm", shortName: "CHA", image: "../../assets/team_logos/chastorm.png", owner: "Patrick Ryan", color: '#000122', fontColor: 'white' },
+      { name: "Seattle Surge", shortName: "STS", image: "../../assets/team_logos/surge.png", owner: "Corey Abbott", color: '#000122', fontColor: 'white' },
+      { name: "Las Vegas Desperado", shortName: "LVD", image: "../../assets/team_logos/lasdesperado.png", owner: "Ferrel Hedberg", color: '#000122', fontColor: 'white' },
+      { name: "San Antonio Outlaws", shortName: "SAO", image: "../../assets/team_logos/outlaws.png", owner: "Kelly Gardner", color: '#000122', fontColor: 'white' },
+      { name: "Oakland Oceanus", shortName: "OAO", image: "../../assets/team_logos/oceanus.png", owner: "Joseph Sutherland", color: '#000122', fontColor: 'white' },
+      { name: "Atlantic City Aces", shortName: "ATC", image: "../../assets/team_logos/aces.png", owner: "Michael Stafford", color: '#000122', fontColor: 'white' },
+      { name: "Toledo Honey Badgers", shortName: "TOL", image: "../../assets/team_logos/badgers.png", owner: "Jordan Schartner", color: '#000122', fontColor: 'white' },
+      { name: "Brandon Bandits", shortName: "BRA", image: "../../assets/team_logos/bandits.png", owner: "Jason Stanier", color: '#000122', fontColor: 'white' },
+      { name: "Cleveland Barons", shortName: "CLE", image: "../../assets/team_logos/barons.png", owner: "Kevin Schmitz", color: '#000122', fontColor: 'white' },
+      { name: "Albuquerque Chupacabras", shortName: "ALB", image: "../../assets/team_logos/chupacabras.png", owner: "Chad Fisher", color: '#000122', fontColor: 'white' },
+      { name: "Halifax Conquerers", shortName: "HAL", image: "../../assets/team_logos/conquerers.png", owner: "Greg Abbott", color: '#000122', fontColor: 'white' },
+      { name: "San Diego Crush", shortName: "SDC", image: "../../assets/team_logos/crush.png", owner: "Ferrel Hedberg", color: '#000122', fontColor: 'white' },
+      { name: "Winnepeg Hellcats", shortName: "WIN", image: "../../assets/team_logos/hellcats.png", owner: "Ciaran Murtagh", color: '#000122', fontColor: 'white' },
+      { name: "Mississauga Indians", shortName: "MGA", image: "../../assets/team_logos/indians.png", owner: "Tim Ross", color: '#000122', fontColor: 'white' },
+      { name: "Salem Indians", shortName: "SAL", image: "../../assets/team_logos/indians.png", owner: "Tim Ross", color: '#000122', fontColor: 'white' },
+      { name: "Jacksonville Jokers", shortName: "JAC", image: "../../assets/team_logos/jokers.png", owner: "Scott Cochrane", color: '#000122', fontColor: 'white' },
+      { name: "Louisville Lionhearts", shortName: "LVL", image: "../../assets/team_logos/lionhearts.png", owner: "Nick McCurry", color: '#000122', fontColor: 'white' },
+      { name: "Abbotsford Loggerheads", shortName: "ABB", image: "../../assets/team_logos/loggerheads.png", owner: "Kyle Einar", color: '#000122', fontColor: 'white' },
+      { name: "Hamilton Predators", shortName: "HAM", image: "../../assets/team_logos/predators.png", owner: "Matt Beatty", color: '#000122', fontColor: 'white' },
+      { name: "Hamilton Rednecks", shortName: "HAR", image: "../../assets/team_logos/rednecks.png", owner: "Travis Quinn", color: '#000122', fontColor: 'white' },
+      { name: "Cape Breton Royals", shortName: "CBR", image: "../../assets/team_logos/royals.png", owner: "Ben Bruchet", color: '#000122', fontColor: 'white' },
+      { name: "Red Deer Rustlers", shortName: "RDR", image: "../../assets/team_logos/rustlers.png", owner: "Dan Wood", color: '#000122', fontColor: 'white' },
+      { name: "Halifax Schooners", shortName: "HAS", image: "../../assets/team_logos/schooners.png", owner: "Adam Martin", color: '#000122', fontColor: 'white' },
+      { name: "Quebec City Thundercats", shortName: "QUE", image: "../../assets/team_logos/thundercats.png", owner: "Jordan Schartner", color: '#000122', fontColor: 'white' },
+      { name: "Louisiana Voodoo", shortName: "LOU", image: "../../assets/team_logos/voodoo.png", owner: "Ryan Pollock", color: '#000122', fontColor: 'white' },
+      { name: "Washington Whiskeyjacks", shortName: "WAS", image: "../../assets/team_logos/whiskeyjacks.png", owner: "Randy Lazzarotto", color: '#000122', fontColor: 'white' },
+      { name: "Tallahasse Crimsontide", shortName: "TAL", image: "../../assets/team_logos/crimsontide.png", owner: "Darren Ward", color: '#000122', fontColor: 'white' },
+      { name: "Portland Beavers", shortName: "POR", image: "../../assets/team_logos/beavers.png", owner: "Jeff Muggleston", color: '#000122', fontColor: 'white' },
+      { name: "Houston Comets", shortName: "HOU", image: "../../assets/team_logos/comets.png", owner: "Al Godfrey", color: '#000122', fontColor: 'white' },
+      { name: "Salem Grave Diggers", shortName: "SGD", image: "../../assets/team_logos/gravediggers.png", owner: "Tim Ross", color: '#000122', fontColor: 'white' },
+    ]
+  }
+
   constructor(
     private _http: HttpClient
   ) { }
@@ -142,7 +178,8 @@ export class MainService {
     if (found !== undefined) { 
       this.currentTeam = found; 
     } else {
-      this.currentTeam = '';
+      found = this.archivedLeague.teams.find(element => element.shortName === short);
+      if (found) { this.currentTeam = found; } 
     }
     return this.currentTeam;
   }

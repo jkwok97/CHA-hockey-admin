@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'salary/:params/edit/:id', component: SalaryCardComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/forward', component: AddPlayerComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/goalie', component: AddPlayerComponent, canActivate: [AuthGuard]},
-  { path: 'salary/add/defense', component: AddPlayerComponent, canActivate: [AuthGuard]},
+  { path: 'salary/add/defense', component: AddPlayerComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

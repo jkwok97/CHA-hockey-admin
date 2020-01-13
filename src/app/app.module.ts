@@ -24,6 +24,10 @@ import { GoalieSalaryComponent } from './salary/goalie-salary/goalie-salary.comp
 import { AddPlayerComponent } from './salary/add-player/add-player.component';
 import { WaiversComponent } from './waivers/waivers.component';
 import { GamesComponent } from './games/games.component';
+import { NewDraftComponent } from './draft/new-draft/new-draft.component';
+import { AddNewPlayerComponent } from './draft/add-new-player/add-new-player.component';
+import { DraftEditComponent } from './draft/draft-edit/draft-edit.component';
+import { EditDraftPlayerComponent } from './draft/edit-draft-player/edit-draft-player.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { GamesComponent } from './games/games.component';
     GoalieSalaryComponent,
     AddPlayerComponent,
     WaiversComponent,
-    GamesComponent
+    GamesComponent,
+    NewDraftComponent,
+    AddNewPlayerComponent,
+    DraftEditComponent,
+    EditDraftPlayerComponent
   ],
   imports: [
     BrowserModule,

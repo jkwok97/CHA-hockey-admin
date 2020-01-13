@@ -1,0 +1,56 @@
+.player-card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* border: 1px solid red; */
+}
+
+.player-card {
+    width: 50%;
+    margin: 25px 0;
+}
+
+.player-card-mobile {
+    width: 90%;
+    margin: 25px 0;
+}
+
+img {
+    height: 30px;
+    width: 30px;
+}
+
+.edit-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.row-description {
+    width: 48%;
+    text-align: center;
+}
+
+.row-output {
+    width: 48%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.mat-form-field {
+    width: 95%;
+}
+
+.error {
+    font-size: x-large;
+    color: red;
+    font-weight: 300;
+    text-align: center;
+}
+
+.back-button {
+    margin-left: 20px;
+}
