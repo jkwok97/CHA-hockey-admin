@@ -38,6 +38,18 @@
     margin-bottom: 30px;
 }
 
+.waiver-list-mobile {
+    width: 250px;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: #4c4d4f;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
 .waiver-box {
     padding: 5px 2.5px;
     border-bottom: solid 1px #ccc;

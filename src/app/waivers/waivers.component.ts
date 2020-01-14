@@ -21,6 +21,7 @@ export class WaiversComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.checkMobile();
     this.isLoading = true;
     this._mainService.getWaiverTeams().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
@@ -28,6 +29,18 @@ export class WaiversComponent implements OnInit, OnDestroy {
       this.teams.sort((a, b) => a['priority_number'] - b['priority_number']);
       this.isLoading = false;
     });
+  }
+
+  checkMobile() {
+    if ( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i) ) {
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+        }
   }
 
   findLogo(shortName) {

@@ -25,13 +25,11 @@ export class ChampService {
   }
 
   addChampion(champ) {
-    console.log(champ);
     let body = champ;
     return this._http.post(`${environment.back_end_url}/champions/`, body);
   }
 
   showEditChampPlayerTrigger(bool) {
-    console.log(bool);
     this._subjectShowEditChampPlayer.next(bool);
   }
 
@@ -40,7 +38,6 @@ export class ChampService {
   }
 
   showAddChampPlayerTrigger(type) {
-    console.log(type);
     this.editType = type;
     this._subjectShowAddChampPlayer.next(type);
   }
@@ -54,13 +51,11 @@ export class ChampService {
   }
 
   updateChamp(champ) {
-    console.log(champ);
     let body = champ;
     return this._http.put(`${environment.back_end_url}/champions/${champ.id}`, body);
   }
 
   setChampion(champ) {
-    console.log(champ);
     this.champion = champ;
   }
   

@@ -8,7 +8,7 @@
         <p>Waiver Priority List</p>
     </div>
 
-    <div cdkDropList class="waiver-list" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList (cdkDropListDropped)="drop($event)" [ngClass]="{'waiver-list': !isMobile, 'waiver-list-mobile': isMobile}">
         <div class="waiver-box" *ngFor="let team of teams" cdkDrag id="{{team.id}}">
             <img src="{{ findLogo(team.team_name).image }}">
             {{findLogo(team.team_name).name}}

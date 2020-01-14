@@ -26,6 +26,7 @@ export class AddChampComponent implements OnInit {
   teamSelected: string;
   ownerSelected: string;
   positionSelected: string;
+  typeSelected: string;
 
   champ: any;
   team: any;
@@ -60,7 +61,6 @@ export class AddChampComponent implements OnInit {
       this.champ = this._champService.champion;
       this.setValues(this.champ);
     }
-    // console.log(this.editType);
     this._champService.showAddChampPlayerListener().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       this.editType = resp;
@@ -68,7 +68,9 @@ export class AddChampComponent implements OnInit {
   }
 
   setValues(champ) {
+    // console.log(champ);
     this.yearWon.setValue(champ.year_won);
+    this.typeSelected = champ.award_type;
     this.type = champ.award_type;
     this.ownerSelected = champ.owner_name;
     this.playerName.setValue(champ.player_name);
