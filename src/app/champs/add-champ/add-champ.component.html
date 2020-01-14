@@ -1,0 +1,118 @@
+<div class="player-card-container">
+
+    <mat-card [ngClass]="{'player-card-mobile': isMobile, 'player-card': !isMobile}">
+
+        <mat-card-header>
+            <mat-card-title>
+                {{editType}} Champions
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <div class="edit-row" *ngIf="champ">
+                <div class="row-description">
+                    <p>Id</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <input 
+                            matInput 
+                            [formControl]="champId"  
+                            color="accent" 
+                        >
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row">
+                <div class="row-description">
+                    <p>Year</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <input 
+                            matInput 
+                            [formControl]="yearWon" 
+                            placeholder="Year" 
+                            color="accent" 
+                        >
+                        <mat-hint align="start">Ex. 2019-20</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row">
+                <div class="row-description">
+                    <p>Type</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <mat-select [(value)]="typeSelected" (selectionChange)="onTypeChange($event)">
+                            <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row" *ngIf="(type == 'champ') || (type == 'season') || (type == 'gm')">
+                <div class="row-description">
+                    <p>Owner Name</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <mat-select [(value)]="ownerSelected" (selectionChange)="onOwnerChange($event)">
+                            <mat-option *ngFor="let owner of owners" [value]="owner">{{owner}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row" *ngIf="(type == 'defense') || (type == 'goalie') || (type == 'scorer') || (type == 'rookie')">
+                <div class="row-description">
+                    <p>Player Name</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <input 
+                            matInput 
+                            [formControl]="playerName" 
+                            placeholder="Last Name, First Name" 
+                            color="accent" 
+                        >
+                        <mat-hint align="start">Ex. Bure, Pavel</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row" *ngIf="type">
+                <div class="row-description">
+                    <p>Teams</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <mat-select [(value)]="teamSelected">
+                            <mat-option 
+                                *ngFor="let team of teams" 
+                                [value]="team.shortName" 
+                            >
+                                {{team.name}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="onSave()" *ngIf="!isSaving  && editType === 'Add'">Save</button>
+            <button mat-raised-button color="accent" (click)="onEditSave(champ.id)" *ngIf="!isSaving && editType === 'Edit'">Edit</button>
+            <button mat-raised-button color="primary" (click)="onCancel()" *ngIf="!isSaving">Cancel</button>
+            <button mat-raised-button color="warn" (click)="onDelete(id)" *ngIf="!isSaving && editType === 'Edit'">Delete</button>
+            <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
+        </mat-card-actions>
+
+    </mat-card>
+
+</div>

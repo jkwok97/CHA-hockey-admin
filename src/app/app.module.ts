@@ -28,6 +28,8 @@ import { NewDraftComponent } from './draft/new-draft/new-draft.component';
 import { AddNewPlayerComponent } from './draft/add-new-player/add-new-player.component';
 import { DraftEditComponent } from './draft/draft-edit/draft-edit.component';
 import { EditDraftPlayerComponent } from './draft/edit-draft-player/edit-draft-player.component';
+import { ChampsComponent } from './champs/champs.component';
+import { AddChampComponent } from './champs/add-champ/add-champ.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { EditDraftPlayerComponent } from './draft/edit-draft-player/edit-draft-p
     NewDraftComponent,
     AddNewPlayerComponent,
     DraftEditComponent,
-    EditDraftPlayerComponent
+    EditDraftPlayerComponent,
+    ChampsComponent,
+    AddChampComponent
   ],
   imports: [
     BrowserModule,

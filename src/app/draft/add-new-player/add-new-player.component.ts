@@ -4,6 +4,7 @@ import { MainService } from 'src/app/main/main.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DraftService } from '../draft.service';
 import { takeWhile } from 'rxjs/operators';
+import { ChampService } from 'src/app/champs/champ.service';
 
 @Component({
   selector: 'app-add-new-player',
@@ -43,7 +44,6 @@ export class AddNewPlayerComponent implements OnInit {
   constructor(
     private _mainService: MainService,
     private _draftsService: DraftService,
-    private _router: Router
   ) { 
     this.teams = this._mainService.currentLeague.teams;
     this.teams.sort((a,b) => (a.shortName > b.shortName) ? 1 : ((b.shortName > a.shortName) ? -1 : 0));
@@ -85,9 +85,8 @@ export class AddNewPlayerComponent implements OnInit {
       player_pos: this.positionSelected,
       teamshort: this.teamSelected
     }
-    console.log(player);
     this._draftsService.addPlayer(player).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this._mainService.popupTrigger(resp);
       this._draftsService.showEditDraftPlayerTrigger(false);
       this.resetValues();
