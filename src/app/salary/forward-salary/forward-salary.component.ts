@@ -28,7 +28,7 @@ export class ForwardSalaryComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   allSalaries: MatTableDataSource<any[]>;
-  allSalariesColumnsToDisplay = ['player_name', 'current_season_salary', 'year_two', 'year_three', 'year_four', 'year_five' ];
+  allSalariesColumnsToDisplay = ['player_name', 'cha_id', 'current_season_salary', 'year_two', 'year_three', 'year_four', 'year_five' ];
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -71,10 +71,8 @@ export class ForwardSalaryComponent implements OnInit, OnDestroy {
     window.scrollTo(0,0);
   }
 
-  openPlayer(name, position, hits, id) {
-    this._router.navigate([`/salary/${name}/edit/${id}`]);
-    this._mainService.setPlayerPosition("C");
-    this._mainService.setPlayerHits(40);
+  openPlayer(player, type) {
+    this._router.navigate([`/salary/edit/${type}/${player.id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }
 

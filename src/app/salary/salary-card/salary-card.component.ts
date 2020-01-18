@@ -18,8 +18,6 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
   hasError: boolean = false;
   isMobile: boolean = false;
 
-  position: string;
-  hits: string;
   seasonType: string;
   selected: string;
   type: string;
@@ -45,8 +43,6 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
     private _router: Router
   ) { 
     this.playerId = this._route.paramMap['destination']['value']['id'];
-    this.position = this._mainService.playerPosition;
-    this.hits = this._mainService.playerHits;
     this.seasonType = this._mainService.currentSeasonType;
     this.teams = this._mainService.currentLeague.teams;
     this.teams.sort((a,b) => (a.shortName > b.shortName) ? 1 : ((b.shortName > a.shortName) ? -1 : 0));
@@ -71,7 +67,7 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
   }
 
   setPlayerCard(id) {
-    if ((!this.position && !this.hits) || this.position === "G") {
+    if (this._route.snapshot.params.type === 'goalie') {
       this.isGoalie = true;
       this._mainService.getSalary(id, "goalie").pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.playerSalary = resp[0] as any;
@@ -79,7 +75,7 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
         this.type = "goalie";
         this.isLoading = false;
       });
-    } else if ((this.position === "LD") || (this.position === "RD")) {
+    } else if (this._route.snapshot.params.type === 'defense') {
       this._mainService.getSalary(id, "defense").pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.playerSalary = resp[0] as any;
         this.setValues(this.playerSalary);

@@ -11,8 +11,6 @@ export class MainService {
 
   currentSeason: string = "2019-20";
   currentSeasonType: string = "Regular";
-  playerPosition: string;
-  playerHits: string;
 
   currentTeam: any;
 
@@ -182,14 +180,6 @@ export class MainService {
       if (found) { this.currentTeam = found; } 
     }
     return this.currentTeam;
-  }
-
-  setPlayerPosition(position) {
-    this.playerPosition = position;
-  }
-
-  setPlayerHits(hits) {
-    this.playerHits = hits;
   }
 
   getPlayerStatsByYearByType(year, type) {

@@ -25,8 +25,8 @@ export class PlayersComponent implements OnInit, OnDestroy {
   currentSeasonType: string;
 
   players: MatTableDataSource<any[]>;
-  playersColumnsToDisplay = ['team_logo', 'team_name', 'player_name'];
-  playersMobileColumnsToDisplay = ['team_logo', 'player_name'];
+  playersColumnsToDisplay = ['team_logo', 'team_name', 'player_name', 'cha_id'];
+  playersMobileColumnsToDisplay = ['team_logo', 'player_name', 'cha_id'];
 
   page: number = 1;
   pageSize: number = 10;
@@ -89,10 +89,8 @@ export class PlayersComponent implements OnInit, OnDestroy {
     }
   }
 
-  openPlayer(name, team, position, hits) {
-    this._router.navigate([`/player/${name}/edit`]);
-    this._mainService.setPlayerPosition(position);
-    this._mainService.setPlayerHits(hits);
+  openPlayer(player, type) {
+    this._router.navigate([`edit/${type}s/${player.player_id}`]);
     window.scrollTo(0,0);
   }
 

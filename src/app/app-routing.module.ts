@@ -11,8 +11,8 @@ import { AddPlayerComponent } from './salary/add-player/add-player.component';
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
-  { path: 'player/:params/edit', component: PlayerCardComponent, canActivate: [AuthGuard]},
-  { path: 'salary/:params/edit/:id', component: SalaryCardComponent, canActivate: [AuthGuard]},
+  { path: 'edit/:type/:id', component: PlayerCardComponent, canActivate: [AuthGuard]},
+  { path: 'salary/edit/:type/:id/:params', component: SalaryCardComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/forward', component: AddPlayerComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/goalie', component: AddPlayerComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/defense', component: AddPlayerComponent, canActivate: [AuthGuard]}

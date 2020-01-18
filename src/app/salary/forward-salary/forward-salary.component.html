@@ -12,7 +12,7 @@
         </div>
 
         <div class="button-container">
-            <button mat-raised-button color="accent" (click)="addPlayer()">Add Forward</button>
+            <!-- <button mat-raised-button color="accent" (click)="addPlayer()">Add Forward</button> -->
             <mat-form-field color="accent" class="filtering">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
             </mat-form-field>
@@ -25,6 +25,11 @@
                 <ng-container matColumnDef="player_name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
                     <td mat-cell *matCellDef="let player"> {{player.player_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cha_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CHA Id </th>
+                    <td mat-cell *matCellDef="let player"> {{player.player_id}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="current_season_salary">
@@ -56,7 +61,7 @@
                 <tr 
                     mat-row 
                     *matRowDef="let player; columns: isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay;"
-                    (click)="openPlayer(player.player_name, player.position, player.hits, player.id)"
+                    (click)="openPlayer(player, 'forward')"
                 ></tr>
     
             </table>

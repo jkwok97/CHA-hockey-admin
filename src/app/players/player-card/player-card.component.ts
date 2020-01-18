@@ -38,11 +38,10 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
-    this.position = this._mainService.playerPosition;
-    this.hits = this._mainService.playerHits;
     this.seasonType = this._mainService.currentSeasonType;
     this.teams = this._mainService.currentLeague.teams;
     this.teams.sort((a,b) => (a.shortName > b.shortName) ? 1 : ((b.shortName > a.shortName) ? -1 : 0));
+    console.log(this._route.snapshot.params);
    }
 
   ngOnInit() {
@@ -64,25 +63,25 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
   }
 
   setPlayerCard() {
-    if ((!this.position && !this.hits) || this.position === "G") {
+    if (this._route.snapshot.params.type === 'goalies') {
       this.isGoalie = true;
-      this._mainService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        // console.log(resp);
+      this._mainService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.id, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
         this.player = resp[0];
         this.playerName.setValue(this.player.player_name);
         this.prevTeam = this.player.team_name;
-        // console.log(this.prevTeam);
+        console.log(this.prevTeam);
         this.team = this.findLogo(this.player.team_name);
         this.selected = this.team.short;
         this.isLoading = false;
       });
-    } else {
-      this._mainService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        // console.log(resp);
+    } else if (this._route.snapshot.params.type === 'players') {
+      this._mainService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.id, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
         this.player = resp[0];
         this.playerName.setValue(this.player.player_name);
         this.prevTeam = this.player.team_name;
-        // console.log(this.prevTeam);
+        console.log(this.prevTeam);
         this.team = this.findLogo(this.player.team_name);
         this.selected = this.team.short;
         this.isLoading = false;
