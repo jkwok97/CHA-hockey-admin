@@ -25,11 +25,22 @@
 
             <div class="edit-row">
                 <div class="row-description">
-                    <p>Player Id</p>
+                    <p>Salary Id</p>
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
                         <input matInput [formControl]="playerNumber" value="{{playerSalary.id}}" color="accent" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row">
+                <div class="row-description">
+                    <p>Player Id</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <input matInput [formControl]="leaguePlayerId" value="{{playerSalary.player_id}}" color="accent">
                     </mat-form-field>
                 </div>
             </div>

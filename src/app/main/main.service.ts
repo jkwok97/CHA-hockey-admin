@@ -287,10 +287,11 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/salaries/${id}`, options);
   }
 
-  saveSalary(id, type, name, current, two, three, four, five) {
+  saveSalary(id, type, name, league_id, current, two, three, four, five) {
     let body = {
       'type': type,
       'name': name,
+      'player_id': league_id,
       'current': current,
       'two': two,
       'three': three,
