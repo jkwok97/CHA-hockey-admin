@@ -69,7 +69,21 @@ export class AddPlayerComponent implements OnInit, OnDestroy {
       this.isSaving = false;
       this._mainService.popupTrigger(resp);
       this._router.navigate(['/main']);
+    }, error => {
+      console.log(error);
+      this.isSaving = false;
+      this._mainService.popupTrigger(error.error);
+      this.clearEntry();
     });
+  }
+
+  clearEntry() {
+    this.playerName.reset();
+    this.currentSalary.reset();
+    this.year_two.reset();
+    this.year_three.reset();
+    this.year_four.reset();
+    this.year_five.reset();
   }
 
   onCancel() {

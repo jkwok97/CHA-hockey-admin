@@ -314,6 +314,7 @@ export class MainService {
       'four': four,
       'five': five
   }
+  console.log(body);
     return this._http.post(`${environment.back_end_url}/salaries/${type}`, body);
   }
 
