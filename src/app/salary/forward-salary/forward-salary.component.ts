@@ -72,7 +72,7 @@ export class ForwardSalaryComponent implements OnInit, OnDestroy {
   }
 
   openPlayer(player, type) {
-    this._router.navigate([`/salary/edit/${type}/${player.id}/${player.player_name}`]);
+    this._router.navigate([`/salary/edit/${type}/${player.player_id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }
 

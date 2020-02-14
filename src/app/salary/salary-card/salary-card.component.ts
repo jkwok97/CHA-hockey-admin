@@ -113,6 +113,7 @@ export class SalaryCardComponent implements OnInit, OnDestroy {
   }
 
   onSave(id) {
+    console.log(id);
     this.isSaving = true;
     this.saveSalary(id, this.type);
     this.type = '';
