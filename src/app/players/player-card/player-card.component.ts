@@ -125,7 +125,7 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
 
   onSave() {
     this.isSaving = true;
-    if (this.prevTeam === "FA") {
+    if ((this.prevTeam === "FA") || (this.prevTeam === '')) {
       this.type = "Waiver Pick Up"
     } else if (this.player.team_name === "FA") {
       this.type = "Waiver Drop"
