@@ -10,7 +10,7 @@ import { Subject, Observable } from 'rxjs';
 export class MainService {
 
   currentSeason: string = "2019-20";
-  currentSeasonType: string = "Regular";
+  currentSeasonType: string = "Playoffs";
 
   currentTeam: any;
 
