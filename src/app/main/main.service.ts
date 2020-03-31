@@ -182,12 +182,28 @@ export class MainService {
     return this.currentTeam;
   }
 
+  getTeamPlayerStatsByYearByType(team, year, type) {
+    // console.log(team, year, type)
+    let options = {params: new HttpParams()
+      .set('year', year)
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/players-stats/${team}`, options);
+  }
+
   getPlayerStatsByYearByType(year, type) {
     // console.log(year, type)
     let options = {params: new HttpParams()
       .set('year', year)
       .set('type', type)}
     return this._http.get(`${environment.back_end_url}/players-stats/`, options);
+  }
+
+  getTeamGoalieStatsByYearByType(team, year, type) {
+    // console.log(team, year, type)
+    let options = {params: new HttpParams()
+      .set('year', year)
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
   }
 
   getGoalieStatsByYearByType(year, type) {

@@ -30,6 +30,10 @@ import { DraftEditComponent } from './draft/draft-edit/draft-edit.component';
 import { EditDraftPlayerComponent } from './draft/edit-draft-player/edit-draft-player.component';
 import { ChampsComponent } from './champs/champs.component';
 import { AddChampComponent } from './champs/add-champ/add-champ.component';
+import { TradesComponent } from './trades/trades.component';
+import { TradeSelectComponent } from './trades/trade-select/trade-select.component';
+import { TradeListViewComponent } from './trades/trade-list-view/trade-list-view.component';
+import { TradeButtonsComponent } from './trades/trade-buttons/trade-buttons.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,11 @@ import { AddChampComponent } from './champs/add-champ/add-champ.component';
     DraftEditComponent,
     EditDraftPlayerComponent,
     ChampsComponent,
-    AddChampComponent
+    AddChampComponent,
+    TradesComponent,
+    TradeSelectComponent,
+    TradeListViewComponent,
+    TradeButtonsComponent
   ],
   imports: [
     BrowserModule,

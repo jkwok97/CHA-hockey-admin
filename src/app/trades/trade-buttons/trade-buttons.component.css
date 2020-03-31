@@ -1,0 +1,15 @@
+mat-grid-list {
+    border: 1px solid red;
+}
+
+.trade-button-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.trade-button {
+    margin: 10px 0;
+    width: 150px;
+}

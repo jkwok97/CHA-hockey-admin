@@ -1,0 +1,12 @@
+.mat-grid-list {
+    padding: 10px 0;
+}
+
+.mat-grid-tile {
+    overflow-y: auto;
+}
+
+.list-container {
+    border: 1px solid red;
+    border-radius: 10px;
+}
