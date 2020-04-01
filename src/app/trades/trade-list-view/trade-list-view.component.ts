@@ -10,7 +10,7 @@ import { takeWhile } from 'rxjs/operators';
 export class TradeListViewComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() selectedTeam;
-  @Input() transactionSuccess: boolean;
+  @Input() transactionSuccess: boolean = false;
 
   @Output() outputTransaction = new EventEmitter<object>();
 
@@ -46,10 +46,10 @@ export class TradeListViewComponent implements OnInit, OnChanges, OnDestroy {
     this.resetTransaction();
 
     if (this.transactionSuccess) {
-      console.log("Transaction Success")
       this.getListOfPlayers(this.selectedTeam);
       this.getListOfGoalies(this.selectedTeam);
       this.getListOfPicks(this.selectedTeam);
+      this.transactionSuccess = false;
     }
 
     if (this.selectedTeam) {

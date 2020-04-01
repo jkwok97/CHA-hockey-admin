@@ -28,8 +28,18 @@
                             [formControl]="playerName" 
                             value="{{player.player_name}}" 
                             color="accent" 
-                            (blur)="changePlayerName()"
                         >
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="edit-row">
+                <div class="row-description">
+                    <p>Table Id</p>
+                </div>
+                <div class="row-output">
+                    <mat-form-field color="accent">
+                        <input matInput [formControl]="playerId" value="{{player.id}}" color="accent" readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -40,7 +50,7 @@
                 </div>
                 <div class="row-output">
                     <mat-form-field color="accent">
-                        <input matInput [formControl]="playerId" value="{{player.id}}" color="accent" readonly>
+                        <input matInput [formControl]="playerId" value="{{player.player_id}}" color="accent" readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -56,7 +66,7 @@
                 </div>
             </div>
 
-            <div class="edit-row">
+            <!-- <div class="edit-row">
                 <div class="row-description">
                     <p>Switch Teams</p>
                 </div>
@@ -67,7 +77,7 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-            </div>
+            </div> -->
 
         </mat-card-content>
 

@@ -12,7 +12,7 @@
     <mat-form-field color="accent">
         <mat-label>Team 2</mat-label>
         <mat-select [(ngModel)]="selectedTeamTwo" (selectionChange)="selectTeamTwo(selectedTeamTwo)">
-            <mat-option *ngFor="let team of teams" [value]="team.shortName">
+            <mat-option *ngFor="let team of teams" [value]="team.shortName" [disabled]="team.shortName === selectTeamOne">
             {{team.name}}
             </mat-option>
         </mat-select>

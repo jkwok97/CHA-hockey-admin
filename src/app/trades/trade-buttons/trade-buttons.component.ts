@@ -34,31 +34,43 @@ export class TradeButtonsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    console.log(this.teamOneTransaction);
-    console.log(this.teamTwoTransaction);
-    console.log(this.selectedTeamOne);
-    console.log(this.selectedTeamTwo);
   }
 
   onTrade() {
-    console.log(this.teamOneTransaction);
-    console.log(this.teamTwoTransaction);
-  }
-
-  onAcquire() {
-    this._tradeService.acquirePlayers(this.currentSeason, this.currentSeasonType, this.teamTwoTransaction, this.selectedTeamOne)
+    this._tradeService.makeTrade(this.teamOneTransaction, this.teamTwoTransaction, this.selectedTeamOne, this.selectedTeamTwo)
       .pipe(takeWhile(() => this._alive)).subscribe( (resp: any[]) => {
-        console.log(resp);
         this._mainService.popupTrigger('Success');
         this.transactionSuccess.emit(true);
       }, error => {
         this._mainService.popupTrigger(error);
       });
+    this.reset();
+  }
+
+  onAcquire() {
+    this._tradeService.acquirePlayers(this.teamTwoTransaction, this.selectedTeamOne)
+      .pipe(takeWhile(() => this._alive)).subscribe( (resp: any[]) => {
+        this._mainService.popupTrigger('Success');
+        this.transactionSuccess.emit(true);
+      }, error => {
+        this._mainService.popupTrigger(error);
+      });
+    this.reset();
   }
 
   onRelease() {
-    console.log(this.teamOneTransaction);
-    console.log(this.teamTwoTransaction);
+    this._tradeService.releasePlayers(this.teamOneTransaction, this.selectedTeamTwo, this.selectedTeamOne)
+      .pipe(takeWhile(() => this._alive)).subscribe( (resp: any[]) => {
+        this._mainService.popupTrigger('Success');
+        this.transactionSuccess.emit(true);
+      }, error => {
+        this._mainService.popupTrigger(error);
+      });
+    this.reset();
+  }
+
+  reset() {
+    this.transactionSuccess.emit(false);
   }
 
   ngOnDestroy() {

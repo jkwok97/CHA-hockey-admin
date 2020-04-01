@@ -22,50 +22,55 @@
 
             <ng-container matColumnDef="round_one">
                 <th mat-header-cell *matHeaderCellDef> Round 1 </th>
-                <mat-menu #teamChangeOptions="matMenu" yPosition="below">
+                <!-- <mat-menu #teamChangeOptions="matMenu" yPosition="below">
                     <button mat-menu-item *ngFor="let team of teams" (click)="updateDraft(team.team_name)">{{team.team_name}}</button>
-                </mat-menu>
-                <td mat-cell *matCellDef="let team" [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'one', team.team_name)">
+                </mat-menu> -->
+                <!-- [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'one', team.team_name)" -->
+                <td mat-cell *matCellDef="let team">
                     <img src="{{ findLogo(team.round_one).image }}"> 
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="round_two">
                 <th mat-header-cell *matHeaderCellDef> Round 2 </th>
-                <mat-menu #teamChangeOptions="matMenu" yPosition="below">
+                <!-- <mat-menu #teamChangeOptions="matMenu" yPosition="below">
                     <button mat-menu-item *ngFor="let team of teams" (click)="updateDraft(team.team_name)">{{team.team_name}}</button>
-                </mat-menu>
-                <td mat-cell *matCellDef="let team" [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'two', team.team_name)">
+                </mat-menu> -->
+                <!-- [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'two', team.team_name)" -->
+                <td mat-cell *matCellDef="let team">
                     <img src="{{ findLogo(team.round_two).image }}"> 
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="round_three">
                 <th mat-header-cell *matHeaderCellDef> Round 3 </th>
-                <mat-menu #teamChangeOptions="matMenu" yPosition="below">
+                <!-- <mat-menu #teamChangeOptions="matMenu" yPosition="below">
                     <button mat-menu-item *ngFor="let team of teams" (click)="updateDraft(team.team_name)">{{team.team_name}}</button>
-                </mat-menu>
-                <td mat-cell *matCellDef="let team" [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'three', team.team_name)">
+                </mat-menu> -->
+                <!-- [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'three', team.team_name)" -->
+                <td mat-cell *matCellDef="let team">
                     <img src="{{ findLogo(team.round_three).image }}"> 
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="round_four">
                 <th mat-header-cell *matHeaderCellDef> Round 4 </th>
-                <mat-menu #teamChangeOptions="matMenu" yPosition="below">
+                <!-- <mat-menu #teamChangeOptions="matMenu" yPosition="below">
                     <button mat-menu-item *ngFor="let team of teams" (click)="updateDraft(team.team_name)">{{team.team_name}}</button>
-                </mat-menu>
-                <td mat-cell *matCellDef="let team" [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'four', team.team_name)">
+                </mat-menu> -->
+                <!-- [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'four', team.team_name)" -->
+                <td mat-cell *matCellDef="let team">
                     <img src="{{ findLogo(team.round_four).image }}"> 
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="round_five">
                 <th mat-header-cell *matHeaderCellDef> Round 5 </th>
-                <mat-menu #teamChangeOptions="matMenu" yPosition="below">
+                <!-- <mat-menu #teamChangeOptions="matMenu" yPosition="below">
                     <button mat-menu-item *ngFor="let team of teams" (click)="updateDraft(team.team_name)">{{team.team_name}}</button>
-                </mat-menu>
-                <td mat-cell *matCellDef="let team" [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'five', team.team_name)">
+                </mat-menu> -->
+                <!-- [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'five', team.team_name)" -->
+                <td mat-cell *matCellDef="let team">
                     <img src="{{ findLogo(team.round_five).image }}"> 
                 </td>
             </ng-container>

@@ -37,7 +37,6 @@ export class TradesComponent implements OnInit {
   }
 
   transactionSuccessChange(event) {
-    console.log(event);
     this.transactionSuccess = event;
   }
 
