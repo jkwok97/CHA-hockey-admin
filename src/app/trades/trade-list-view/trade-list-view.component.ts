@@ -77,21 +77,22 @@ export class TradeListViewComponent implements OnInit, OnChanges, OnDestroy {
 
   getListOfPicks(shortName: string) {
     this._mainService.getDraftTable().pipe(takeWhile(() => this._alive)).subscribe((resp: any[]) => {
+      console.log(resp);
       let tempPicks = resp;
       let teamPicks = [];
       tempPicks.forEach((team) => {
         Object.entries(team).forEach(([key, val]) => {
           if (val === shortName) {
             if (key === 'round_one') {
-              teamPicks.push({ team: team.team_name, pick_value: '1st'})
+              teamPicks.push({ team: team.team_name, pick_value: '1st', draft_year: team.draft_year})
             } else if (key === 'round_two') {
-              teamPicks.push({ team: team.team_name, pick_value: '2nd'})
+              teamPicks.push({ team: team.team_name, pick_value: '2nd', draft_year: team.draft_year})
             } else if (key === 'round_three') {
-              teamPicks.push({ team: team.team_name, pick_value: '3rd'})
+              teamPicks.push({ team: team.team_name, pick_value: '3rd', draft_year: team.draft_year})
             } else if (key === 'round_four') {
-              teamPicks.push({ team: team.team_name, pick_value: '4th'})
+              teamPicks.push({ team: team.team_name, pick_value: '4th', draft_year: team.draft_year})
             } else if (key === 'round_five') {
-              teamPicks.push({ team: team.team_name, pick_value: '5th'})
+              teamPicks.push({ team: team.team_name, pick_value: '5th', draft_year: team.draft_year})
             }
           }
         });

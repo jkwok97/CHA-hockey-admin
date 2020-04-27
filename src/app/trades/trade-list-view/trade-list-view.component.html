@@ -22,7 +22,7 @@
     <mat-selection-list (selectionChange)="onSelectPick($event)">
         <div mat-subheader>Picks</div>
         <mat-list-option *ngFor="let pick of picks" [value]="pick">
-            {{pick.team}} {{pick.pick_value}}
+            {{pick.team}} {{pick.pick_value}} {{pick.draft_year}}
         </mat-list-option>
     </mat-selection-list>
 
