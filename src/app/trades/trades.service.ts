@@ -28,6 +28,7 @@ export class TradesService {
       teamOne: teamOneTransaction,
       teamTwo: teamTwoTransaction
     }
+    console.log(newTransaction);
     return this._http.put(`${environment.back_end_url}/transactions/trade`, newTransaction);
   }
 

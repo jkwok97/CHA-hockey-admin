@@ -40,6 +40,4 @@ export class TradesComponent implements OnInit {
     this.transactionSuccess = event;
   }
 
-
-
 }

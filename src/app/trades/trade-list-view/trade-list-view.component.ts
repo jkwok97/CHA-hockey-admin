@@ -77,7 +77,6 @@ export class TradeListViewComponent implements OnInit, OnChanges, OnDestroy {
 
   getListOfPicks(shortName: string) {
     this._mainService.getDraftTable().pipe(takeWhile(() => this._alive)).subscribe((resp: any[]) => {
-      console.log(resp);
       let tempPicks = resp;
       let teamPicks = [];
       tempPicks.forEach((team) => {

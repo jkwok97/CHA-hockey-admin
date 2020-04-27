@@ -9,8 +9,8 @@ import { Subject, Observable } from 'rxjs';
 })
 export class MainService {
 
-  currentSeason: string = "2019-20";
-  currentSeasonType: string = "Playoffs";
+  currentSeason: string = "2020-21";
+  currentSeasonType: string = "Regular";
 
   currentTeam: any;
 
@@ -271,7 +271,7 @@ export class MainService {
   }
 
   getDraftTable() {
-    return this._http.get(`${environment.back_end_url}/draft-table/`);
+    return this._http.get(`${environment.back_end_url}/draft-table/all`);
   }
 
   getLeagueTeamsStats() {

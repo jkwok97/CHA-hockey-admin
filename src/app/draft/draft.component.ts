@@ -17,6 +17,7 @@ export class DraftComponent implements OnInit, OnDestroy {
   teams = [];
   teamNames = [];
   drafts: any;
+  draftSeason: string = '2020';
   
   originalTeamRound: string;
   prevTeam: string;
