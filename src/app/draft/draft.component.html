@@ -74,6 +74,15 @@
                     <img src="{{ findLogo(team.round_five).image }}"> 
                 </td>
             </ng-container>
+
+            <ng-container matColumnDef="playing_year">
+                <th mat-header-cell *matHeaderCellDef> Year </th>
+                <!-- <mat-menu #teamChangeOptions="matMenu" yPosition="below">
+                    <button mat-menu-item *ngFor="let team of teams" (click)="updateDraft(team.team_name)">{{team.team_name}}</button>
+                </mat-menu> -->
+                <!-- [matMenuTriggerFor]="teamChangeOptions" (click)="setPrevTeam(team.id, 'five', team.team_name)" -->
+                <td mat-cell *matCellDef="let team"> {{ team.draft_year }} </td>
+            </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="isMobile ? draftMobileColumnsToDisplay : draftColumnsToDisplay;"></tr>
             <tr mat-row *matRowDef="let team; columns: isMobile ? draftMobileColumnsToDisplay : draftColumnsToDisplay;"></tr>

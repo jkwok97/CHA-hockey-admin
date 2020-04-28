@@ -24,8 +24,8 @@ export class DraftComponent implements OnInit, OnDestroy {
   originalTeamPickId: number;
 
   draft: MatTableDataSource<any[]>;
-  draftColumnsToDisplay = ['team_logo', 'team_name', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
-  draftMobileColumnsToDisplay = ['team_logo', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
+  draftColumnsToDisplay = ['team_logo', 'team_name', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five', 'playing_year'];
+  draftMobileColumnsToDisplay = ['team_logo', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five', 'playing_year'];
 
   constructor(
     private _mainService: MainService,
