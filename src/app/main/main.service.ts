@@ -33,7 +33,7 @@ export class MainService {
         mobileLink: `https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=32&single=false&widget=false&headers=false&gridlines=false&range=a1:m35`,
         color: '#ec131e'  
       },
-      { name: "Victoria Vipers", shortName: "VIC", image: "../../assets/team_logos/Vipers.png", owner: "Ryan Bender", 
+      { name: "Victoria Stellers Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", 
         link: `https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=33&single=true&widget=false&headers=false&gridlines=false&chrome=false&range=a1:m35`,
         mobileLink: `https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=33&single=false&widget=false&headers=false&gridlines=false&range=a1:m35`,
         color: '#5ebe7d' 
@@ -124,6 +124,7 @@ export class MainService {
 
   archivedLeague = {
     teams: [
+      { name: "Victoria Vipers", shortName: "VIC", image: "../../assets/team_logos/Vipers.png", owner: "Ryan Bender", color: '#5ebe7d', fontColor: 'black' },
       { name: "Mississippi Mudbugs", shortName: "MIS", image: "../../assets/team_logos/mudbugs.png", owner: "Jeff Kwok", color: '#000122', fontColor: 'white' },
       { name: "Charlotte Storm", shortName: "CHA", image: "../../assets/team_logos/chastorm.png", owner: "Patrick Ryan", color: '#000122', fontColor: 'white' },
       { name: "Seattle Surge", shortName: "STS", image: "../../assets/team_logos/surge.png", owner: "Corey Abbott", color: '#000122', fontColor: 'white' },
