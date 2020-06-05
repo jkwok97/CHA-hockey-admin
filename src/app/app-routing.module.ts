@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'waivers', component: WaiversComponent},
   { path: 'new-draft', component: NewDraftComponent},
   { path: 'champs', component: ChampsComponent},
-  { path: 'users', component: UsersComponent}
+  { path: 'users', component: UsersComponent},
 
   { path: 'edit/:type/:id', component: PlayerCardComponent, canActivate: [AuthGuard]},
   { path: 'salary/edit/:type/:id/:params', component: SalaryCardComponent, canActivate: [AuthGuard]},
