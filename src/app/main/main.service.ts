@@ -164,7 +164,7 @@ export class MainService {
   ) { }
 
   getAllUsers() {
-    return this._http.get(`${environment.back_end_url}/users/`);
+    return this._http.get(`${environment.back_end_url}/v2/users/`);
   }
 
   getUser(email) {

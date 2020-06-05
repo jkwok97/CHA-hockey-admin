@@ -22,7 +22,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private _authService: AuthService,
     private _router: Router,
   ) {
-    this._authService.currentUser.subscribe(x => this.currentUser = x);
+    this._authService.currentUser.subscribe(x => this.currentUser = x[0]);
     if (!this.currentUser) {
       this._router.navigate(['/login']);
     }
@@ -42,11 +42,6 @@ export class MainComponent implements OnInit, OnDestroy {
         } else {
           this.isMobile = false;
         }
-  }
-
-  logout() {
-    this._authService.logout();
-    this._router.navigate(['/login']);
   }
 
   ngOnDestroy() {

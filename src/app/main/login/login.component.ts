@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { first, takeWhile } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 import { AuthService } from '../auth.service';
 
@@ -23,15 +23,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   error:string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private _authService: AuthService
   ) {
-    // redirect to home if already logged in
       if (this._authService.currentUserValue) { 
-        // console.log(this._authService.currentUserValue)
-        this.router.navigate(['main']);
+        this.router.navigate(['games']);
       } 
    }
 
@@ -39,13 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email])
     })
-
-    // get return url from route parameters or default to '/'
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-
-  // convenience getter for easy access to form fields
-  // get f() { return this.loginForm.controls; }
 
   get email() { return this.loginForm.get('email'); }
 
@@ -60,7 +50,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
     }
@@ -74,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.showNotification = true;
           this.isLoading = false;
         } else {
-          this.router.navigate(['main/']);
+          this.router.navigate(['games']);
         }
       },
       error => {

@@ -34,6 +34,7 @@ import { TradesComponent } from './trades/trades.component';
 import { TradeSelectComponent } from './trades/trade-select/trade-select.component';
 import { TradeListViewComponent } from './trades/trade-list-view/trade-list-view.component';
 import { TradeButtonsComponent } from './trades/trade-buttons/trade-buttons.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { TradeButtonsComponent } from './trades/trade-buttons/trade-buttons.comp
     TradesComponent,
     TradeSelectComponent,
     TradeListViewComponent,
-    TradeButtonsComponent
+    TradeButtonsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

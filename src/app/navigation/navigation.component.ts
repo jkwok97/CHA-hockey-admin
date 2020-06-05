@@ -22,6 +22,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   route: string;
 
+  activeLinkIndex = -1;
+
+  routes = [
+    {name: 'Games', url: 'games', current: true},
+    {name: 'Trades', url: 'trades', current: false},
+    {name: 'Players', url: 'players', current: false},
+    {name: 'Goalies', url: 'goalies', current: false},
+    {name: 'Draft Picks', url: 'draft', current: false},
+    {name: 'Salary', url: 'salary', current: false},
+    {name: 'Waivers', url: 'waivers', current: false},
+    {name: 'Draft Upload', url: 'new-draft', current: false},
+    {name: 'Champ Upload', url: 'champs', current: false},
+    {name: 'Users', url: 'users', current: false}
+  ];
+
   constructor(
     private _router: Router, 
     private _authService: AuthService,
@@ -29,15 +44,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     private _popper: MatSnackBar
   ) { 
 
-    // redirect to home if already logged in
     if (this._authService.currentUserValue) { 
-      // console.log(this._authService.currentUserValue)
       this.loggedIn = true;
-      // console.log(this.loggedIn);
-      this._router.navigate(['main']);
+      this._router.navigate(['games']);
     } else {
-      // console.log(this.loggedIn);
-
       this._router.navigate(['login']);
     }
     this._authService.currentUser.subscribe(x => this.currentUser = x);
@@ -55,6 +65,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._popper.open(message, action, {
       duration: this.duration * 1000,
     });
+  }
+
+  logout() {
+    this._authService.logout();
+    this._router.navigate(['/login']);
   }
 
   ngOnDestroy() {

@@ -6,9 +6,9 @@
             <p class="title">CHA Adminstration</p>
         </div>
 
-        <div class="welcome">
+        <div class="welcome" *ngIf="currentUser">
             <mat-form-field color="accent">
-                <mat-label>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</mat-label>
+                <mat-label>Welcome {{currentUser[0].firstname}} {{currentUser[0].lastname}}!</mat-label>
                 <mat-select>
                     <mat-option (click)="logout()">Logout</mat-option>
                 </mat-select>
@@ -18,6 +18,16 @@
     </div>
 
     <div class="body-container cha-dark">
+
+        <nav mat-tab-nav-bar color="accent">
+            <a mat-tab-link
+                *ngFor="let route of routes"
+                [routerLink]="route.url"
+                routerLinkActive #rla="routerLinkActive"
+                [active]="rla.isActive">
+                {{route.name}}
+            </a>
+        </nav>
         
         <router-outlet></router-outlet>
 
