@@ -4,14 +4,17 @@
 
     <h3 *ngIf="!isLoading">Users</h3>
 
-    <mat-form-field color="accent" class="filtering" *ngIf="!isLoading">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-    </mat-form-field>
+    <section class="filter-add" *ngIf="!isLoading">
+        <mat-form-field color="accent" class="filtering">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
 
-    <div class="table">
+        <button mat-raised-button color="accent" (click)="onAddUser()"> Add User </button>
+    </section>
+
+    <div class="table" *ngIf="!isLoading">
 
         <table 
-            *ngIf="!isLoading"
             mat-table 
             [dataSource]="usersData" 
             matSort 
@@ -60,7 +63,7 @@
             <tr 
                 mat-row 
                 *matRowDef="let user; columns: columns;"
-                (click)="onEdit(user)"
+                (click)="onEdit(user.id)"
             ></tr>
 
         </table>

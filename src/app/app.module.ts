@@ -35,6 +35,7 @@ import { TradeSelectComponent } from './trades/trade-select/trade-select.compone
 import { TradeListViewComponent } from './trades/trade-list-view/trade-list-view.component';
 import { TradeButtonsComponent } from './trades/trade-buttons/trade-buttons.component';
 import { UsersComponent } from './users/users.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { UsersComponent } from './users/users.component';
     TradeSelectComponent,
     TradeListViewComponent,
     TradeButtonsComponent,
-    UsersComponent
+    UsersComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { takeWhile } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -31,7 +32,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    private _userService: UserService
+    private _userService: UserService,
+    private _router: Router,
+    private _route: ActivatedRoute
   ) {
     this.users$ = this._userService.getAllUsers();
    }
@@ -59,8 +62,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   }
 
-  onEdit(user: User) {
-    console.log(user);
+  onEdit(userId: number) {
+    this._router.navigate([`edit/${userId}`], { relativeTo: this._route });
+    window.scrollTo(0,0);
+  }
+
+  onAddUser() {
+    this._router.navigate([`add`], { relativeTo: this._route });
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy(): void {

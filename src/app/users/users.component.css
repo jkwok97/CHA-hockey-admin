@@ -2,9 +2,23 @@
     color: white;
     display: grid;
     justify-items: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 50vh;
     grid-row-gap: 10px;
+}
+
+.filter-add {
+    display: inline-grid;
+    grid-template-columns: 300px auto;
+    grid-column-gap: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.filter-add button {
+    height: min-content;
+    width: min-content;
 }
 
 .table {
@@ -13,7 +27,7 @@
 }
 
 .mat-form-field {
-    width: 50%;
+    width: 100%;
 }
 
 .mat-row:hover {

@@ -27,17 +27,28 @@ export class UserService {
     )
   }
 
+  getUserById(id: number): Observable<User> {
+    return this._http.get(`${environment.back_end_url}/v2/users/edit/${id}`).pipe(
+      map(result => result['result'][0])
+    )
+  }
+
   addUser(userInfo: User) {
-    
+    return this._http.post(`${environment.back_end_url}/v2/users/add/`, userInfo).pipe(
+      map(result => result['message'])
+    )
   }
 
-  updateUser(id: number) {
-
+  updateUser(user: User) {
+    return this._http.put(`${environment.back_end_url}/v2/users/edit/${user.id}`, user).pipe(
+      map(result => result['message'])
+    )
   }
 
-  deletUser(id: number) {
-
+  deleteUser(id: number) {
+    return this._http.delete(`${environment.back_end_url}/v2/users/delete/${id}`).pipe(
+      map(result => result['message'])
+    )
   }
-
 
 }

@@ -17,6 +17,7 @@ import { WaiversComponent } from './waivers/waivers.component';
 import { NewDraftComponent } from './draft/new-draft/new-draft.component';
 import { ChampsComponent } from './champs/champs.component';
 import { UsersComponent } from './users/users.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -30,7 +31,10 @@ const routes: Routes = [
   { path: 'waivers', component: WaiversComponent},
   { path: 'new-draft', component: NewDraftComponent},
   { path: 'champs', component: ChampsComponent},
-  { path: 'users', component: UsersComponent},
+
+  { path: 'users', component: UsersComponent },
+  { path: 'users/edit/:id', component: UserEditComponent },
+  { path: 'users/add', component: UserEditComponent },
 
   { path: 'edit/:type/:id', component: PlayerCardComponent, canActivate: [AuthGuard]},
   { path: 'salary/edit/:type/:id/:params', component: SalaryCardComponent, canActivate: [AuthGuard]},

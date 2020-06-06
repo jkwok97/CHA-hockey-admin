@@ -5,6 +5,7 @@ import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MainService } from '../main/main.service';
+import { DisplayService } from '../_services/display.service';
 
 @Component({
   selector: 'app-navigation',
@@ -41,6 +42,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     private _router: Router, 
     private _authService: AuthService,
     private _mainService: MainService,
+    private _displayService: DisplayService,
     private _popper: MatSnackBar
   ) { 
 
@@ -55,7 +57,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._router.navigate(['login']);
-    this._mainService.popupListener().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._displayService.popupListener().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let message = resp as string;
       this.openPopup(message, "Update");
     });
