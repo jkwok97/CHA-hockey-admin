@@ -10,7 +10,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
-import { AuthService } from './main/auth.service';
+import { AuthService } from './_services/auth.service';
 import { PlayerCardComponent } from './players/player-card/player-card.component';
 import { PlayersComponent } from './players/players.component';
 import { GoaliesComponent } from './goalies/goalies.component';

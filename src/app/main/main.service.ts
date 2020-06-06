@@ -163,14 +163,6 @@ export class MainService {
     private _http: HttpClient
   ) { }
 
-  getAllUsers() {
-    return this._http.get(`${environment.back_end_url}/v2/users/`);
-  }
-
-  getUser(email) {
-    return this._http.get(`${environment.back_end_url}/players-stats/${email}`);
-  }
-
   getTeamInfo(short) {
     let found;
     found = this.currentLeague.teams.find(team => team.shortName === short);

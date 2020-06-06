@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { takeWhile, filter } from 'rxjs/operators';
-import { AuthService } from '../main/auth.service';
+import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MainService } from '../main/main.service';

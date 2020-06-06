@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
-import { AuthGuard } from './main/auth.guard';
+import { AuthGuard } from '../app/_services/auth.guard';
 import { PlayerCardComponent } from './players/player-card/player-card.component';
 import { SalaryCardComponent } from './salary/salary-card/salary-card.component';
 import { AddPlayerComponent } from './salary/add-player/add-player.component';
@@ -20,8 +20,8 @@ import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'main', component: MainComponent, canActivate: [AuthGuard]},
-  { path: 'games', component: GamesComponent},
+  { path: 'main', component: MainComponent},
+  { path: 'games', component: GamesComponent, canActivate: [AuthGuard]},
   { path: 'trades', component: TradesComponent},
   { path: 'players', component: PlayersComponent},
   { path: 'goalies', component: GoaliesComponent},
