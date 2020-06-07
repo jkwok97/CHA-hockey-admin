@@ -74,8 +74,6 @@ export class SalariesComponent implements OnInit, OnDestroy {
   }
 
   onEdit(salaryId: number, salary: Salary) {
-    console.log(salaryId);
-
     console.log(salary);
 
     if (salaryId) {
