@@ -6,4 +6,4 @@ export interface User {
     isadmin: boolean,
     isactive: boolean
     authdata?: string
-}
+};

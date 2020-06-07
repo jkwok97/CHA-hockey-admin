@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Player } from 'src/app/_models/player';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DisplayService } from 'src/app/_services/display.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/_services/user.service';
 import { take, takeWhile } from 'rxjs/operators';
-import { User } from 'src/app/_models/user';
-import { Observable } from 'rxjs';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { PlayersService } from 'src/app/_services/players.service';
 
 @Component({
-  selector: 'app-user-edit',
-  templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  selector: 'app-player-info-form',
+  templateUrl: './player-info-form.component.html',
+  styleUrls: ['./player-info-form.component.css']
 })
-export class UserEditComponent implements OnInit, OnDestroy {
+export class PlayerInfoFormComponent implements OnInit {
 
   isMobile: boolean;
   isSaving: boolean;
@@ -20,24 +20,22 @@ export class UserEditComponent implements OnInit, OnDestroy {
   inEditMode: boolean;
   private _alive: boolean = true;
 
-  user$: Observable<User>;
-  user: User;
+  player$: Observable<Player>;
+  player: Player;
 
-  userForm: FormGroup;
+  playerForm: FormGroup;
 
   constructor(
     private _displayService: DisplayService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _playersService: PlayersService
   ) { 
-
     if (this._route.snapshot.url.find(url => url.path.includes('edit'))) {
       this.inEditMode = true;
-      const userId = this._route.snapshot.params.id;
-      this.user$ = this._userService.getUserById(userId);
+      const playerId = this._route.snapshot.params.id;
+      this.player$ = this._playersService.getPlayer(playerId);
     }
-    
   }
 
   ngOnInit() {
@@ -46,12 +44,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.createForm();
 
     if (this.inEditMode) {
-      this.user$.pipe(
+      this.player$.pipe(
         take(1)
-      ).subscribe((user: User) => {
+      ).subscribe((player: Player) => {
         this.isLoading = false;
-        this.user = user;
-        this.patchform(user);
+        this.player = player;
+        this.patchform(player);
       })
     } else {
       this.isLoading = false;
@@ -59,24 +57,34 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.userForm = new FormGroup({
+    this.playerForm = new FormGroup({
       'firstname': new FormControl('', [Validators.required]),
       'lastname': new FormControl('', [Validators.required]),
-      'email': new FormControl('', [Validators.email]),
-      'isadmin': new FormControl(''),
+      'nhl_id': new FormControl(''),
+      'position': new FormControl(''),
       'isactive': new FormControl('')
     })
   }
 
-  patchform(user: User) {
-    this.userForm.patchValue({
-      'firstname': user.firstname,
-      'lastname': user.lastname,
-      'email': user.email,
-      'isadmin': user.isadmin,
-      'isactive': user.isactive
+  patchform(player: Player) {
+    this.playerForm.patchValue({
+      'firstname': player.firstname,
+      'lastname': player.lastname,
+      'nhl_id': player.nhl_id,
+      'position': this.getPosition(player),
+      'isactive': player.isactive
     })
 
+  }
+
+  getPosition(player: Player) {
+    if (player.isgoalie) {
+      return 'isgoalie';
+    } else if (player.isdefense) {
+      return 'isdefense';
+    } else if (player.isforward) {
+      return 'isforward'
+    }
   }
 
   onSave() {
@@ -86,11 +94,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   handleAddSave() {
 
-    const userData = {
-      ...this.userForm.value
+    const playerData = {
+      ...this.playerForm.value,
+      isgoalie: this.playerForm.controls.position.value === 'isgoalie' ? true : false,
+      isdefense: this.playerForm.controls.position.value === 'isdefense' ? true : false,
+      isforward: this.playerForm.controls.position.value === 'isforward' ? true : false,
     };
 
-    this._userService.addUser(userData).pipe(
+    this._playersService.addPlayer(playerData).pipe(
       takeWhile(() => this._alive)
     ).subscribe(resp => {
       this.isSaving = false;
@@ -103,12 +114,15 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   handleEditSave() {
 
-    const userData = {
-      ...this.userForm.value,
-      id: this.user.id
+    const playerData = {
+      ...this.playerForm.value,
+      id: this.player.id,
+      isgoalie: this.playerForm.controls.position.value === 'isgoalie' ? true : false,
+      isdefense: this.playerForm.controls.position.value === 'isdefense' ? true : false,
+      isforward: this.playerForm.controls.position.value === 'isforward' ? true : false,
     }
 
-    this._userService.updateUser(userData).pipe(
+    this._playersService.updatePlayer(playerData).pipe(
       takeWhile(() => this._alive)
     ).subscribe(resp => {
       this.isSaving = false;
@@ -129,7 +143,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this._userService.deleteUser(this.user.id).pipe(
+    this._playersService.deletePlayer(this.player.id).pipe(
       takeWhile(() => this._alive)
     ).subscribe(resp => {
       this.isSaving = false;

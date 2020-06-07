@@ -1,0 +1,103 @@
+<h3>Players</h3>
+
+<section class="filter-add">
+
+    <mat-form-field color="accent" class="filtering">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" (click)="onAddPlayer()"> Add Player </button>
+
+    <mat-button-toggle-group #byActive="matButtonToggleGroup" [value]="showType" (change)="changeActive(byActive.value)">
+        <mat-button-toggle value="true" color="accent">
+            Active
+        </mat-button-toggle>
+        <mat-button-toggle value="false" color="accent">
+            Non-Active
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+
+</section>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="table" *ngIf="!isLoading">
+
+    <table 
+        mat-table 
+        [dataSource]="playersData" 
+        matSort 
+        class="mat-elevation-z8 full-width" 
+        matSortActive="isactive" 
+        matSortDirection="desc"
+    >
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Player Id </th>
+            <td mat-cell *matCellDef="let player"> {{player.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nhl_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> NHL Id </th>
+            <td mat-cell *matCellDef="let player"> {{player.nhl_id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First </th>
+            <td mat-cell *matCellDef="let player"> {{player.firstname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last </th>
+            <td mat-cell *matCellDef="let player"> {{player.lastname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isactive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Active </th>
+            <td mat-cell *matCellDef="let user">
+                    <mat-icon *ngIf="user.isactive">done</mat-icon>
+                    <mat-icon color="warn" *ngIf="!user.isactive">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isgoalie">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Goalie </th>
+            <td mat-cell *matCellDef="let player">
+                    <mat-icon *ngIf="player.isgoalie">done</mat-icon>
+                    <mat-icon color="warn" *ngIf="!player.isgoalie">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isdefense">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Defense </th>
+            <td mat-cell *matCellDef="let player">
+                    <mat-icon *ngIf="player.isdefense">done</mat-icon>
+                    <mat-icon color="warn" *ngIf="!player.isdefense">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isforward">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Forward </th>
+            <td mat-cell *matCellDef="let player">
+                    <mat-icon *ngIf="player.isforward">done</mat-icon>
+                    <mat-icon color="warn" *ngIf="!player.isforward">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr 
+            mat-row 
+            *matRowDef="let player; columns: columns;"
+            (click)="onEdit(player.id)"
+        ></tr>
+
+    </table>
+
+    <mat-paginator
+        [pageSize]="pageSize"
+        [length]="length"
+        color="accent"
+        showFirstLastButtons
+    ></mat-paginator>
+
+</div>

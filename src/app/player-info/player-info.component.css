@@ -1,24 +1,25 @@
-.user-container {
+:host {
     color: white;
     display: grid;
     justify-items: center;
     align-items: flex-start;
     min-height: 50vh;
     grid-row-gap: 10px;
+    grid-template-rows: repeat(auto-fill, minmax(min-content, auto));;
 }
 
 .filter-add {
     display: inline-grid;
-    grid-template-columns: 300px auto;
-    grid-column-gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    grid-column-gap: 20px;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
 .filter-add button {
-    height: min-content;
     width: min-content;
+    margin: auto;
 }
 
 .table {
@@ -47,4 +48,12 @@
 h3 {
     font-size: x-large;
     font-weight: 100;   
+}
+
+.mat-button-toggle-group {
+    margin: auto;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
 }

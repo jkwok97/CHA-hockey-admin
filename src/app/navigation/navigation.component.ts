@@ -26,6 +26,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   activeLinkIndex = -1;
 
   routes = [
+    {name: 'Users', url: 'users', current: false},
+    {name: 'Player Info', url: 'player-info', current: false},
+
     {name: 'Games', url: 'games', current: true},
     {name: 'Trades', url: 'trades', current: false},
     {name: 'Players', url: 'players', current: false},
@@ -35,7 +38,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Waivers', url: 'waivers', current: false},
     {name: 'Draft Upload', url: 'new-draft', current: false},
     {name: 'Champ Upload', url: 'champs', current: false},
-    {name: 'Users', url: 'users', current: false}
   ];
 
   constructor(

@@ -18,9 +18,10 @@ import { NewDraftComponent } from './draft/new-draft/new-draft.component';
 import { ChampsComponent } from './champs/champs.component';
 import { UsersComponent } from './users/users.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { PlayerInfoComponent } from './player-info/player-info.component';
+import { PlayerInfoFormComponent } from './player-info/player-info-form/player-info-form.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: 'main', component: MainComponent},
   { path: 'games', component: GamesComponent, canActivate: [AuthGuard]},
   { path: 'trades', component: TradesComponent},
@@ -31,17 +32,27 @@ const routes: Routes = [
   { path: 'waivers', component: WaiversComponent},
   { path: 'new-draft', component: NewDraftComponent},
   { path: 'champs', component: ChampsComponent},
-
-  { path: 'users', component: UsersComponent },
-  { path: 'users/edit/:id', component: UserEditComponent },
-  { path: 'users/add', component: UserEditComponent },
-
   { path: 'edit/:type/:id', component: PlayerCardComponent, canActivate: [AuthGuard]},
   { path: 'salary/edit/:type/:id/:params', component: SalaryCardComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/forward', component: AddPlayerComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/goalie', component: AddPlayerComponent, canActivate: [AuthGuard]},
   { path: 'salary/add/defense', component: AddPlayerComponent, canActivate: [AuthGuard]},
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard]},
+
+  // ****************************************************************************************
+  //                                       NEW USED ROUTES
+  // ****************************************************************************************
+
+  { path: 'login', component: LoginComponent},
+
+  { path: 'users', component: UsersComponent },
+  { path: 'users/edit/:id', component: UserEditComponent },
+  { path: 'users/add', component: UserEditComponent },
+
+  { path: 'player-info', component: PlayerInfoComponent },
+  { path: 'player-info/edit/:id', component: PlayerInfoFormComponent },
+  { path: 'player-info/add', component: PlayerInfoFormComponent },
+
 ];
 
 @NgModule({

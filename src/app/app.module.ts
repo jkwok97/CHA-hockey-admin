@@ -36,6 +36,8 @@ import { TradeListViewComponent } from './trades/trade-list-view/trade-list-view
 import { TradeButtonsComponent } from './trades/trade-buttons/trade-buttons.component';
 import { UsersComponent } from './users/users.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { PlayerInfoComponent } from './player-info/player-info.component';
+import { PlayerInfoFormComponent } from './player-info/player-info-form/player-info-form.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     TradeButtonsComponent,
     UsersComponent,
     UserEditComponent,
+    PlayerInfoComponent,
+    PlayerInfoFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,3 +23,13 @@ form {
     width: 75%;
     margin-top: 50px;
 }
+
+.mat-radio-group {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.mat-radio-button {
+    margin: 5px 0;
+}
