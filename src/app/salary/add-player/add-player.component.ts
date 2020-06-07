@@ -3,7 +3,6 @@ import { FormControl, Validators, FormsModule } from '@angular/forms';
 import { MainService } from 'src/app/main/main.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Component({
   selector: 'app-add-player',

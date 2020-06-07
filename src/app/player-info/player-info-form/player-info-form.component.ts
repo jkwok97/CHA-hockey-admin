@@ -105,8 +105,8 @@ export class PlayerInfoFormComponent implements OnInit {
       takeWhile(() => this._alive)
     ).subscribe(resp => {
       this.isSaving = false;
-      this._displayService.popupTrigger(resp);
-      this._router.navigate(['../'], {relativeTo: this._route});
+      this._displayService.popupTrigger('Player Added');
+      this._router.navigate([`${resp}`], { relativeTo: this._route});
     }, error => {
       this._displayService.popupTrigger(error);
     })

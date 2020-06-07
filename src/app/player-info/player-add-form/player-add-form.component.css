@@ -1,0 +1,31 @@
+:host {
+    display: grid;
+    justify-items: center;
+    padding: 30px 0;
+}
+
+.mat-card {
+    width: 90%;
+}
+
+form {
+    display: grid;
+    grid-row-gap: 15px;
+    grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(75px, auto));
+}
+
+.mat-progress-bar {
+    width: 75%;
+    margin-top: 50px;
+}
+
+.mat-radio-group {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.mat-radio-button {
+    margin: 5px 0;
+}

@@ -39,7 +39,7 @@ export class PlayersService {
 
   addPlayer(playerInfo: Player) {
     return this._http.post(`${environment.back_end_url}/v2/players/add/`, playerInfo).pipe(
-      map(result => result['message'])
+      map(result => result['result'])
     )
   }
 

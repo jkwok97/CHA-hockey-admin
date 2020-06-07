@@ -1,0 +1,145 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<mat-card *ngIf="(player$ | async)">
+
+    <mat-card-header>
+        <mat-card-title>{{player.firstname}} {{player.lastname}}</mat-card-title>
+        <mat-card-subtitle>Add Salary</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+    
+        <form [formGroup]="playerForm">
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>Player Id</mat-label>
+                <input matInput placeholder="Player Id" formControlName="player_id" readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2019-20</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2020">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2020-21</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2021">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2021-22</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2022">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2022-23</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2023">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2023-24</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2024">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2024-25</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2025">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2025-26</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2026">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2026-27</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2027">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2027-28</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2028">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2028-29</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2029">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2029-30</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2030">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2030-31</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2031">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2031-32</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2032">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2032-33</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2033">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2033-34</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2034">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2034-35</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2035">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2035-36</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2036">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2036-37</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2037">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2037-38</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2038">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2038-39</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2039">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>NHL 2039-40</mat-label>
+                <input matInput placeholder="Last" formControlName="season_2040">
+            </mat-form-field>
+    
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+        <button 
+            mat-raised-button 
+            color="accent" 
+            type="submit" 
+            *ngIf="!isSaving"
+            [disabled]="playerForm.invalid"
+            (click)="onSave()" 
+        >
+            Save
+        </button>
+
+        <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
+
+    </mat-card-actions>
+
+</mat-card>
