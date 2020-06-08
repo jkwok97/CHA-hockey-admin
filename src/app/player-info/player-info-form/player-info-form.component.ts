@@ -101,6 +101,8 @@ export class PlayerInfoFormComponent implements OnInit {
       isforward: this.playerForm.controls.position.value === 'isforward' ? true : false,
     };
 
+    delete playerData.position;
+
     this._playersService.addPlayer(playerData).pipe(
       takeWhile(() => this._alive)
     ).subscribe(resp => {
@@ -121,6 +123,8 @@ export class PlayerInfoFormComponent implements OnInit {
       isdefense: this.playerForm.controls.position.value === 'isdefense' ? true : false,
       isforward: this.playerForm.controls.position.value === 'isforward' ? true : false,
     }
+
+    delete playerData.position;
 
     this._playersService.updatePlayer(playerData).pipe(
       takeWhile(() => this._alive)
