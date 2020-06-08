@@ -22,6 +22,7 @@ import { PlayerInfoComponent } from './player-info/player-info.component';
 import { PlayerInfoFormComponent } from './player-info/player-info-form/player-info-form.component';
 import { PlayerAddFormComponent } from './player-info/player-add-form/player-add-form.component';
 import { SalariesComponent } from './salaries/salaries.component';
+import { SalaryEditComponent } from './salaries/salary-edit/salary-edit.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -57,6 +58,7 @@ const routes: Routes = [
   { path: 'player-info/add/:id', component: PlayerAddFormComponent },
 
   { path: 'salaries', component: SalariesComponent },
+  { path: 'salaries/edit/:id', component: SalaryEditComponent },
 
 ];
 

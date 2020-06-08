@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { SalaryService } from '../_services/salary.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
+import { DisplayService } from '../_services/display.service';
 
 @Component({
   selector: 'app-salaries',
@@ -36,6 +37,7 @@ export class SalariesComponent implements OnInit, OnDestroy {
 
   constructor(
     private _salariesService: SalaryService,
+    private _displayService: DisplayService,
     private _router: Router,
     private _route: ActivatedRoute
   ) { }
@@ -73,12 +75,13 @@ export class SalariesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onEdit(salaryId: number, salary: Salary) {
-    console.log(salary);
+  onEdit(salaryId: number) {
 
     if (salaryId) {
-    // this._router.navigate([`edit/${playerId}`], { relativeTo: this._route });
-    // window.scrollTo(0,0);
+    this._router.navigate([`edit/${salaryId}`], { relativeTo: this._route });
+    window.scrollTo(0,0);
+    } else {
+      this._displayService.popupTrigger('Edit Salary Not Available');
     }
     
   }

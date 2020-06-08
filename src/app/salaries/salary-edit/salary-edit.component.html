@@ -1,10 +1,10 @@
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<mat-card *ngIf="(player$ | async)">
+<mat-card *ngIf="(salary$ | async)">
 
     <mat-card-header>
-        <mat-card-title>{{player.firstname}} {{player.lastname}}</mat-card-title>
-        <mat-card-subtitle>Add Salary</mat-card-subtitle>
+        <mat-card-title>{{salary.firstname}} {{salary.lastname}}</mat-card-title>
+        <mat-card-subtitle>Edit Salary</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>

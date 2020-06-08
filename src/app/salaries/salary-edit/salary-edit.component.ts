@@ -1,26 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SalaryService } from 'src/app/_services/salary.service';
 import { Observable } from 'rxjs';
-import { Player } from 'src/app/_models/player';
-import { PlayersService } from 'src/app/_services/players.service';
+import { Salary } from 'src/app/_models/salary';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, takeWhile } from 'rxjs/operators';
 import { DisplayService } from 'src/app/_services/display.service';
-import { SalaryService } from 'src/app/_services/salary.service';
+import { take, takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-player-add-form',
-  templateUrl: './player-add-form.component.html',
-  styleUrls: ['./player-add-form.component.css']
+  selector: 'app-salary-edit',
+  templateUrl: './salary-edit.component.html',
+  styleUrls: ['./salary-edit.component.css']
 })
-export class PlayerAddFormComponent implements OnInit, OnDestroy {
+export class SalaryEditComponent implements OnInit {
 
   isSaving: boolean;
   isLoading: boolean = true;
   private _alive: boolean = true;
 
-  player$: Observable<Player>;
-  player: Player;
+  salary$: Observable<Salary>;
+  salary: Salary;
 
   salaryForm: FormGroup;
 
@@ -28,24 +27,23 @@ export class PlayerAddFormComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router,
     private _salaryService: SalaryService,
-    private _playersService: PlayersService,
     private _displayService: DisplayService
-  ) { 
-    const playerId = this._route.snapshot.params.id;
-    this.player$ = this._playersService.getPlayer(playerId);
-  }
+  ) {
+    const salaryId = this._route.snapshot.params.id;
+    this.salary$ = this._salaryService.getSalary(salaryId);
+   }
 
   ngOnInit() {
     this.createForm();
 
-    this.player$.pipe(
+    this.salary$.pipe(
       take(1)
-    ).subscribe((player: Player) => {
+    ).subscribe((salary: Salary) => {
+      console.log(salary);
       this.isLoading = false;
-      this.player = player;
-      this.patchform(player);
+      this.salary = salary;
+      this.patchform(salary);
     })
-
   }
 
   createForm() {
@@ -75,27 +73,51 @@ export class PlayerAddFormComponent implements OnInit, OnDestroy {
     })
   }
 
-  patchform(player: Player) {
-    this.salaryForm.patchValue({'player_id': player.id})
+  patchform(salary: Salary) {
+    this.salaryForm.patchValue({
+      'player_id': salary.player_id,
+      'season_2020': salary.season_2020,
+      'season_2021': salary.season_2021,
+      'season_2022': salary.season_2022,
+      'season_2023': salary.season_2023,
+      'season_2024': salary.season_2024,
+      'season_2025': salary.season_2025,
+      'season_2026': salary.season_2026,
+      'season_2027': salary.season_2027,
+      'season_2028': salary.season_2028,
+      'season_2029': salary.season_2029,
+      'season_2030': salary.season_2030,
+      'season_2031': salary.season_2031,
+      'season_2032': salary.season_2032,
+      'season_2033': salary.season_2033,
+      'season_2034': salary.season_2034,
+      'season_2035': salary.season_2035,
+      'season_2036': salary.season_2036,
+      'season_2037': salary.season_2037,
+      'season_2038': salary.season_2038,
+      'season_2039': salary.season_2039,
+      'season_2040': salary.season_2040,
+    })
+    
   }
 
   onSave() {
 
     const salaryData = {
       ...this.salaryForm.value,
+      id: this.salary.id
     }
 
-    console.log(salaryData);
-
-    this._salaryService.addSalary(salaryData).pipe(
+    this._salaryService.updateSalary(salaryData).pipe(
       takeWhile(() => this._alive)
     ).subscribe(resp => {
       this.isSaving = false;
-      this._displayService.popupTrigger('Salary Added');
+      this._displayService.popupTrigger(resp);
       this._router.navigate(['../../'], {relativeTo: this._route});
     }, error => {
       this._displayService.popupTrigger(error);
-    })
+    });
+
   }
 
   ngOnDestroy(): void {

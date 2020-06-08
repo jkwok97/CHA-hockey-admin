@@ -5,12 +5,13 @@
     align-items: flex-start;
     min-height: 50vh;
     grid-row-gap: 10px;
-    grid-template-rows: repeat(auto-fill, minmax(min-content, auto));;
+    grid-template-rows: min-content;
+    /* grid-template-rows: repeat(auto-fill, inmax(min-content, auto));; */
 }
 
 .filter-add {
-    display: inline-grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, auto));
     grid-column-gap: 20px;
     align-items: center;
     justify-content: center;
@@ -28,7 +29,7 @@
 }
 
 .mat-form-field {
-    width: 100%;
+    width: 300px;
 }
 
 .mat-progress-bar {

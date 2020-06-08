@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Salary } from '../_models/salary';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,12 @@ export class SalaryService {
 
   }
 
+  getSalary(id: number): Observable<Salary> {
+    return this._http.get(`${environment.back_end_url}/v2/players/salaries/edit/${id}`).pipe(
+      map(result => result['result'][0])
+    )
+  }
+
   addSalary(salaryInfo: Salary) {
     return this._http.post(`${environment.back_end_url}/v2/players/salaries/add`, salaryInfo).pipe(
       map(result => result['result'])
@@ -38,7 +45,7 @@ export class SalaryService {
   }
 
   updateSalary(salary: Salary) {
-    return this._http.put(`${environment.back_end_url}/v2/players/salaries/edit/${salary.player_id}`, salary).pipe(
+    return this._http.put(`${environment.back_end_url}/v2/players/salaries/edit/${salary.id}`, salary).pipe(
       map(result => result['message'])
     )
   }
