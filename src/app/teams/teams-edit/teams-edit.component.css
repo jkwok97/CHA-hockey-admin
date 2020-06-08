@@ -10,16 +10,24 @@
 
 form {
     display: grid;
-    grid-row-gap: 15px;
 }
 
 .form-section {
     display: inline-grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-column-gap: 10px;
+}
+
+.mat-checkbox {
+    margin-bottom: 10px;
 }
 
 .mat-progress-bar {
     width: 75%;
     margin-top: 50px;
+}
+
+img {
+    height: 30px;
+    width: 30px;
 }

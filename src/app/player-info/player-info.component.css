@@ -6,11 +6,12 @@
     min-height: 50vh;
     grid-row-gap: 10px;
     grid-template-rows: min-content;
+    padding: 20px;
 }
 
 .filter-add {
     display: grid;
-    grid-template-columns: repeat(3, minmax(300px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-column-gap: 20px;
     align-items: center;
     justify-content: center;

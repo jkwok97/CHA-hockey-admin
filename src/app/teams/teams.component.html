@@ -1,16 +1,14 @@
+<h3>Teams</h3>
 
-
-<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
-
-<h3 *ngIf="!isLoading">Teams</h3>
-
-<section class="filter-add" *ngIf="!isLoading">
+<section class="filter-add">
     <mat-form-field color="accent" class="filtering">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
     </mat-form-field>
 
     <button mat-raised-button color="accent" (click)="onAddTeam()"> Add Team </button>
 </section>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
 <div class="table" *ngIf="!isLoading">
 

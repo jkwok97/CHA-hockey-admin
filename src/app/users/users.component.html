@@ -1,80 +1,76 @@
-<div class="user-container">
+<h3>Users</h3>
 
-    <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<section class="filter-add">
+    <mat-form-field color="accent" class="filtering">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
 
-    <h3 *ngIf="!isLoading">Users</h3>
+    <button mat-raised-button color="accent" (click)="onAddUser()"> Add User </button>
+</section>
 
-    <section class="filter-add" *ngIf="!isLoading">
-        <mat-form-field color="accent" class="filtering">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-        <button mat-raised-button color="accent" (click)="onAddUser()"> Add User </button>
-    </section>
+<div class="table" *ngIf="!isLoading">
 
-    <div class="table" *ngIf="!isLoading">
+    <table 
+        mat-table 
+        [dataSource]="usersData" 
+        matSort 
+        class="mat-elevation-z8 full-width" 
+        matSortActive="isactive" 
+        matSortDirection="desc"
+    >
 
-        <table 
-            mat-table 
-            [dataSource]="usersData" 
-            matSort 
-            class="mat-elevation-z8 full-width" 
-            matSortActive="isactive" 
-            matSortDirection="desc"
-        >
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> User Id </th>
+            <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> User Id </th>
-                <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-            </ng-container>
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First </th>
+            <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="firstname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> First </th>
-                <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
-            </ng-container>
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last </th>
+            <td mat-cell *matCellDef="let user"> {{user.lastname}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="lastname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last </th>
-                <td mat-cell *matCellDef="let user"> {{user.lastname}} </td>
-            </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                <td mat-cell *matCellDef="let user"> {{user.email}} </td>
-            </ng-container>
+        <ng-container matColumnDef="isadmin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Admin </th>
+            <td mat-cell *matCellDef="let user"> 
+                <mat-icon *ngIf="user.isadmin">done</mat-icon>
+                <mat-icon color="warn" *ngIf="!user.isadmin">block</mat-icon>
+            </td>
+        </ng-container>
 
-            <ng-container matColumnDef="isadmin">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Admin </th>
-                <td mat-cell *matCellDef="let user"> 
-                    <mat-icon *ngIf="user.isadmin">done</mat-icon>
-                    <mat-icon color="warn" *ngIf="!user.isadmin">block</mat-icon>
-                </td>
-            </ng-container>
+        <ng-container matColumnDef="isactive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Active </th>
+            <td mat-cell *matCellDef="let user">
+                    <mat-icon *ngIf="user.isactive">done</mat-icon>
+                    <mat-icon color="warn" *ngIf="!user.isactive">block</mat-icon>
+            </td>
+        </ng-container>
 
-            <ng-container matColumnDef="isactive">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Active </th>
-                <td mat-cell *matCellDef="let user">
-                     <mat-icon *ngIf="user.isactive">done</mat-icon>
-                     <mat-icon color="warn" *ngIf="!user.isactive">block</mat-icon>
-                </td>
-            </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr 
+            mat-row 
+            *matRowDef="let user; columns: columns;"
+            (click)="onEdit(user.id)"
+        ></tr>
 
-            <tr mat-header-row *matHeaderRowDef="columns"></tr>
-            <tr 
-                mat-row 
-                *matRowDef="let user; columns: columns;"
-                (click)="onEdit(user.id)"
-            ></tr>
+    </table>
 
-        </table>
-
-        <mat-paginator
-            [pageSize]="pageSize"
-            [length]="length"
-            color="accent"
-            showFirstLastButtons
-        ></mat-paginator>
-
-    </div>
+    <mat-paginator
+        [pageSize]="pageSize"
+        [length]="length"
+        color="accent"
+        showFirstLastButtons
+    ></mat-paginator>
 
 </div>

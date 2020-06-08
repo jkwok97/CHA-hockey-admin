@@ -3,12 +3,17 @@
 <mat-card *ngIf="(team$ | async) || !inEditMode">
 
     <mat-card-header *ngIf="team">
+        <div mat-card-avatar>
+            <img [src]="team.teamlogo">
+        </div>
         <mat-card-title>{{team.city}} {{team.nickname}}</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
 
         <form [formGroup]="teamForm">
+
+            <mat-checkbox formControlName="isactive">Is Active</mat-checkbox>
 
             <section class="form-section">
 
@@ -40,8 +45,6 @@
 
             <section class="form-section">
 
-                <mat-checkbox formControlName="isactive">Is Active</mat-checkbox>
-
                 <mat-form-field color="accent">
                     <mat-label>User</mat-label>
                     <mat-select formControlName="users_id">
@@ -60,10 +63,6 @@
                     </mat-select>
                 </mat-form-field>
 
-            </section>
-
-            <section class="form-section">
-
                 <mat-form-field appearance="fill" color="accent">
                     <mat-label>Logo</mat-label>
                     <input matInput placeholder="logo" formControlName="teamlogo">
@@ -71,6 +70,10 @@
                         This field is mandatory.
                     </mat-error>
                 </mat-form-field>
+
+            </section>
+
+            <section class="form-section">
 
                 <mat-form-field appearance="fill" color="accent">
                     <mat-label>Logo Alt</mat-label>

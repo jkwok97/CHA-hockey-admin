@@ -6,12 +6,12 @@
     min-height: 50vh;
     grid-row-gap: 10px;
     grid-template-rows: min-content;
-    /* grid-template-rows: repeat(auto-fill, minmax(min-content, auto));; */
+    padding: 20px;
 }
 
 .filter-add {
     display: inline-grid;
-    grid-template-columns: repeat(2, minmax(300px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-column-gap: 20px;
     align-items: center;
     justify-content: center;

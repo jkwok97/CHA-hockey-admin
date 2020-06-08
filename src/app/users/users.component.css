@@ -1,10 +1,12 @@
-.user-container {
+:host {
     color: white;
     display: grid;
     justify-items: center;
     align-items: flex-start;
     min-height: 50vh;
     grid-row-gap: 10px;
+    grid-template-rows: min-content;
+    padding: 20px;
 }
 
 .filter-add {
