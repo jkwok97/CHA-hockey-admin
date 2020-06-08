@@ -41,6 +41,12 @@ import { PlayerInfoFormComponent } from './player-info/player-info-form/player-i
 import { PlayerAddFormComponent } from './player-info/player-add-form/player-add-form.component';
 import { SalariesComponent } from './salaries/salaries.component';
 import { SalaryEditComponent } from './salaries/salary-edit/salary-edit.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { AssetListComponent } from './transactions/asset-list/asset-list.component';
+import { TransactionButtonsComponent } from './transactions/transaction-buttons/transaction-buttons.component';
+import { TeamSelectComponent } from './transactions/team-select/team-select.component';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +84,12 @@ import { SalaryEditComponent } from './salaries/salary-edit/salary-edit.componen
     PlayerAddFormComponent,
     SalariesComponent,
     SalaryEditComponent,
+    TransactionsComponent,
+    AssetListComponent,
+    TransactionButtonsComponent,
+    TeamSelectComponent,
+    TeamsComponent,
+    TeamsEditComponent,
   ],
   imports: [
     BrowserModule,

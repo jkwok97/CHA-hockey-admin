@@ -1,0 +1,25 @@
+:host {
+    display: grid;
+    justify-items: center;
+    padding: 30px 0;
+}
+
+.mat-card {
+    width: 90%;
+}
+
+form {
+    display: grid;
+    grid-row-gap: 15px;
+}
+
+.form-section {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    grid-column-gap: 10px;
+}
+
+.mat-progress-bar {
+    width: 75%;
+    margin-top: 50px;
+}

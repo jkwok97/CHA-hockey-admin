@@ -39,7 +39,6 @@ export class SalaryEditComponent implements OnInit {
     this.salary$.pipe(
       take(1)
     ).subscribe((salary: Salary) => {
-      console.log(salary);
       this.isLoading = false;
       this.salary = salary;
       this.patchform(salary);
@@ -118,6 +117,10 @@ export class SalaryEditComponent implements OnInit {
       this._displayService.popupTrigger(error);
     });
 
+  }
+
+  onCancel() {
+    this._router.navigate(['../../'], {relativeTo: this._route});
   }
 
   ngOnDestroy(): void {

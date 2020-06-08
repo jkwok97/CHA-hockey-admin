@@ -1,0 +1,9 @@
+:host {
+    display: grid;
+    grid-template-rows: min-content;
+    grid-row-gap: 20px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(min-content, auto));
+    /* grid-template-columns: minmax(min-content, 1fr); */
+    justify-content: center;
+}

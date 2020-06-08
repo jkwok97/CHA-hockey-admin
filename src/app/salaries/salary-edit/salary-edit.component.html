@@ -138,6 +138,15 @@
             Save
         </button>
 
+        <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="onCancel()" 
+            *ngIf="!isSaving"
+        >   
+            Cancel
+        </button>
+
         <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
 
     </mat-card-actions>

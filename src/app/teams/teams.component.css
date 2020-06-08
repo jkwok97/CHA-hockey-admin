@@ -5,17 +5,20 @@
     align-items: flex-start;
     min-height: 50vh;
     grid-row-gap: 10px;
-    grid-template-rows: min-content;
-    /* grid-template-rows: repeat(auto-fill, minmax(min-content, auto));; */
 }
 
 .filter-add {
     display: inline-grid;
-    grid-template-columns: repeat(2, minmax(300px, auto));
-    grid-column-gap: 20px;
+    grid-template-columns: 300px auto;
+    grid-column-gap: 30px;
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.filter-add button {
+    height: min-content;
+    width: min-content;
 }
 
 .table {
@@ -46,10 +49,7 @@ h3 {
     font-weight: 100;   
 }
 
-.mat-button-toggle-group {
-    margin: auto;
-}
-
-.mat-button-toggle-checked {
-    background-color: red;
+.table img {
+    height: 30px;
+    width: 30px;
 }

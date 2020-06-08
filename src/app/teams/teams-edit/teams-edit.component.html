@@ -1,0 +1,138 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<mat-card *ngIf="(team$ | async) || !inEditMode">
+
+    <mat-card-header *ngIf="team">
+        <mat-card-title>{{team.city}} {{team.nickname}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form [formGroup]="teamForm">
+
+            <section class="form-section">
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Team Abb.</mat-label>
+                    <input matInput placeholder="ABC" formControlName="shortname" [readonly]="inEditMode">
+                    <mat-error *ngIf="teamForm.controls.shortname.touched && teamForm.controls.shortname.invalid">
+                        This field is mandatory.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>City</mat-label>
+                    <input matInput placeholder="City" formControlName="city">
+                    <mat-error *ngIf="teamForm.controls.city.touched && teamForm.controls.city.invalid">
+                        This field is mandatory.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Nickname</mat-label>
+                    <input matInput placeholder="Nickname" formControlName="nickname">
+                    <mat-error *ngIf="teamForm.controls.nickname.touched && teamForm.controls.nickname.invalid">
+                        This field is mandatory.
+                    </mat-error>
+                </mat-form-field>
+
+            </section>
+
+            <section class="form-section">
+
+                <mat-checkbox formControlName="isactive">Is Active</mat-checkbox>
+
+                <mat-form-field color="accent">
+                    <mat-label>User</mat-label>
+                    <mat-select formControlName="users_id">
+                        <mat-option *ngFor="let user of (users$ | async)" [value]="user.id">
+                            {{user.firstname}} {{user.lastname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field color="accent">
+                    <mat-label>Division</mat-label>
+                    <mat-select formControlName="divisions_id">
+                        <mat-option *ngFor="let division of (divisions$ | async)" [value]="division.id">
+                            {{division.divisionname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </section>
+
+            <section class="form-section">
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Logo</mat-label>
+                    <input matInput placeholder="logo" formControlName="teamlogo">
+                    <mat-error *ngIf="teamForm.controls.teamlogo.touched && teamForm.controls.teamlogo.invalid">
+                        This field is mandatory.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Logo Alt</mat-label>
+                    <input matInput placeholder="alt logo" formControlName="teamaltlogo">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Team Color</mat-label>
+                    <input matInput placeholder="color" formControlName="teamcolor">
+                    <mat-error *ngIf="teamForm.controls.teamcolor.touched && teamForm.controls.teamcolor.invalid">
+                        This field is mandatory.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Text Color</mat-label>
+                    <input matInput placeholder="text color" formControlName="teamtextcolor">
+                    <mat-error *ngIf="teamForm.controls.teamtextcolor.touched && teamForm.controls.teamtextcolor.invalid">
+                        This field is mandatory.
+                    </mat-error>
+                </mat-form-field>
+
+            </section>
+    
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+        <button 
+            mat-raised-button 
+            color="accent" 
+            type="submit" 
+            *ngIf="!isSaving"
+            [disabled]="teamForm.invalid"
+            (click)="onSave()" 
+        >
+            Save
+        </button>
+
+        <button 
+            mat-raised-button 
+            color="warn" 
+            *ngIf="!isSaving && inEditMode"
+            [disabled]="teamForm.invalid"
+            (click)="onDelete()" 
+        >
+            Delete
+        </button>
+
+        <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="onCancel()" 
+            *ngIf="!isSaving"
+        >   
+            Cancel
+        </button>
+
+        <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
+
+    </mat-card-actions>
+
+</mat-card>

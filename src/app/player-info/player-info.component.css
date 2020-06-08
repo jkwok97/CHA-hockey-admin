@@ -6,7 +6,6 @@
     min-height: 50vh;
     grid-row-gap: 10px;
     grid-template-rows: min-content;
-    /* grid-template-rows: repeat(auto-fill, inmax(min-content, auto));; */
 }
 
 .filter-add {

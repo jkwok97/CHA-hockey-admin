@@ -23,6 +23,9 @@ import { PlayerInfoFormComponent } from './player-info/player-info-form/player-i
 import { PlayerAddFormComponent } from './player-info/player-add-form/player-add-form.component';
 import { SalariesComponent } from './salaries/salaries.component';
 import { SalaryEditComponent } from './salaries/salary-edit/salary-edit.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -52,6 +55,10 @@ const routes: Routes = [
   { path: 'users/edit/:id', component: UserEditComponent },
   { path: 'users/add', component: UserEditComponent },
 
+  { path: 'teams', component: TeamsComponent },
+  { path: 'teams/edit/:id', component: TeamsEditComponent },
+  { path: 'teams/add', component: TeamsEditComponent },
+
   { path: 'player-info', component: PlayerInfoComponent },
   { path: 'player-info/edit/:id', component: PlayerInfoFormComponent },
   { path: 'player-info/add', component: PlayerInfoFormComponent },
@@ -59,6 +66,8 @@ const routes: Routes = [
 
   { path: 'salaries', component: SalariesComponent },
   { path: 'salaries/edit/:id', component: SalaryEditComponent },
+
+  { path: 'transactions', component: TransactionsComponent },
 
 ];
 
