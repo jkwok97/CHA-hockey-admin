@@ -39,8 +39,8 @@ export class CurrentGoaliesComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute
   ) {
-    console.log(this._leagueService.currentSeason);
-    this.currentPlayers$ = this._statsService.getGoalieStats('2020-21', 'Regular');
+    this.currentPlayers$ = 
+      this._statsService.getGoalieStats(this._leagueService.currentSeason, this._leagueService.currentSeasonType);
    }
 
   ngOnInit() {
