@@ -29,6 +29,8 @@ import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
 import { CurrentPlayersComponent } from './current-players/current-players.component';
 import { CurrentGoaliesComponent } from './current-goalies/current-goalies.component';
 import { CurrentEditComponent } from './current-edit/current-edit.component';
+import { DraftTableComponent } from './draft-table/draft-table.component';
+import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-table-edit.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -77,6 +79,9 @@ const routes: Routes = [
 
   { path: 'current-goalies', component: CurrentGoaliesComponent },
   { path: 'current-goalies/edit/:id', component: CurrentEditComponent },
+
+  { path: 'draft-table', component: DraftTableComponent },
+  { path: 'draft-table/edit/:id', component: DraftTableEditComponent },
 
 ];
 

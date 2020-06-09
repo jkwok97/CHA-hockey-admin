@@ -10,13 +10,13 @@
 
 form {
     display: grid;
-    justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     grid-column-gap: 10px;
+    justify-items: center;
 }
 
 .mat-form-field {
-    width: 300px;
+    width: 100%;
 }
 
 .mat-progress-bar {

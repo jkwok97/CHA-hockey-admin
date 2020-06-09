@@ -4,7 +4,6 @@ import { takeWhile, filter } from 'rxjs/operators';
 import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MainService } from '../main/main.service';
 import { DisplayService } from '../_services/display.service';
 
 @Component({
@@ -32,6 +31,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Salaries', url: 'salaries', current: false},
     {name: 'Current Players', url: 'current-players', current: false},
     {name: 'Current Goalies', url: 'current-goalies', current: false},
+    {name: 'Draft Table', url: 'draft-table', current: false},
     {name: 'Transactions', url: 'transactions', current: false},
 
     {name: 'Games', url: 'games', current: true},
@@ -48,7 +48,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router, 
     private _authService: AuthService,
-    private _mainService: MainService,
     private _displayService: DisplayService,
     private _popper: MatSnackBar
   ) { 

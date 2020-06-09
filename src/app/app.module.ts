@@ -50,6 +50,8 @@ import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
 import { CurrentPlayersComponent } from './current-players/current-players.component';
 import { CurrentGoaliesComponent } from './current-goalies/current-goalies.component';
 import { CurrentEditComponent } from './current-edit/current-edit.component';
+import { DraftTableComponent } from './draft-table/draft-table.component';
+import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-table-edit.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { CurrentEditComponent } from './current-edit/current-edit.component';
     CurrentPlayersComponent,
     CurrentGoaliesComponent,
     CurrentEditComponent,
+    DraftTableComponent,
+    DraftTableEditComponent,
   ],
   imports: [
     BrowserModule,

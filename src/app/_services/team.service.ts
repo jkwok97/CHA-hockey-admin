@@ -44,6 +44,12 @@ export class TeamService {
     )
   }
 
+  getTeamLogo(id: number): Observable<string> {
+    return this._http.get(`${environment.back_end_url}/v2/teams/${id}/logo`).pipe(
+      map(result => result['result'][0])
+    )
+  }
+
   addTeam(teamInfo: Team) {
     return this._http.post(`${environment.back_end_url}/v2/teams`, teamInfo).pipe(
       map(result => result['message'])
