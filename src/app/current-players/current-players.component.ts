@@ -67,9 +67,8 @@ export class CurrentPlayersComponent implements OnInit {
   }
 
   onEdit(statId: number) {
-    console.log(statId)
-    // this._router.navigate([`edit/${userId}`], { relativeTo: this._route });
-    // window.scrollTo(0,0);
+    this._router.navigate([`edit/${statId}`], { relativeTo: this._route });
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy(): void {

@@ -49,6 +49,7 @@ import { TeamsComponent } from './teams/teams.component';
 import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
 import { CurrentPlayersComponent } from './current-players/current-players.component';
 import { CurrentGoaliesComponent } from './current-goalies/current-goalies.component';
+import { CurrentEditComponent } from './current-edit/current-edit.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { CurrentGoaliesComponent } from './current-goalies/current-goalies.compo
     TeamsEditComponent,
     CurrentPlayersComponent,
     CurrentGoaliesComponent,
+    CurrentEditComponent,
   ],
   imports: [
     BrowserModule,

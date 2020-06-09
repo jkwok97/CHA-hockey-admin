@@ -28,6 +28,7 @@ import { TeamsComponent } from './teams/teams.component';
 import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
 import { CurrentPlayersComponent } from './current-players/current-players.component';
 import { CurrentGoaliesComponent } from './current-goalies/current-goalies.component';
+import { CurrentEditComponent } from './current-edit/current-edit.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -72,8 +73,10 @@ const routes: Routes = [
   { path: 'transactions', component: TransactionsComponent },
 
   { path: 'current-players', component: CurrentPlayersComponent },
+  { path: 'current-players/edit/:id', component: CurrentEditComponent },
 
   { path: 'current-goalies', component: CurrentGoaliesComponent },
+  { path: 'current-goalies/edit/:id', component: CurrentEditComponent },
 
 ];
 

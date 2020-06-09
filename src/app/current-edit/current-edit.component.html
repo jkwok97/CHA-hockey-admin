@@ -1,0 +1,53 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<mat-card *ngIf="(player$ | async)">
+
+    <mat-card-header *ngIf="player">
+        <mat-card-title>{{player.firstname}} {{player.lastname}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form [formGroup]="playerForm">
+
+            <mat-form-field color="accent">
+                <mat-label>Team</mat-label>
+                <mat-select formControlName="team_name">
+                    <mat-option *ngFor="let team of (teams$ | async)" [value]="team.shortname">
+                        {{team.city}} {{team.nickname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+        <button 
+            mat-raised-button 
+            color="accent" 
+            type="submit" 
+            *ngIf="!isSaving"
+            [disabled]="playerForm.invalid"
+            (click)="onSave()" 
+        >
+            Save
+        </button>
+
+        <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="onCancel()" 
+            *ngIf="!isSaving"
+        >   
+            Cancel
+        </button>
+
+        <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
+
+    </mat-card-actions>
+
+</mat-card>
+

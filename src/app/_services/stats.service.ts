@@ -33,7 +33,7 @@ export class StatsService {
   }
 
   updatePlayerStats(requestBody: any) {
-    return this._http.put(`${environment.back_end_url}/v2/players-stats/${requestBody.id}`, requestBody).pipe(
+    return this._http.patch(`${environment.back_end_url}/v2/players-stats/${requestBody.id}`, requestBody).pipe(
       map(result => result['message'])
     )
   }
@@ -57,7 +57,7 @@ export class StatsService {
   }
 
   updateGoalieStats(requestBody: any) {
-    return this._http.put(`${environment.back_end_url}/v2/goalies-stats/${requestBody.id}`, requestBody).pipe(
+    return this._http.patch(`${environment.back_end_url}/v2/goalies-stats/${requestBody.id}`, requestBody).pipe(
       map(result => result['message'])
     )
   }
