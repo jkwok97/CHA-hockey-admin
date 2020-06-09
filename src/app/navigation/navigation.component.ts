@@ -30,6 +30,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Teams', url: 'teams', current: false},
     {name: 'Player Info', url: 'player-info', current: false},
     {name: 'Salaries', url: 'salaries', current: false},
+    {name: 'Current Players', url: 'current-players', current: false},
+    {name: 'Current Goalies', url: 'current-goalies', current: false},
     {name: 'Transactions', url: 'transactions', current: false},
 
     {name: 'Games', url: 'games', current: true},

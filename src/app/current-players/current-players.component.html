@@ -1,0 +1,79 @@
+<h3>Current Players</h3>
+
+<section class="filter-add">
+    <mat-form-field color="accent" class="filtering">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+</section>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="table" *ngIf="!isLoading">
+
+    <table 
+        mat-table 
+        [dataSource]="currentPlayerData" 
+        matSort 
+        class="mat-elevation-z8 full-width" 
+        matSortActive="lastname" 
+        matSortDirection="asc"
+    >
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Stat Id </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="player_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Player Id </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.player_id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.firstname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.lastname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="team_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.team_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="player_status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.player_status}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="playing_year">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.playing_year}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="season_type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let currentPlayer"> {{currentPlayer.season_type}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr 
+            mat-row 
+            *matRowDef="let currentPlayer; columns: columns;"
+            (click)="onEdit(currentPlayer.id)"
+        ></tr>
+
+    </table>
+
+    <mat-paginator
+        [pageSize]="pageSize"
+        [length]="length"
+        color="accent"
+        showFirstLastButtons
+    ></mat-paginator>
+
+</div>
+

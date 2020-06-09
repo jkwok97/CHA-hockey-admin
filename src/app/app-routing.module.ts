@@ -26,6 +26,8 @@ import { SalaryEditComponent } from './salaries/salary-edit/salary-edit.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TeamsComponent } from './teams/teams.component';
 import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
+import { CurrentPlayersComponent } from './current-players/current-players.component';
+import { CurrentGoaliesComponent } from './current-goalies/current-goalies.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -68,6 +70,10 @@ const routes: Routes = [
   { path: 'salaries/edit/:id', component: SalaryEditComponent },
 
   { path: 'transactions', component: TransactionsComponent },
+
+  { path: 'current-players', component: CurrentPlayersComponent },
+
+  { path: 'current-goalies', component: CurrentGoaliesComponent },
 
 ];
 

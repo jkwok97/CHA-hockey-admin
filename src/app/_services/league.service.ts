@@ -10,7 +10,14 @@ import { map } from 'rxjs/operators';
 })
 export class LeagueService {
 
-  constructor(private _http: HttpClient) { }
+  currentSeason: '2020-21';
+  currentSeasonType: 'Regular';
+
+  constructor(private _http: HttpClient) { 
+    console.log(this.currentSeasonType);
+    console.log(this.currentSeason);
+    console.log('2020-21')
+  }
 
   getDivisions(): Observable<Division[]> {
     return this._http.get(`${environment.back_end_url}/v2/league/divisions`).pipe(

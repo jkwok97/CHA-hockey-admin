@@ -47,6 +47,8 @@ import { TransactionButtonsComponent } from './transactions/transaction-buttons/
 import { TeamSelectComponent } from './transactions/team-select/team-select.component';
 import { TeamsComponent } from './teams/teams.component';
 import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
+import { CurrentPlayersComponent } from './current-players/current-players.component';
+import { CurrentGoaliesComponent } from './current-goalies/current-goalies.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { TeamsEditComponent } from './teams/teams-edit/teams-edit.component';
     TeamSelectComponent,
     TeamsComponent,
     TeamsEditComponent,
+    CurrentPlayersComponent,
+    CurrentGoaliesComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,3 +8,14 @@ export interface Player {
     isdefense: boolean,
     isforward: boolean
 };
+
+export interface CurrentPlayer {
+    id: number,
+    player_id: number,
+    player_status: string,
+    firstname: string,
+    lastname: string,
+    team_name: string,
+    playing_year: string,
+    season_type: string
+}
