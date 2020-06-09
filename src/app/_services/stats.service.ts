@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { CurrentPlayer } from '../_models/player';
+import { CurrentPlayer, Player } from '../_models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,17 @@ export class StatsService {
 
   getPlayerStatById(id: number) {
     return this._http.get(`${environment.back_end_url}/v2/players-stats/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getActivePlayersByTeam(name: string, bool:string) {
+
+    const options = {params: new HttpParams()
+      .set('isactive', bool)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/team/${name}`, options).pipe(
       map(result => result['result'])
     )
   }

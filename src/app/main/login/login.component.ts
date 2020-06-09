@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _authService: AuthService
   ) {
       if (this._authService.currentUserValue) { 
-        this.router.navigate(['games']);
+        this.router.navigate(['users']);
       } 
    }
 

@@ -1,0 +1,64 @@
+:host {
+    color: white;
+    display: grid;
+    justify-items: center;
+    align-items: flex-start;
+    min-height: 50vh;
+    grid-row-gap: 10px;
+    grid-template-rows: min-content;
+}
+
+.filter-add {
+    display: inline-grid;
+    grid-template-columns: 300px auto;
+    grid-column-gap: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.filter-add button {
+    height: min-content;
+    width: min-content;
+}
+
+.table {
+    min-width: 90%;
+    margin-bottom: 20px;
+}
+
+.table img {
+    width: 30px;
+    height: 30px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-progress-bar {
+    width: 75%;
+    margin-top: 50px;
+}
+
+.mat-row:hover {
+    background-color: rgb(61, 90, 254);
+    cursor: pointer;
+}
+
+.full-width {
+    width: 100%;
+}
+
+h3 {
+    font-size: x-large;
+    font-weight: 100;   
+}
+
+.mat-button-toggle-group {
+    margin: auto;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}

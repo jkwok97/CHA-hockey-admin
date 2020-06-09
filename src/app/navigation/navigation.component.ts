@@ -32,6 +32,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Current Players', url: 'current-players', current: false},
     {name: 'Current Goalies', url: 'current-goalies', current: false},
     {name: 'Draft Table', url: 'draft-table', current: false},
+    {name: 'Draft', url: 'draft', current: false},
     {name: 'Transactions', url: 'transactions', current: false},
 
     {name: 'Games (OLD)', url: 'games', current: true},
@@ -49,7 +50,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     if (this._authService.currentUserValue) { 
       this.loggedIn = true;
-      this._router.navigate(['games']);
+      this._router.navigate(['users']);
     } else {
       this._router.navigate(['login']);
     }

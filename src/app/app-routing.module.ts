@@ -23,6 +23,8 @@ import { CurrentGoaliesComponent } from './current-goalies/current-goalies.compo
 import { CurrentEditComponent } from './current-edit/current-edit.component';
 import { DraftTableComponent } from './draft-table/draft-table.component';
 import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-table-edit.component';
+import { DraftComponent } from './draft/draft.component';
+import { DraftPlayersComponent } from './draft-players/draft-players.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -64,6 +66,9 @@ const routes: Routes = [
 
   { path: 'draft-table', component: DraftTableComponent },
   { path: 'draft-table/edit/:id', component: DraftTableEditComponent },
+
+  { path: 'draft', component: DraftComponent },
+  { path: 'draft/edit/:id', component: DraftPlayersComponent },
 
 ];
 

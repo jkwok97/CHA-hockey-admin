@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthService } from './_services/auth.service';
-import { MessagePopperComponent } from './message-popper/message-popper.component';
 import { WaiversComponent } from './waivers/waivers.component';
 import { GamesComponent } from './games/games.component';
 import { ChampsComponent } from './champs/champs.component';
@@ -38,6 +37,9 @@ import { CurrentGoaliesComponent } from './current-goalies/current-goalies.compo
 import { CurrentEditComponent } from './current-edit/current-edit.component';
 import { DraftTableComponent } from './draft-table/draft-table.component';
 import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-table-edit.component';
+import { DrafteesComponent } from './draftees/draftees.component';
+import { DraftPlayersComponent } from './draft-players/draft-players.component';
+import { DraftComponent } from './draft/draft.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,6 @@ import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-ta
     NavigationComponent,
     MainComponent,
     LoginComponent,
-    MessagePopperComponent,
     WaiversComponent,
     GamesComponent,
     ChampsComponent,
@@ -72,6 +73,9 @@ import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-ta
     CurrentEditComponent,
     DraftTableComponent,
     DraftTableEditComponent,
+    DrafteesComponent,
+    DraftPlayersComponent,
+    DraftComponent,
   ],
   imports: [
     BrowserModule,
