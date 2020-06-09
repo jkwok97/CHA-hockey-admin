@@ -34,15 +34,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Draft Table', url: 'draft-table', current: false},
     {name: 'Transactions', url: 'transactions', current: false},
 
-    {name: 'Games', url: 'games', current: true},
-    {name: 'Trades', url: 'trades', current: false},
-    {name: 'Players', url: 'players', current: false},
-    {name: 'Goalies', url: 'goalies', current: false},
-    {name: 'Draft Picks', url: 'draft', current: false},
-    {name: 'Salary', url: 'salary', current: false},
-    {name: 'Waivers', url: 'waivers', current: false},
-    {name: 'Draft Upload', url: 'new-draft', current: false},
-    {name: 'Champ Upload', url: 'champs', current: false},
+    {name: 'Games (OLD)', url: 'games', current: true},
+    {name: 'Trades (OLD)', url: 'trades', current: false},
+    {name: 'Waivers (OLD)', url: 'waivers', current: false},
+    {name: 'Champ Upload (OLD)', url: 'champs', current: false},
   ];
 
   constructor(

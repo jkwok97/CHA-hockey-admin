@@ -22,8 +22,8 @@
         [dataSource]="draftTableData" 
         matSort 
         class="mat-elevation-z8 full-width" 
-        matSortActive="team" 
-        matSortDirection="desc"
+        matSortActive="city" 
+        matSortDirection="asc"
     >
 
         <ng-container matColumnDef="id">
@@ -43,9 +43,14 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="team">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
-            <td mat-cell *matCellDef="let table"> {{table.city}} {{table.nickname}} </td>
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+            <td mat-cell *matCellDef="let table"> {{table.city}}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="nickname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nickname </th>
+            <td mat-cell *matCellDef="let table"> {{table.nickname}}</td>
         </ng-container>
 
         <ng-container matColumnDef="round_one">

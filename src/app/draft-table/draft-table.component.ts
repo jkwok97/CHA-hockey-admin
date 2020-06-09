@@ -27,7 +27,7 @@ export class DraftTableComponent implements OnInit {
   currentSeason: string = '2020';
 
   draftTableData: MatTableDataSource<any[]>;
-  columns = [ 'id', 'draft_year', 'logo', 'team', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
+  columns = [ 'id', 'draft_year', 'logo', 'city', 'nickname','round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
 
   page: number = 1;
   pageSize: number = 20;
