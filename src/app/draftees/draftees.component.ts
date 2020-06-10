@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DraftPlayerService } from '../_services/draft-player.service';
 import { DraftPlayer } from '../_models/draft-table';
-import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,7 +17,6 @@ export class DrafteesComponent implements OnInit {
   private _alive: boolean = true;
   isLoading: boolean = false;
 
-  players$: Observable<DraftPlayer[]>;
   players: DraftPlayer[];
 
   draftedData: MatTableDataSource<any[]>;
@@ -36,13 +34,23 @@ export class DrafteesComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute
   ) {
-    this.players$ = this._draftPlayerService.getAllDrafted();
+    this.getDraftedPlayers();
    }
 
   ngOnInit() {
     this.isLoading = true;
 
-    this.players$.pipe(
+    this._draftPlayerService.draftPlayerListener().pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(() => {
+      this.isLoading = true;
+      this.getDraftedPlayers();
+    })
+
+  }
+
+  getDraftedPlayers() {
+    this._draftPlayerService.getAllDrafted().pipe(
       takeWhile(() => this._alive)
     ).subscribe((players: DraftPlayer[]) => {
       this.isLoading = false;

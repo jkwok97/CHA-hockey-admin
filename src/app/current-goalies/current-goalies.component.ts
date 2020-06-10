@@ -67,7 +67,6 @@ export class CurrentGoaliesComponent implements OnInit {
   }
 
   onEdit(statId: number) {
-    console.log(statId)
     this._router.navigate([`edit/${statId}`], { relativeTo: this._route });
     window.scrollTo(0,0);
   }

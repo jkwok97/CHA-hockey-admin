@@ -10,6 +10,11 @@
 
         <form [formGroup]="playerForm">
 
+            <mat-radio-group aria-label="Select an option" formControlName="position" *ngIf="!inEditMode">
+                <mat-radio-button value="isplayer">Player</mat-radio-button>
+                <mat-radio-button value="isgoalie">Goalie</mat-radio-button>
+            </mat-radio-group>
+
             <section class="form-section">
 
                 <mat-form-field color="accent">

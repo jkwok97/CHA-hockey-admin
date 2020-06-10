@@ -7,6 +7,7 @@ export class CurrentSeasonService {
 
   currentSeason: string = '2020-21';
   currentSeasonType: string = 'Regular';
+  currentOffSeaon: string = '2020';
 
   constructor() { }
 }

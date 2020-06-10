@@ -32,10 +32,11 @@ export class StatsService {
     )
   }
 
-  getActivePlayersByTeam(name: string, bool:string) {
+  getActivePlayersByTeam(name: string, bool:string, season: string) {
 
     const options = {params: new HttpParams()
       .set('isactive', bool)
+      .set('playing_year', season)
     }
 
     return this._http.get(`${environment.back_end_url}/v2/players-stats/team/${name}`, options).pipe(
@@ -63,6 +64,18 @@ export class StatsService {
 
   getGoalieStatById(id: number) {
     return this._http.get(`${environment.back_end_url}/v2/goalies-stats/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getActiveGoaliesByTeam(name: string, bool:string, season: string) {
+
+    const options = {params: new HttpParams()
+      .set('isactive', bool)
+      .set('playing_year', season)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/team/${name}`, options).pipe(
       map(result => result['result'])
     )
   }

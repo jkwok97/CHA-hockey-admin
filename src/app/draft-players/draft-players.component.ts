@@ -24,6 +24,7 @@ export class DraftPlayersComponent implements OnInit {
   isLoading: boolean = true;
   inEditMode: boolean;
   private _alive: boolean = true;
+  currentOffSeason: string;
   currentSeason: string;
 
   player$: Observable<DraftPlayer>;
@@ -52,33 +53,55 @@ export class DraftPlayersComponent implements OnInit {
       this.leaguePlayers$ = this._playersService.getAllPlayers();
       this.teams$ = this._teamService.getTeams();
     } else {
-      this.leaguePlayers$ = this._statsService.getActivePlayersByTeam('FA','true');
       this.teams$ = this._teamService.getTeamsByActive('true');
     }
-    this.currentSeason = this._leagueService.currentOffSeason;
+    this.currentOffSeason = this._leagueService.currentOffSeason;
+    this.currentSeason = this._leagueService.currentSeason;
   }
 
   ngOnInit() {
 
-    this.createForm();
-
     if (this.inEditMode) {
+      this.createForm();
+
       this.player$.pipe(
         take(1)
       ).subscribe((player: DraftPlayer) => {
         this.isLoading = false;
         this.player = player;
+        this.listenForLeaguePlayers();
         this.patchform(player);
       })
+
     } else {
+      this.createAddForm();
       this.isLoading = false;
-      this.teams$.pipe(
+
+      this.positionType.valueChanges.pipe(
         takeWhile(() => this._alive)
-      ).subscribe((teams: Team[]) => {
-        this.teams = teams;
-      })
+      ).subscribe((position: string) => {
+
+        if (position === 'isgoalie') {
+          this.leaguePlayers$ = this._statsService.getActiveGoaliesByTeam('FA','true', this.currentSeason);
+        } else {
+          this.leaguePlayers$ = this._statsService.getActivePlayersByTeam('FA','true', this.currentSeason);
+        }
+
+        this.listenForLeaguePlayers();
+
+      });
+
     }
 
+    this.teams$.pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((teams: Team[]) => {
+      this.teams = teams;
+    })
+    
+  }
+
+  listenForLeaguePlayers() {
     this.leaguePlayers$.pipe(
       takeWhile(() => this._alive)
     ).subscribe((players) => {
@@ -89,7 +112,18 @@ export class DraftPlayersComponent implements OnInit {
   createForm() {
     this.playerForm = new FormGroup({
       'player_id': new FormControl({ value:'', disabled: this.inEditMode}, [Validators.required]),
-      'draft_year': new FormControl(this.currentSeason, [Validators.required]),
+      'draft_year': new FormControl(this.currentOffSeason, [Validators.required]),
+      'draft_round': new FormControl('', [Validators.required]),
+      'draft_overall': new FormControl('', [Validators.required]),
+      'team_id': new FormControl('', [Validators.required])
+    })
+  }
+
+  createAddForm() {
+    this.playerForm = new FormGroup({
+      'position': new FormControl('', [Validators.required]),
+      'player_id': new FormControl('', [Validators.required]),
+      'draft_year': new FormControl(this.currentOffSeason, [Validators.required]),
       'draft_round': new FormControl('', [Validators.required]),
       'draft_overall': new FormControl('', [Validators.required]),
       'team_id': new FormControl('', [Validators.required])
@@ -112,16 +146,33 @@ export class DraftPlayersComponent implements OnInit {
     this.inEditMode ? this.handleEditSave() : this.handleAddSave();
   }
 
-  updatePlayerStatWithTeam(playerStatData) {
+  updatePlayerStatWithTeam(playerStatData, position: string) {
 
-    this._statsService.updatePlayerStats(playerStatData).pipe(
-      takeWhile(() => this._alive)
-    ).subscribe(resp => {
-      this.isSaving = false;
-      this._displayService.popupTrigger(resp);
-    }, error => {
-      this._displayService.popupTrigger(error);
-    });
+    if (position === 'isplayer') {
+
+      this._statsService.updatePlayerStats(playerStatData).pipe(
+        takeWhile(() => this._alive)
+      ).subscribe(resp => {
+        this.isSaving = false;
+        this._displayService.popupTrigger(resp);
+        this._draftPlayerService.draftPlayerTrigger('added');
+      }, error => {
+        this._displayService.popupTrigger(error);
+      });
+    } else {
+
+      this._statsService.updateGoalieStats(playerStatData).pipe(
+        takeWhile(() => this._alive)
+      ).subscribe(resp => {
+        this.isSaving = false;
+        this._displayService.popupTrigger(resp);
+        this._draftPlayerService.draftPlayerTrigger('added');
+      }, error => {
+        this._displayService.popupTrigger(error);
+      });
+
+    }
+
   }
 
   handleAddSave() {
@@ -129,6 +180,8 @@ export class DraftPlayersComponent implements OnInit {
     const playerData = {
       ...this.playerForm.value,
     };
+
+    delete playerData.position;
 
     const playerStatTeam = this.teams.find((team: Team) => team.id === playerData.team_id).shortname;
     const playerStatsId = this.players.find((player) => player.player_id === this.playerForm.controls.player_id.value).id;
@@ -139,18 +192,19 @@ export class DraftPlayersComponent implements OnInit {
     };
 
     if (playerStatTeam) {
+      
       this._draftPlayerService.addDraftedPlayer(playerData).pipe(
         takeWhile(() => this._alive)
       ).subscribe(resp => {
         this.isSaving = false;
         this._displayService.popupTrigger('Player Drafted');
-        this.updatePlayerStatWithTeam(playerStatData)
-  
+        this.updatePlayerStatWithTeam(playerStatData, this.positionType.value);
+        this.playerForm.reset();
       }, error => {
         this._displayService.popupTrigger(error);
+        this.playerForm.reset();
       })
-  
-      this.playerForm.reset();
+
     }
 
   }
@@ -175,7 +229,11 @@ export class DraftPlayersComponent implements OnInit {
   }
 
   onCancel() {
-    this.playerForm.reset();
+    if (this.inEditMode) {
+      this._router.navigate(['../../'], {relativeTo: this._route});
+    } else {
+      this.playerForm.reset();
+    }
   }
 
   onDelete() {
@@ -192,6 +250,10 @@ export class DraftPlayersComponent implements OnInit {
 
   ngOnDestroy(): void {
     this._alive = false;
+  }
+
+  get positionType() {
+    return this.playerForm.get('position');
   }
 
 }
