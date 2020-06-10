@@ -10,10 +10,6 @@ import { map } from 'rxjs/operators';
 })
 export class LeagueService {
 
-  currentSeason: string ='2020-21';
-  currentSeasonType: string ='Regular';
-  currentOffSeason: string = '2020';
-
   constructor(private _http: HttpClient) { 
 
   }

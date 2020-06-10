@@ -31,6 +31,18 @@ export class DraftService {
     )
   }
 
+  getDraftTableByTeam(id: number, currentSeason: string, nextSeason: string): Observable<DraftTable[]> {
+
+    const options = {params: new HttpParams()
+      .set('currentSeason', currentSeason.toString())
+      .set('nextSeason', nextSeason.toString())
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/draft-table/team/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
   updateDraftTableByYearById(row: DraftTable) {
     return this._http.patch(`${environment.back_end_url}/v2/draft-table/${row.id}`, row).pipe(
       map(result => result['message'])

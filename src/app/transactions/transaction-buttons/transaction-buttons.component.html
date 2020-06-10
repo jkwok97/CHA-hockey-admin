@@ -1,1 +1,37 @@
-<p>transaction-buttons works!</p>
+<div class="container">
+
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="trade-button" 
+        *ngIf="selectedTeamTwo !== 'FA'"
+        (click)="onTrade()"
+    >
+        <mat-icon aria-hidden="false">chevron_left</mat-icon>
+        Trade
+        <mat-icon aria-hidden="false">chevron_right</mat-icon>
+    </button>
+    
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="trade-button" 
+        *ngIf="selectedTeamTwo === 'FA'"
+        (click)="onAcquire()"
+    >
+        <mat-icon aria-hidden="false">arrow_back</mat-icon>
+        Acquire
+    </button>
+    
+    <button 
+        mat-raised-button 
+        color="accent" 
+        class="trade-button" 
+        *ngIf="selectedTeamTwo === 'FA'"
+        (click)="onRelease()"
+    >
+        Release
+        <mat-icon aria-hidden="false">arrow_forward</mat-icon>
+    </button>
+    
+</div>

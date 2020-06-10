@@ -1,37 +1,64 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TeamService } from 'src/app/_services/team.service';
 import { Team } from '../../_models/team';
+import { Observable } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { takeWhile } from 'rxjs/operators';
+import { TransactionsService } from 'src/app/_services/transactions.service';
 
 @Component({
   selector: 'app-team-select',
   templateUrl: './team-select.component.html',
   styleUrls: ['./team-select.component.css']
 })
-export class TeamSelectComponent implements OnInit {
+export class TeamSelectComponent implements OnInit, OnDestroy {
 
-  selectedTeamOne: string;
-  selectedTeamTwo: string;
+  private _alive: boolean = true;
 
-  teams: Team[];
+  teams$: Observable<Team[]>;
 
-  @Output() teamOneSelected = new EventEmitter<string>();
-  @Output() teamTwoSelected = new EventEmitter<string>();
+  teamSelectForm: FormGroup;
 
   constructor(
-    private _teamService: TeamService
+    private _teamService: TeamService,
+    private _transactionService: TransactionsService
   ) { 
-    // this.teams = this._teamService.currentLeague.teams;
+    this.teams$ = this._teamService.getTeamsByActive('true');
   }
 
   ngOnInit() {
+    this.createForm();
+
+    this.teamOne.valueChanges.pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((value: string) => {
+      this._transactionService.teamOneTrigger(value);
+    })
+
+    this.teamTwo.valueChanges.pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((value: string) => {
+      this._transactionService.teamTwoTrigger(value);
+    })
   }
 
-  selectTeamOne(shortName: string) {
-    this.teamOneSelected.emit(shortName);
+  createForm() {
+    this.teamSelectForm = new FormGroup({
+      'selectedTeamOne': new FormControl('', [Validators.required]),
+      'selectedTeamTwo': new FormControl('', [Validators.required]),
+    })
   }
 
-  selectTeamTwo(shortName: string) {
-    this.teamTwoSelected.emit(shortName);
+  ngOnDestroy(): void {
+    this._alive = false;
+  }
+
+  get teamOne() {
+    return this.teamSelectForm.get('selectedTeamOne');
+  }
+
+  get teamTwo() {
+    return this.teamSelectForm.get('selectedTeamTwo');
   }
 
 }

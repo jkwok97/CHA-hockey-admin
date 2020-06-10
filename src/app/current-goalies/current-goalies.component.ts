@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 import { StatsService } from '../_services/stats.service';
 import { LeagueService } from '../_services/league.service';
+import { CurrentSeasonService } from '../_services/current-season.service';
 
 @Component({
   selector: 'app-current-goalies',
@@ -35,12 +36,12 @@ export class CurrentGoaliesComponent implements OnInit {
 
   constructor(
     private _statsService: StatsService,
-    private _leagueService: LeagueService,
+    private _currentSeasonService: CurrentSeasonService,
     private _router: Router,
     private _route: ActivatedRoute
   ) {
     this.currentPlayers$ = 
-      this._statsService.getGoalieStats(this._leagueService.currentSeason, this._leagueService.currentSeasonType);
+      this._statsService.getGoalieStats(this._currentSeasonService.currentSeason, this._currentSeasonService.currentSeasonType);
    }
 
   ngOnInit() {

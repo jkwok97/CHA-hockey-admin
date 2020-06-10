@@ -23,7 +23,7 @@ export class DrafteesComponent implements OnInit {
   columns = [ 'id', 'player', 'draft_year', 'draft_round', 'draft_overall', 'logo', 'team'];
 
   page: number = 1;
-  pageSize: number = 20;
+  pageSize: number = 5;
   length: number = 0;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;

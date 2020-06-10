@@ -1,0 +1,19 @@
+:host {
+    width: 300px;
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 600px;
+    
+}
+
+.container {
+    border: 1.5px solid red;
+    border-radius: 10px;
+    
+    
+    overflow-y: auto;
+}
+
+.mat-selection-list {
+    width: 250px;
+}

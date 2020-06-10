@@ -1,9 +1,12 @@
 :host {
+    display: grid;
+}
+
+.form {
     display: inline-grid;
-    grid-template-rows: min-content;
-    justify-content: center;
-    grid-column-gap: 20px;
-    grid-template-columns: repeat(2, minmax(300px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    grid-column-gap: 10px;
+    justify-content: space-evenly;
 }
 
 .mat-form-field {

@@ -1,1 +1,25 @@
 <app-team-select></app-team-select>
+
+<section class="section">
+
+    <app-asset-list
+        [selectedTeam]="selectedTeamOne"
+        [transactionSuccess]="transactionSuccess"
+        (outputTransaction)="transactionTeamOneChange($event)"
+    ></app-asset-list>
+
+    <app-transaction-buttons
+        [selectedTeamOne]="selectedTeamOne"
+        [selectedTeamTwo]="selectedTeamTwo"
+        [teamOneTransaction]="teamOneTransaction"
+        [teamTwoTransaction]="teamTwoTransaction"
+        (transactionSuccess)="transactionSuccessChange($event)"
+    ></app-transaction-buttons>
+
+    <app-asset-list
+        [selectedTeam]="selectedTeamTwo"
+        [transactionSuccess]="transactionSuccess"
+        (outputTransaction)="transactionTeamTwoChange($event)"
+    ></app-asset-list>
+
+</section>

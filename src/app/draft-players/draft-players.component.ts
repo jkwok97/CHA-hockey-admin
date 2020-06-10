@@ -12,6 +12,7 @@ import { TeamService } from '../_services/team.service';
 import { StatsService } from '../_services/stats.service';
 import { Player } from '../_models/player';
 import { Team } from '../_models/team';
+import { CurrentSeasonService } from '../_services/current-season.service';
 
 @Component({
   selector: 'app-draft-players',
@@ -26,6 +27,7 @@ export class DraftPlayersComponent implements OnInit {
   private _alive: boolean = true;
   currentOffSeason: string;
   currentSeason: string;
+  currentSeasonType: string;
 
   player$: Observable<DraftPlayer>;
   leaguePlayers$: Observable<Player[]>;
@@ -43,7 +45,7 @@ export class DraftPlayersComponent implements OnInit {
     private _draftPlayerService: DraftPlayerService,
     private _statsService: StatsService,
     private _playersService: PlayersService,
-    private _leagueService: LeagueService,
+    private _currentSeasonService: CurrentSeasonService,
     private _teamService: TeamService
   ) { 
     if (this._route.snapshot.url.find(url => url.path.includes('edit'))) {
@@ -55,8 +57,9 @@ export class DraftPlayersComponent implements OnInit {
     } else {
       this.teams$ = this._teamService.getTeamsByActive('true');
     }
-    this.currentOffSeason = this._leagueService.currentOffSeason;
-    this.currentSeason = this._leagueService.currentSeason;
+    this.currentOffSeason = this._currentSeasonService.currentOffSeason;
+    this.currentSeason = this._currentSeasonService.currentSeason;
+    this.currentSeasonType = this._currentSeasonService.currentSeasonType;
   }
 
   ngOnInit() {
@@ -82,9 +85,9 @@ export class DraftPlayersComponent implements OnInit {
       ).subscribe((position: string) => {
 
         if (position === 'isgoalie') {
-          this.leaguePlayers$ = this._statsService.getActiveGoaliesByTeam('FA','true', this.currentSeason);
+          this.leaguePlayers$ = this._statsService.getActiveGoaliesByTeam('FA','true', this.currentSeason, this.currentSeasonType);
         } else {
-          this.leaguePlayers$ = this._statsService.getActivePlayersByTeam('FA','true', this.currentSeason);
+          this.leaguePlayers$ = this._statsService.getActivePlayersByTeam('FA','true', this.currentSeason, this.currentSeasonType);
         }
 
         this.listenForLeaguePlayers();
