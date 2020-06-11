@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { TradesService } from 'src/app/trades/trades.service';
-import { MainService } from 'src/app/main/main.service';
 import { takeWhile } from 'rxjs/operators';
 import { DisplayService } from 'src/app/_services/display.service';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';

@@ -6,7 +6,7 @@
             <mat-option 
                 *ngFor="let team of teams$ | async" 
                 [value]="team.shortname" 
-                [disabled]="team.shortname === 'FA' || team.id === teamTwo.value"
+                [disabled]="team.shortname === 'FA' || team.shortname === teamTwo.value"
             >
                 {{team.city}} {{team.nickname}}
             </mat-option>
@@ -19,7 +19,7 @@
             <mat-option 
                 *ngFor="let team of teams$ | async" 
                 [value]="team.shortname" 
-                [disabled]="team.id === teamOne.value"
+                [disabled]="team.shortname === teamOne.value"
             >
                 {{team.city}} {{team.nickname}}
             </mat-option>

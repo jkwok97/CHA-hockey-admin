@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TeamService } from 'src/app/_services/team.service';
 import { Team } from '../../_models/team';
 import { Observable } from 'rxjs';

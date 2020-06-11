@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
 import { takeWhile, map } from 'rxjs/operators';
-import { TransactionsService } from 'src/app/_services/transactions.service';
 import { StatsService } from 'src/app/_services/stats.service';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { DraftService } from 'src/app/_services/draft.service';
 import { TeamService } from 'src/app/_services/team.service';
 import { Team } from 'src/app/_models/team';
 import { DraftTable } from 'src/app/_models/draft-table';
+import { TransactionsService } from 'src/app/_services/transactions.service';
 
 @Component({
   selector: 'app-asset-list',
@@ -40,6 +40,7 @@ export class AssetListComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private _currentSeasonService: CurrentSeasonService,
+    private _transactionService: TransactionsService,
     private _teamsService: TeamService,
     private _draftService: DraftService,
     private _statsService: StatsService
@@ -53,9 +54,11 @@ export class AssetListComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit() {
 
     this._teamsService.getTeamsByActive('true').pipe(
-      takeWhile(() => this._alive),
-      map((teams:Team[]) => this.teams = teams)
-    ).subscribe()
+      takeWhile(() => this._alive)
+    ).subscribe((teams: Team[]) => {
+      this.teams = teams;
+      this._transactionService.setTeams(teams);
+    })
 
   }
 
@@ -109,15 +112,15 @@ export class AssetListComponent implements OnInit, OnDestroy, OnChanges {
             Object.entries(team).forEach(([key, val]) => {
               if (val === teamId) {
                 if (key === 'round_one') {
-                  teamPicks.push({ team: team['shortname'], pick_value: '1st', draft_year: team.draft_year})
+                  teamPicks.push({ id: team.id, team: team['shortname'], pick_value: '1st', draft_year: team.draft_year})
                 } else if (key === 'round_two') {
-                  teamPicks.push({ team: team['shortname'], pick_value: '2nd', draft_year: team.draft_year})
+                  teamPicks.push({ id: team.id, team: team['shortname'], pick_value: '2nd', draft_year: team.draft_year})
                 } else if (key === 'round_three') {
-                  teamPicks.push({ team: team['shortname'], pick_value: '3rd', draft_year: team.draft_year})
+                  teamPicks.push({ id: team.id, team: team['shortname'], pick_value: '3rd', draft_year: team.draft_year})
                 } else if (key === 'round_four') {
-                  teamPicks.push({ team: team['shortname'], pick_value: '4th', draft_year: team.draft_year})
+                  teamPicks.push({ id: team.id, team: team['shortname'], pick_value: '4th', draft_year: team.draft_year})
                 } else if (key === 'round_five') {
-                  teamPicks.push({ team: team['shortname'], pick_value: '5th', draft_year: team.draft_year})
+                  teamPicks.push({ id: team.id, team: team['shortname'], pick_value: '5th', draft_year: team.draft_year})
                 }
               }
             });
