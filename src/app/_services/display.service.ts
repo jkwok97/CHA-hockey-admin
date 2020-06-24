@@ -7,8 +7,11 @@ import { Subject, Observable } from 'rxjs';
 export class DisplayService {
 
   private _subjectPopup = new Subject<any>();
+  isMobile: boolean;
 
-  constructor() { }
+  constructor() {
+    this.isMobile = this.checkMobile();
+   }
 
   checkMobile() {
     if ( navigator.userAgent.match(/Android/i)
