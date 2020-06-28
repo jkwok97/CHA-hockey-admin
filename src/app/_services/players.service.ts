@@ -26,7 +26,7 @@ export class PlayersService {
       .set('isactive', bool)
     }
 
-    return this._http.get(`${environment.back_end_url}/v2/players/active`, options).pipe(
+    return this._http.get(`${environment.back_end_url}/v2/all-players/active`, options).pipe(
       map(result => result['result'])
     )
   }
