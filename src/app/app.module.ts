@@ -40,6 +40,7 @@ import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-ta
 import { DrafteesComponent } from './draftees/draftees.component';
 import { DraftPlayersComponent } from './draft-players/draft-players.component';
 import { DraftComponent } from './draft/draft.component';
+import { AllGamesTableComponent } from './games/all-games-table/all-games-table.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { DraftComponent } from './draft/draft.component';
     DrafteesComponent,
     DraftPlayersComponent,
     DraftComponent,
+    AllGamesTableComponent,
   ],
   imports: [
     BrowserModule,

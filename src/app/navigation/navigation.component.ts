@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { takeWhile, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { takeWhile } from 'rxjs/operators';
 import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,8 +35,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Draft', url: 'draft', current: false},
     {name: 'Transactions', url: 'transactions', current: false},
     {name: 'Waivers', url: 'waivers', current: false},
+    {name: 'Games', url: 'games', current: true},
 
-    {name: 'Games (OLD)', url: 'games', current: true},
+    
     {name: 'Trades (OLD)', url: 'trades', current: false},
     {name: 'Champ Upload (OLD)', url: 'champs', current: false},
   ];
