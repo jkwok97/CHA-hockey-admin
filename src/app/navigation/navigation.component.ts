@@ -36,10 +36,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Transactions', url: 'transactions', current: false},
     {name: 'Waivers', url: 'waivers', current: false},
     {name: 'Games', url: 'games', current: true},
-
+    {name: 'Champions', url: 'champs', current: false},
+    // {name: 'Trades (OLD)', url: 'trades', current: false},
     
-    {name: 'Trades (OLD)', url: 'trades', current: false},
-    {name: 'Champ Upload (OLD)', url: 'champs', current: false},
   ];
 
   constructor(

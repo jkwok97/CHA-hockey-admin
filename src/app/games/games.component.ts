@@ -27,10 +27,6 @@ export class GamesComponent implements OnInit, OnDestroy {
     'home_team_name', 'home_team_score' 
   ];
 
-  page: number = 1;
-  pageSize: number = 25;
-  length: number = 0;
-
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 

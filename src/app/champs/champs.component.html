@@ -1,75 +1,11 @@
-<div class="spinner" *ngIf="isLoading">
-    <mat-spinner color="accent"></mat-spinner>
-</div>
+<p class="title">Champions List</p>
 
-<div class="add-champ" *ngIf="!isLoading && editMode">
-    <app-add-champ></app-add-champ>
-</div>
+<button mat-raised-button color="accent" (click)="addPlayer()">Add New</button>
 
-<div class="playerStatsTable cha-dark" *ngIf="!isLoading && !editMode">
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-    <div class="tableHeader">
-        <p>Champions List</p>
-    </div>
-
-    <div class="button-container">
-        <button mat-raised-button color="accent" (click)="addPlayer()">Add New</button>
-    </div>
-
-    <div class="table">
-
-        <table mat-table [dataSource]="champs" matSort class="mat-elevation-z8 full-width" matSortActive="year_won" matSortDirection="desc">
-
-            <ng-container matColumnDef="team_logo">
-                <th mat-header-cell *matHeaderCellDef> Team </th>
-                <td mat-cell *matCellDef="let team"> 
-                    <img src="{{ findLogo(team.team_name).image }}"> 
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="year_won">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
-                <td mat-cell *matCellDef="let champ"> {{ champ.year_won}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="team_name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
-                <td mat-cell *matCellDef="let champ"> {{ champ.team_name }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="owner_name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Owner </th>
-                <td mat-cell *matCellDef="let champ"> {{ champ.owner_name }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="player_name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Player </th>
-                <td mat-cell *matCellDef="let champ"> {{ champ.player_name }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="award_type">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                <td mat-cell *matCellDef="let champ"> {{ champ.award_type }} </td>
-            </ng-container>
-            
-            <tr mat-header-row *matHeaderRowDef="isMobile ? champMobileColumnsToDisplay : champColumnsToDisplay;"></tr>
-            <tr 
-                mat-row 
-                *matRowDef="let champ; columns: isMobile ? champMobileColumnsToDisplay : champColumnsToDisplay;"
-                (click)="editChamp(champ)"
-                matTooltip="Click to Edit"
-            ></tr>
-
-        </table>
-
-    </div>
-
-    <mat-paginator
-        [pageSizeOptions]="[20]"
-        [pageSize]="pageSize"
-        [length]="length"
-        color="accent"
-        showFirstLastButtons
-    ></mat-paginator>
-
-</div>
+<app-champ-table
+    [champs]="champs"
+    [columns]="isMobile ? mobileColumns : columns"
+    *ngIf="!isLoading"
+></app-champ-table>

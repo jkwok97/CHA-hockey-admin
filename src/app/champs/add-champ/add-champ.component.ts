@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormControl } from '@angular/forms';
-import { MainService } from 'src/app/main/main.service';
-import { takeWhile } from 'rxjs/operators';
-import { ChampService } from '../champ.service';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { takeWhile, map, take, startWith } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChampionsService } from 'src/app/_services/champions.service';
+import { DisplayService } from 'src/app/_services/display.service';
+import { CurrentSeasonService } from 'src/app/_services/current-season.service';
+import { Observable } from 'rxjs';
+import { Team } from 'src/app/_models/team';
+import { TeamService } from 'src/app/_services/team.service';
+import { UserService } from 'src/app/_services/user.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-add-champ',
@@ -14,197 +21,226 @@ export class AddChampComponent implements OnInit {
   private _alive:boolean = true;
   isLoading: boolean = false;
   isSaving: boolean = false;
-  isGoalie: boolean = false;
-  hasError: boolean = false;
   isMobile: boolean = false;
-  showTeams: boolean = false;
-  addMode: boolean = false;
+  inEditMode: boolean = false;
 
-  type: string;
-  editType: string;
-  playerId: string;
-  teamSelected: string;
-  ownerSelected: string;
-  positionSelected: string;
-  typeSelected: string;
+  showPlayerField: boolean = false;
 
-  champ: any;
-  team: any;
-  teams: any[];
-  owners: any[] = [];
+  awardForm: FormGroup;
+  
+  currentSeason: string;
 
-  yearWon = new FormControl('2019-20', [Validators.required]);
-  playerName = new FormControl(null, [Validators.required]);
-  // ownerName = new FormControl(null, [Validators.required]);
-  teamName = new FormControl('', [Validators.required]);
-  champId = new FormControl('', [Validators.required]);
-
-  positions = ["Center", "Winger", "Defense", "Goaltender"];
-  types = ["champ", "gm", "defense", "goalie", 'scorer', 'rookie', 'season'];
+  awardTypes$: Observable<string[]>;
+  teams$: Observable<Team[]>;
+  owners$: Observable<User[]>;
+  players: [];
+  teams: Team[];
+  winner: any;
 
   constructor(
-    private _mainService: MainService,
-    private _champService: ChampService
+    private _route: ActivatedRoute,
+    private _championsService: ChampionsService,
+    private _displayService: DisplayService,
+    private _currentSeasonService: CurrentSeasonService,
+    private _router: Router,
+    private _teamsService: TeamService,
+    private _userService: UserService
   ) { 
-    this.teams = this._mainService.currentLeague.teams;
-    this.teams.sort((a,b) => (a.shortName > b.shortName) ? 1 : ((b.shortName > a.shortName) ? -1 : 0));
-    this.teams.forEach(team => {
-      this.owners.push(team.owner);
-    });
-    this.champ = this._champService.champion;
+    this.currentSeason = this._currentSeasonService.currentSeason;
+
+    if (this._route.snapshot.params.id) {
+      this.inEditMode = true;
+      this.isLoading = true;
+      this.getAwardWinner(this._route.snapshot.params.id);
+    } 
+
+    this.awardTypes$ = this._championsService.getAwardTypes();
+    this.teams$ = this._teamsService.getTeamsByActive('true');
+    this.owners$ = this._userService.getAllUsers();
   }
 
   ngOnInit() {
-    this.checkMobile();
-    this.editType = this._champService.editType;
-    if (this.editType === "Edit") {
-      this.champ = this._champService.champion;
-      this.setValues(this.champ);
-    }
-    this._champService.showAddChampPlayerListener().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      this.editType = resp;
+
+    this.isMobile = this._displayService.isMobile;
+
+    this.teams$.pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((teams: Team[]) => {
+      this.teams = teams;
+    })
+
+    this.createForm();
+
+    this.awardType.valueChanges.pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((id) => {
+      this.showPlayerField = this.allowPlayerField(id);
+      this.showPlayerField ? this.wonByPlayer.setValidators([Validators.required]) : this.updatePlayerField();
     });
+
+    this.teamForm.valueChanges.pipe(
+      startWith(this._route.snapshot.params.id),
+      takeWhile(() => this._alive)
+    ).subscribe((id: number) => {
+      if (id && this.teams) {
+        const teamName = this.getTeamName(id);
+        this.getPlayers(teamName);
+        this.getTeamOwner(teamName);
+      }
+    });
+
   }
 
-  setValues(champ) {
-    // console.log(champ);
-    this.yearWon.setValue(champ.year_won);
-    this.typeSelected = champ.award_type;
-    this.type = champ.award_type;
-    this.ownerSelected = champ.owner_name;
-    this.playerName.setValue(champ.player_name);
-    this.teamSelected = champ.team_short;
-    this.champId.setValue(champ.id);
+  createForm() {
+    this.awardForm = new FormGroup({
+      'cha_season': new FormControl(this.currentSeason, [Validators.required]),
+      'display_season': new FormControl('2021', [Validators.required]),
+      'award_type': new FormControl('', [Validators.required]),
+      'users_id': new FormControl('', [Validators.required]),
+      'player_id': new FormControl(''),
+      'team_id': new FormControl('', [Validators.required])
+    })
   }
 
-  checkMobile() {
-    if ( navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i) ) {
-          this.isMobile = true;
-        } else {
-          this.isMobile = false;
-        }
+  patchForm(winner) {
+    this.awardForm.patchValue({
+      'cha_season': winner.cha_season,
+      'display_season': winner.display_season,
+      'award_type': winner.awardtypeid,
+      'users_id': winner.ownerid,
+      'player_id': winner.playerid,
+      'team_id': winner.teamid
+    });
+
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000)
   }
 
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._mainService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
+  getAwardWinner(id: number) {
+    this._championsService.getAwardWinnerById(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((winner) => {
+      this.winner = winner;
+      this.patchForm(this.winner);
+    })
+  }
+
+  updatePlayerField() {
+    this.wonByPlayer.setValidators(null);
+    this.wonByPlayer.setValue(null);
+  }
+
+  getTeamName(id) {
+    return this.teams.find((team) => team.id === id).shortname;
+  }
+
+  getPlayers(name: string) {
+    this._teamsService.getPlayersByTeamName(name, this.currentSeason, 'Regular').pipe(
+      take(1)
+    ).subscribe((players) => {
+      this.players = players['players'].concat(players['goalies']);
+    })
+  }
+
+  getTeamOwner(name: string) {
+    this._teamsService.getUserByTeamName(name).pipe(
+      take(1)
+    ).subscribe((id) => {
+      this.ownerForm.setValue(id['users_id']);
+    })
+  }
+
+  allowPlayerField(id) {
+    switch (id) {
+      case 2:
+      case 3:
+      case 4:
+        return false;
+      default:
+        return true;
     }
-  }
-
-  onTypeChange(event) {
-    // console.log(event);
-    this.type = event.value;
-    if (event.value == 'gm') {
-      // this.showTeams = false;
-      this.playerName.setValue(null);
-    } else if (event.value == 'season') {
-      this.playerName.setValue(null);
-    } else if (event.value == 'champ') {
-      this.playerName.setValue(null);
-    } else if (event.value == 'defense') {
-      this.ownerSelected = null;
-    } else if (event.value == 'scorer') {
-      this.ownerSelected = null;
-    } else if (event.value == 'goalie') {
-      this.ownerSelected = null;
-    }
-  }
-
-  onOwnerChange(event) {
-    this.teamSelected = this.teams.find(team => team.owner === event.value).shortName;
-    // console.log(this.teamSelected);
   }
 
   onSave() {
     this.isSaving = true;
-    let champ = {
-      year_won: this.yearWon.value,
-      team_name: this.findLogo(this.teamSelected).name,
-      owner_name: this.ownerSelected,
-      player_name: this.playerName.value,
-      team_short: this.teamSelected,
-      award_type: this.type
+
+    const awardWinner = {
+      ...this.awardForm.value
     }
-    // console.log(champ);
-    this._champService.addChampion(champ).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      this._mainService.popupTrigger(resp);
-      this.resetValues();
+
+    this._championsService.addAwardWinner(awardWinner).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(resp => {
+      this._displayService.popupTrigger(resp['message']);
+      this.awardForm.reset();
       this.isSaving = false;
-      this._champService.showEditChampPlayerTrigger(false);
-      this._champService.showAddChampPlayerTrigger("");
+      this._router.navigate(['champs']);
     }, error => {
-      console.log(error);
-      this._mainService.popupTrigger(error);
+      this._displayService.popupTrigger(error);
       this.isSaving = false;
-    });
+    })
   }
 
   onEditSave(id) {
-    // console.log(id);
-    this.isSaving = true;
-    let champ = {
-      id: id,
-      year_won: this.yearWon.value,
-      team_name: this.findLogo(this.teamSelected).name,
-      owner_name: this.ownerSelected,
-      player_name: this.playerName.value,
-      team_short: this.teamSelected,
-      award_type: this.type
-    }
-    // console.log(champ);
-    this._champService.updateChamp(champ).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      this._mainService.popupTrigger(resp);
-      this.resetValues();
-      this.isSaving = false;
-      this._champService.showEditChampPlayerTrigger(false);
-      this._champService.showAddChampPlayerTrigger("");
-    }, error => {
-      console.log(error);
-      this._mainService.popupTrigger(error);
-      this.isSaving = false;
-    });
-  }
 
-  resetValues() {
-    this.playerName.reset();
-    this.yearWon.reset();
-    this.teamSelected = null;
-    this.ownerSelected = null;
-    this.teamSelected = null;
-    this.type = null;
+    this.isSaving = true;
+
+    const awardWinner = {
+      ...this.awardForm.value
+    }
+
+    this._championsService.updateAwardWinner(id, awardWinner).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(resp => {
+      this._displayService.popupTrigger(resp['message']);
+      this.awardForm.reset();
+      this.isSaving = false;
+      this._router.navigate(['champs']);
+    }, error => {
+      this._displayService.popupTrigger(error);
+      this.isSaving = false;
+    })
   }
 
   onCancel() {
-    this.resetValues();
-    this._champService.showEditChampPlayerTrigger(false);
-    this._champService.showAddChampPlayerTrigger("");
+    this.awardForm.reset();
+    this._router.navigate(['champs']);
   }
 
-  onDelete() {
-    this.isSaving = false;
-    this._champService.deleteChamp(this.champ.id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this._mainService.popupTrigger(resp);
+  onDelete(id: number) {
+    this.isSaving = true;
+
+    this._championsService.deleteAwardWinner(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(resp => {
+      this._displayService.popupTrigger(resp['message']);
       this.isSaving = false;
-      this._champService.showEditChampPlayerTrigger(false);
+      this._router.navigate(['champs']);
     }, error => {
-      console.log(error);
-      this._mainService.popupTrigger(error);
+      this._displayService.popupTrigger(error);
       this.isSaving = false;
-    });
+    })
   }
 
   ngOnDestroy() {
     this._alive = false;
+  }
+
+  get awardType() {
+    return this.awardForm.get('award_type');
+  }
+
+  get wonByPlayer() {
+    return this.awardForm.get('player_id');
+  }
+
+  get teamForm() {
+    return this.awardForm.get('team_id');
+  }
+
+  get ownerForm() {
+    return this.awardForm.get('users_id');
   }
 
 }

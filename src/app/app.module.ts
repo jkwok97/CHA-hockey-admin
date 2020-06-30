@@ -41,6 +41,7 @@ import { DrafteesComponent } from './draftees/draftees.component';
 import { DraftPlayersComponent } from './draft-players/draft-players.component';
 import { DraftComponent } from './draft/draft.component';
 import { AllGamesTableComponent } from './games/all-games-table/all-games-table.component';
+import { ChampTableComponent } from './champs/champ-table/champ-table.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { AllGamesTableComponent } from './games/all-games-table/all-games-table.
     DraftPlayersComponent,
     DraftComponent,
     AllGamesTableComponent,
+    ChampTableComponent,
   ],
   imports: [
     BrowserModule,

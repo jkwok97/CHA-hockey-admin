@@ -1,86 +1,18 @@
-.playerStatsTable {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-    margin-top: 20px;
+:host {
+    display: grid;
+    padding: 20px;
+    /* justify-items: center; */
+    grid-template-columns: minmax(350px, 1fr);
+    grid-row-gap: 20px;
 }
 
-.add-champ {
-    /* border: 1px solid red; */
-}
-
-.tableHeader {
-    color: white;
-    font-size: x-large;
-    font-weight: 100;
-    text-align: center;
-    width: 100%;
-}
-
-.table {
-    width: 95%;
-    overflow-x: auto;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.spinner {
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.table img {
-    height: 30px;
-    width: 30px;
-}
-
-.mat-header-cell {
-    text-align: center;
-}
-
-.mat-cell, .mat-header-cell {
-    white-space: nowrap;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-:host ::ng-deep .mat-sort-header-container {
-    display: flex;
-    justify-content: center;
-}
-
-table {
-    text-align: center;
-}
-
-.mat-row:hover {
-    background-color: rgb(61, 90, 254);
-    cursor: pointer;
-}
-
-.mat-paginator {
-    width: 95%;
-}
-
-.tableHeader {
-    width: 100%;
-    font-size: x-large;
+.title {
     color: white;
     font-weight: 100;
+    font-size: x-large;
     text-align: center;
 }
 
-.button-container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 10px 0;
+button {
+    justify-self: center;
 }

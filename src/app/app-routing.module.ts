@@ -25,18 +25,10 @@ import { DraftTableComponent } from './draft-table/draft-table.component';
 import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-table-edit.component';
 import { DraftComponent } from './draft/draft.component';
 import { DraftPlayersComponent } from './draft-players/draft-players.component';
+import { AddChampComponent } from './champs/add-champ/add-champ.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
-  { path: 'games', component: GamesComponent, canActivate: [AuthGuard]},
-  { path: 'trades', component: TradesComponent},
-  { path: 'waivers', component: WaiversComponent},
-  { path: 'champs', component: ChampsComponent},
-  { path: 'trades', component: TradesComponent, canActivate: [AuthGuard]},
-
-  // ****************************************************************************************
-  //                                       NEW USED ROUTES
-  // ****************************************************************************************
 
   { path: 'login', component: LoginComponent},
 
@@ -69,6 +61,14 @@ const routes: Routes = [
 
   { path: 'draft', component: DraftComponent },
   { path: 'draft/edit/:id', component: DraftPlayersComponent },
+
+  { path: 'champs', component: ChampsComponent},
+  { path: 'champs/add', component: AddChampComponent},
+  { path: 'champs/edit/:id', component: AddChampComponent},
+
+  { path: 'waivers', component: WaiversComponent},
+
+  { path: 'games', component: GamesComponent, canActivate: [AuthGuard]},
 
 ];
 

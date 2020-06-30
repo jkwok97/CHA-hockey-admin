@@ -67,4 +67,22 @@ export class TeamService {
       map(result => result['message'])
     )
   }
+
+  getUserByTeamName(teamName: string): Observable<number> {
+    return this._http.get(`${environment.back_end_url}/v2/teams/${teamName}/user/`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getPlayersByTeamName(teamName: string, season: string, seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season', season)
+      .set('seasonType', seasonType)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/teams/${teamName}/players/`, options).pipe(
+      map(result => result['result'])
+    )
+  }
 }
