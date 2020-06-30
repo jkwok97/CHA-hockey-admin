@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from '../app/_services/auth.guard';
-import { TradesComponent } from './trades/trades.component';
 import { GamesComponent } from './games/games.component';
 import { WaiversComponent } from './waivers/waivers.component';
 import { ChampsComponent } from './champs/champs.component';

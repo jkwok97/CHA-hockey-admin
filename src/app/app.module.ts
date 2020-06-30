@@ -15,10 +15,6 @@ import { WaiversComponent } from './waivers/waivers.component';
 import { GamesComponent } from './games/games.component';
 import { ChampsComponent } from './champs/champs.component';
 import { AddChampComponent } from './champs/add-champ/add-champ.component';
-import { TradesComponent } from './trades/trades.component';
-import { TradeSelectComponent } from './trades/trade-select/trade-select.component';
-import { TradeListViewComponent } from './trades/trade-list-view/trade-list-view.component';
-import { TradeButtonsComponent } from './trades/trade-buttons/trade-buttons.component';
 import { UsersComponent } from './users/users.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { PlayerInfoComponent } from './player-info/player-info.component';
@@ -53,10 +49,6 @@ import { ChampTableComponent } from './champs/champ-table/champ-table.component'
     GamesComponent,
     ChampsComponent,
     AddChampComponent,
-    TradesComponent,
-    TradeSelectComponent,
-    TradeListViewComponent,
-    TradeButtonsComponent,
     UsersComponent,
     UserEditComponent,
     PlayerInfoComponent,
