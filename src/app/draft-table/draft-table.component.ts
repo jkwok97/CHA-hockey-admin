@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute } from '@angular/router';
-import { takeWhile, take, map, exhaustMap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { TeamService } from '../_services/team.service';
 import { Observable } from 'rxjs';
 import { Team } from '../_models/team';

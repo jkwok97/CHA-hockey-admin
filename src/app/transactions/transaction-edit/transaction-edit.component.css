@@ -1,0 +1,23 @@
+:host {
+    display: grid;
+    justify-items: center;
+    padding: 20px;
+}
+
+.mat-card {
+    width: 90%;
+}
+
+form {
+    display: grid;
+}
+
+.form-section {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    grid-column-gap: 10px;
+}
+
+.mat-form-field {
+    width: 100%;
+}

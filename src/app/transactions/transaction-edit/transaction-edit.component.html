@@ -1,0 +1,103 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<mat-card *ngIf="teams$ | async">
+
+    <mat-card-header>
+        <mat-card-title>Transaction Edit Picks</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form [formGroup]="form">
+
+            <section class="form-section">
+
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Id</mat-label>
+                    <input matInput placeholder="Transaction Id" formControlName="id" readonly>
+                </mat-form-field>
+
+            </section>
+
+            <section class="form-section">
+
+                <mat-form-field color="accent">
+                    <mat-label>Team</mat-label>
+                    <mat-select formControlName="team_one_id">
+                        <mat-option *ngFor="let team of (teams$ | async)" [value]="team.id">
+                            {{team.city}} {{team.nickname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div 
+                    formArrayName="team_one_picks"
+                    *ngFor="let picks of form.get('team_one_picks')?.controls; let i = index"
+                >
+                    <ng-container [formGroupName]="i">
+                        <mat-form-field appearance="fill" color="accent">
+                            <mat-label>Picks</mat-label>
+                            <input matInput placeholder="Picks" formControlName="pick">
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+                
+            </section>
+
+            <section class="form-section">
+
+                <mat-form-field color="accent">
+                    <mat-label>Team</mat-label>
+                    <mat-select formControlName="team_two_id">
+                        <mat-option *ngFor="let team of (teams$ | async)" [value]="team.id">
+                            {{team.city}} {{team.nickname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div 
+                    formArrayName="team_two_picks"
+                    *ngFor="let picks of form.get('team_two_picks')?.controls; let i = index"
+                >
+                    <ng-container [formGroupName]="i">
+                        <mat-form-field appearance="fill" color="accent">
+                            <mat-label>Picks</mat-label>
+                            <input matInput placeholder="Picks" formControlName="pick">
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+                
+            </section>
+
+        </form>
+
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="form">
+
+        <button 
+            mat-raised-button 
+            color="accent" 
+            type="submit" 
+            *ngIf="!isSaving"
+            [disabled]="form.invalid"
+            (click)="onSave()" 
+        >
+            Save
+        </button>
+
+        <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="onCancel()" 
+            *ngIf="!isSaving"
+        >   
+            Cancel
+        </button>
+        <button mat-raised-button color="warn" (click)="onDelete()" *ngIf="!isSaving">Delete</button>
+
+        <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
+
+    </mat-card-actions>
+
+</mat-card>

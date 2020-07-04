@@ -38,6 +38,8 @@ import { DraftPlayersComponent } from './draft-players/draft-players.component';
 import { DraftComponent } from './draft/draft.component';
 import { AllGamesTableComponent } from './games/all-games-table/all-games-table.component';
 import { ChampTableComponent } from './champs/champ-table/champ-table.component';
+import { TransactionTableComponent } from './transactions/transaction-table/transaction-table.component';
+import { TransactionEditComponent } from './transactions/transaction-edit/transaction-edit.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { ChampTableComponent } from './champs/champ-table/champ-table.component'
     DraftComponent,
     AllGamesTableComponent,
     ChampTableComponent,
+    TransactionTableComponent,
+    TransactionEditComponent,
   ],
   imports: [
     BrowserModule,

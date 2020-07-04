@@ -7,7 +7,6 @@ import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 import { StatsService } from '../_services/stats.service';
-import { LeagueService } from '../_services/league.service';
 import { CurrentSeasonService } from '../_services/current-season.service';
 
 @Component({

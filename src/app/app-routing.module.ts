@@ -25,6 +25,7 @@ import { DraftTableEditComponent } from './draft-table/draft-table-edit/draft-ta
 import { DraftComponent } from './draft/draft.component';
 import { DraftPlayersComponent } from './draft-players/draft-players.component';
 import { AddChampComponent } from './champs/add-champ/add-champ.component';
+import { TransactionEditComponent } from './transactions/transaction-edit/transaction-edit.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent},
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'salaries/edit/:id', component: SalaryEditComponent },
 
   { path: 'transactions', component: TransactionsComponent },
+  { path: 'transactions/edit/:id', component: TransactionEditComponent },
 
   { path: 'current-players', component: CurrentPlayersComponent },
   { path: 'current-players/edit/:id', component: CurrentEditComponent },
