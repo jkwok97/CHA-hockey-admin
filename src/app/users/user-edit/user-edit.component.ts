@@ -63,8 +63,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
       'firstname': new FormControl('', [Validators.required]),
       'lastname': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.email]),
-      'isadmin': new FormControl(''),
-      'isactive': new FormControl('')
+      'isadmin': new FormControl(false),
+      'isactive': new FormControl(false)
     })
   }
 

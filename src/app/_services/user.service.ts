@@ -35,15 +35,7 @@ export class UserService {
 
   addUser(userInfo: User) {
 
-    const body = {
-      email: userInfo.email,
-      firstname: userInfo.firstname,
-      isactive: userInfo.isactive,
-      isadmin: userInfo.isadmin,
-      lastname: userInfo.lastname
-    };
-
-    return this._http.post(`${environment.back_end_url}/v2/users/add/`, body).pipe(
+    return this._http.post(`${environment.back_end_url}/v2/users/add/`, userInfo).pipe(
       map(result => result['message'])
     )
   }
