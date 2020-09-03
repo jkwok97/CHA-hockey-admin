@@ -33,7 +33,7 @@ export class WaiversComponent implements OnInit, OnDestroy {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.teams, event.previousIndex, event.currentIndex);
     this.teams.forEach(team => {
-      let index = this.teams.findIndex(squad => squad.team_name === team.team_name) + 1;
+      let index = this.teams.findIndex(squad => squad.team_id === team.team_id) + 1;
       this._waiversService.updateWaiverTeam(team.id, index).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
       });
