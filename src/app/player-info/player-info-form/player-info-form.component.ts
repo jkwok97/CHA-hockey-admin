@@ -62,7 +62,7 @@ export class PlayerInfoFormComponent implements OnInit {
       'lastname': new FormControl('', [Validators.required]),
       'nhl_id': new FormControl(''),
       'position': new FormControl(''),
-      'isactive': new FormControl('')
+      'isactive': new FormControl(false)
     })
   }
 
