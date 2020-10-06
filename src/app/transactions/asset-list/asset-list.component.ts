@@ -101,7 +101,7 @@ export class AssetListComponent implements OnInit, OnDestroy, OnChanges {
     const teamId = this.getTeamId(name);
 
     if (teamId) {
-
+      
       this._draftService.getDraftTableByTeam(teamId, this.currentDraftSeason, this.nextDraftSeason).pipe(
         takeWhile(() => this._alive)
       ).subscribe((rows: DraftTable[]) => {
