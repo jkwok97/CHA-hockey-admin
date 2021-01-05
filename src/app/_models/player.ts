@@ -6,7 +6,8 @@ export interface Player {
     isactive: boolean,
     isgoalie: boolean,
     isdefense: boolean,
-    isforward: boolean
+    isforward: boolean,
+    is_protected: boolean
 };
 
 export interface CurrentPlayer {

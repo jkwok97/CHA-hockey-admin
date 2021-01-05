@@ -22,7 +22,7 @@ export class PlayerInfoComponent implements OnInit {
   showType: string = 'true';
 
   playersData: MatTableDataSource<any[]>;
-  columns = [ 'id', 'nhl_id', 'firstname', 'lastname', 'isactive', 'isgoalie', 'isdefense', 'isforward'];
+  columns = [ 'id', 'nhl_id', 'firstname', 'lastname', 'isactive', 'isgoalie', 'isdefense', 'isforward', 'is_protected' ];
 
   page: number = 1;
   pageSize: number = 25;

@@ -62,7 +62,8 @@ export class PlayerInfoFormComponent implements OnInit {
       'lastname': new FormControl('', [Validators.required]),
       'nhl_id': new FormControl(''),
       'position': new FormControl(''),
-      'isactive': new FormControl(false)
+      'isactive': new FormControl(false),
+      'is_protected': new FormControl(false)
     })
   }
 
@@ -72,7 +73,8 @@ export class PlayerInfoFormComponent implements OnInit {
       'lastname': player.lastname,
       'nhl_id': player.nhl_id,
       'position': this.getPosition(player),
-      'isactive': player.isactive
+      'isactive': player.isactive,
+      'is_protected': player.is_protected
     })
 
   }
