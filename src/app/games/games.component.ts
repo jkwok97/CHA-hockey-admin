@@ -35,8 +35,8 @@ export class GamesComponent implements OnInit, OnDestroy {
     private _gamesService: GamesService,
     private _currentSeasonService: CurrentSeasonService
   ) { 
-    this.currentSeason = '2019-20';
-    // this.currentSeason = this._currentSeasonService.currentSeason;
+    // this.currentSeason = '2019-20';
+    this.currentSeason = this._currentSeasonService.currentSeason;
   }
 
   ngOnInit() {
