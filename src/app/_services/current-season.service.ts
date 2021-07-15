@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class CurrentSeasonService {
 
-  currentSeason: string = '2020-21';
+  currentSeason: string = '2021-22';
   currentSeasonType: string = 'Regular';
   currentOffSeason: string = '2021';
 
-  currentNextSeason: string = '2021-22';
+  currentNextSeason: string = '2022-23';
   currentNextOffSeason: string = '2022';
 
   constructor() { }

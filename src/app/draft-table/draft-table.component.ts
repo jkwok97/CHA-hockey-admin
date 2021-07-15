@@ -24,7 +24,7 @@ export class DraftTableComponent implements OnInit {
   teams$: Observable<Team[]>;
   teams: Team[];
 
-  currentSeason: string = '2020';
+  currentSeason: string = '2021';
 
   draftTableData: MatTableDataSource<any[]>;
   columns = [ 'id', 'draft_year', 'logo', 'city', 'nickname','round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
