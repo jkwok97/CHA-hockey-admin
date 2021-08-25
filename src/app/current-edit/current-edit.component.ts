@@ -67,12 +67,15 @@ export class CurrentEditComponent implements OnInit {
   createForm() {
     this.playerForm = new FormGroup({
       'team_name': new FormControl('', [Validators.required]),
+      'position': new FormControl('', [Validators.required])
     })
   }
 
   patchform(player: CurrentPlayer) {
+    console.log(player);
     this.playerForm.patchValue({
       'team_name': player.team_name,
+      'position': player.position
     })
 
   }

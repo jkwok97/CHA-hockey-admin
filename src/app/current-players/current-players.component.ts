@@ -25,7 +25,7 @@ export class CurrentPlayersComponent implements OnInit {
 
   currentPlayerData: MatTableDataSource<any[]>;
 
-  columns = [ 'id', 'player_id', 'player_status', 'firstname', 'lastname', 'team_name', 'playing_year', 'season_type'];
+  columns = [ 'id', 'player_id', 'player_status', 'firstname', 'lastname', 'position', 'team_name', 'playing_year', 'season_type'];
 
   page: number = 1;
   pageSize: number = 25;

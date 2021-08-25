@@ -18,5 +18,6 @@ export interface CurrentPlayer {
     lastname: string,
     team_name: string,
     playing_year: string,
-    season_type: string
+    season_type: string,
+    position: string
 }
