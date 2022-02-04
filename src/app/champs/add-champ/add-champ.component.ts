@@ -106,10 +106,10 @@ export class AddChampComponent implements OnInit {
     this.awardForm.patchValue({
       'cha_season': winner.cha_season,
       'display_season': winner.display_season,
-      'award_type': winner.awardtypeid,
-      'users_id': winner.ownerid,
-      'player_id': winner.playerid,
-      'team_id': winner.teamid
+      'award_type': winner.awardTypeId,
+      'users_id': winner.ownerId,
+      'player_id': winner.playerId,
+      'team_id': winner.teamId
     });
 
     setTimeout(() => {
