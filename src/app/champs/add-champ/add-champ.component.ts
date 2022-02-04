@@ -108,7 +108,7 @@ export class AddChampComponent implements OnInit {
       'display_season': winner.display_season,
       'award_type': winner.awardTypeId,
       'users_id': winner.ownerId,
-      'player_id': winner.playerId,
+      'player_id': winner.playerid,
       'team_id': winner.teamId
     });
 
@@ -136,10 +136,12 @@ export class AddChampComponent implements OnInit {
   }
 
   getPlayers(name: string) {
+    console.log(this.currentSeason);
     this._teamsService.getPlayersByTeamName(name, this.currentSeason, 'Regular').pipe(
       take(1)
     ).subscribe((players) => {
       this.players = players['players'].concat(players['goalies']);
+      console.log(this.players)
     })
   }
 
