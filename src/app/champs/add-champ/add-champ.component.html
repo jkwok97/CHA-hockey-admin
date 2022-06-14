@@ -1,114 +1,165 @@
-<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<mat-progress-bar
+  mode="query"
+  color="accent"
+  *ngIf="isLoading"
+></mat-progress-bar>
 
 <mat-card *ngIf="!isLoading">
+  <mat-card-header>
+    <mat-card-title> Awards </mat-card-title>
+  </mat-card-header>
 
-    <mat-card-header>
-        <mat-card-title>
-            Awards
-        </mat-card-title>
-    </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="awardForm">
+      <section class="form-section">
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>CHA Season</mat-label>
+          <input matInput placeholder="Last" formControlName="cha_season" />
+          <mat-error
+            *ngIf="
+              awardForm.controls.cha_season.touched &&
+              awardForm.controls.cha_season.invalid
+            "
+          >
+            This field is mandatory.
+          </mat-error>
+        </mat-form-field>
 
-    <mat-card-content>
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>Display Season</mat-label>
+          <input
+            matInput
+            placeholder="Year To Display"
+            formControlName="display_season"
+          />
+          <mat-error
+            *ngIf="
+              awardForm.controls.display_season.touched &&
+              awardForm.controls.display_season.invalid
+            "
+          >
+            This field is mandatory.
+          </mat-error>
+        </mat-form-field>
+      </section>
 
-        <form [formGroup]="awardForm">
+      <section class="form-section">
+        <mat-form-field color="accent">
+          <mat-label>Award Type</mat-label>
+          <mat-select formControlName="award_type">
+            <mat-option
+              *ngFor="let type of awardTypes$ | async"
+              [value]="type.id"
+            >
+              {{ type.display_name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              awardForm.controls.award_type.touched &&
+              awardForm.controls.award_type.invalid
+            "
+          >
+            This field is mandatory.
+          </mat-error>
+        </mat-form-field>
 
-            <section class="form-section">
-    
-                <mat-form-field color="accent" appearance="fill">
-                    <mat-label>CHA Season</mat-label>
-                    <input matInput placeholder="Last" formControlName="cha_season">
-                    <mat-error *ngIf="awardForm.controls.cha_season.touched && awardForm.controls.cha_season.invalid">
-                        This field is mandatory.
-                    </mat-error>
-                </mat-form-field>
-    
-                <mat-form-field color="accent" appearance="fill">
-                    <mat-label>Display Season</mat-label>
-                    <input matInput placeholder="Year To Display" formControlName="display_season">
-                    <mat-error *ngIf="awardForm.controls.display_season.touched && awardForm.controls.display_season.invalid">
-                        This field is mandatory.
-                    </mat-error>
-                </mat-form-field>
+        <mat-form-field color="accent">
+          <mat-label>Team</mat-label>
+          <mat-select formControlName="team_id">
+            <mat-option *ngFor="let team of teams$ | async" [value]="team.id">
+              {{ team.city }} {{ team.nickname }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              awardForm.controls.team_id.touched &&
+              awardForm.controls.team_id.invalid
+            "
+          >
+            This field is mandatory.
+          </mat-error>
+        </mat-form-field>
+      </section>
 
-            </section>
+      <section class="form-section">
+        <mat-form-field color="accent">
+          <mat-label>Owner</mat-label>
+          <mat-select formControlName="users_id">
+            <mat-option
+              *ngFor="let owner of owners$ | async"
+              [value]="owner.id"
+            >
+              {{ owner.firstname }} {{ owner.lastname }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              awardForm.controls.users_id.touched &&
+              awardForm.controls.users_id.invalid
+            "
+          >
+            This field is mandatory.
+          </mat-error>
+        </mat-form-field>
 
-            <section class="form-section">
+        <mat-form-field color="accent" *ngIf="showPlayerField">
+          <mat-label>Player</mat-label>
+          <mat-select formControlName="player_id">
+            <mat-option
+              *ngFor="let player of players"
+              [value]="player.playerid"
+            >
+              {{ player.firstname }} {{ player.lastname }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              awardForm.controls.player_id.touched &&
+              awardForm.controls.player_id.invalid
+            "
+          >
+            This field is mandatory.
+          </mat-error>
+        </mat-form-field>
+      </section>
+    </form>
+  </mat-card-content>
 
-                <mat-form-field color="accent">
-                    <mat-label>Award Type</mat-label>
-                    <mat-select formControlName="award_type">
-                        <mat-option *ngFor="let type of (awardTypes$ | async)" [value]="type.id">
-                            {{type.display_name}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="awardForm.controls.award_type.touched && awardForm.controls.award_type.invalid">
-                        This field is mandatory.
-                    </mat-error>
-                </mat-form-field>
-    
-                <mat-form-field color="accent">
-                    <mat-label>Team</mat-label>
-                    <mat-select formControlName="team_id">
-                        <mat-option *ngFor="let team of (teams$ | async)" [value]="team.id">
-                            {{team.city}} {{team.nickname}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="awardForm.controls.team_id.touched && awardForm.controls.team_id.invalid">
-                        This field is mandatory.
-                    </mat-error>
-                </mat-form-field>
-
-            </section>
-
-            <section class="form-section">
-
-                <mat-form-field color="accent">
-                    <mat-label>Owner</mat-label>
-                    <mat-select formControlName="users_id">
-                        <mat-option *ngFor="let owner of (owners$ | async)" [value]="owner.id">
-                            {{owner.firstname}} {{owner.lastname}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="awardForm.controls.users_id.touched && awardForm.controls.users_id.invalid">
-                        This field is mandatory.
-                    </mat-error>
-                </mat-form-field>
-    
-                <mat-form-field 
-                    color="accent" 
-                    *ngIf="showPlayerField"
-                >
-                    <mat-label>Player</mat-label>
-                    <mat-select formControlName="player_id">
-                        <mat-option *ngFor="let player of players" [value]="player.playerid">
-                            {{player.firstname}} {{player.lastname}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="awardForm.controls.player_id.touched && awardForm.controls.player_id.invalid">
-                        This field is mandatory.
-                    </mat-error>
-                </mat-form-field>
-
-            </section>
-
-        </form>
-
-    </mat-card-content>
-
-    <mat-card-actions>
-        <button 
-            mat-raised-button 
-            color="accent" 
-            (click)="onSave()" 
-            *ngIf="!isSaving && !inEditMode"
-            [disabled]="awardForm.invalid"
-        >
-            Save
-        </button>
-        <button mat-raised-button color="accent" (click)="onEditSave(winner.id)" *ngIf="!isSaving && inEditMode">Edit</button>
-        <button mat-raised-button color="primary" (click)="onCancel()" *ngIf="!isSaving">Cancel</button>
-        <button mat-raised-button color="warn" (click)="onDelete(winner.id)" *ngIf="!isSaving && inEditMode">Delete</button>
-        <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
-    </mat-card-actions>
-
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onSave()"
+      *ngIf="!isSaving && !inEditMode"
+      [disabled]="awardForm.invalid"
+    >
+      Save
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onEditSave(winner.id)"
+      *ngIf="!isSaving && inEditMode"
+    >
+      Edit
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onCancel()"
+      *ngIf="!isSaving"
+    >
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="onDelete(winner.id)"
+      *ngIf="!isSaving && inEditMode"
+    >
+      Delete
+    </button>
+    <mat-spinner color="accent" *ngIf="isSaving" diameter="30"></mat-spinner>
+  </mat-card-actions>
 </mat-card>
