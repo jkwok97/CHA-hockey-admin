@@ -1,22 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DraftTable } from '../_models/draft-table';
-import { DraftService } from '../_services/draft.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
-import { TeamService } from '../_services/team.service';
-import { Observable } from 'rxjs';
-import { Team } from '../_models/team';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { DraftTable } from "../_models/draft-table";
+import { DraftService } from "../_services/draft.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { Router, ActivatedRoute } from "@angular/router";
+import { takeWhile } from "rxjs/operators";
+import { TeamService } from "../_services/team.service";
+import { Observable } from "rxjs";
+import { Team } from "../_models/team";
 
 @Component({
-  selector: 'app-draft-table',
-  templateUrl: './draft-table.component.html',
-  styleUrls: ['./draft-table.component.css']
+  selector: "app-draft-table",
+  templateUrl: "./draft-table.component.html",
+  styleUrls: ["./draft-table.component.css"],
 })
 export class DraftTableComponent implements OnInit {
-
   private _alive: boolean = true;
   isLoading: boolean = false;
 
@@ -24,25 +23,36 @@ export class DraftTableComponent implements OnInit {
   teams$: Observable<Team[]>;
   teams: Team[];
 
-  currentSeason: string = '2021';
+  currentSeason: string = "2022";
 
   draftTableData: MatTableDataSource<any[]>;
-  columns = [ 'id', 'draft_year', 'logo', 'city', 'nickname','round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
+  columns = [
+    "id",
+    "draft_year",
+    "logo",
+    "city",
+    "nickname",
+    "round_one",
+    "round_two",
+    "round_three",
+    "round_four",
+    "round_five",
+  ];
 
   page: number = 1;
   pageSize: number = 20;
   length: number = 0;
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     private _draftService: DraftService,
     private _teamsService: TeamService,
     private _router: Router,
     private _route: ActivatedRoute
-  ) { 
-    this.teams$ = this._teamsService.getTeamsByActive('true');
+  ) {
+    this.teams$ = this._teamsService.getTeamsByActive("true");
   }
 
   ngOnInit() {
@@ -50,11 +60,11 @@ export class DraftTableComponent implements OnInit {
 
     this.getDraftTableByYear(this.currentSeason);
 
-    this.teams$.pipe(
-      takeWhile(() => this._alive),
-    ).subscribe((teams: Team[]) => {
-      this.teams = teams;
-    })
+    this.teams$
+      .pipe(takeWhile(() => this._alive))
+      .subscribe((teams: Team[]) => {
+        this.teams = teams;
+      });
   }
 
   changeActive(type: string) {
@@ -64,17 +74,20 @@ export class DraftTableComponent implements OnInit {
   }
 
   getDraftTableByYear(type: string) {
-    this._draftService.getDraftTableByYear(type).pipe(
-      takeWhile(() => this._alive)
-    ).subscribe((table: DraftTable[]) => {
-      this.isLoading = false;
-      this.table = table;
-      this.draftTableData = new MatTableDataSource<any[]>(this.table as any[]);
-      setTimeout(() => {
-        this.draftTableData.paginator = this.paginator;
-        this.draftTableData.sort = this.sort;
-      }, 350);
-    })
+    this._draftService
+      .getDraftTableByYear(type)
+      .pipe(takeWhile(() => this._alive))
+      .subscribe((table: DraftTable[]) => {
+        this.isLoading = false;
+        this.table = table;
+        this.draftTableData = new MatTableDataSource<any[]>(
+          this.table as any[]
+        );
+        setTimeout(() => {
+          this.draftTableData.paginator = this.paginator;
+          this.draftTableData.sort = this.sort;
+        }, 350);
+      });
   }
 
   getTeamLogo(id: number) {
@@ -85,16 +98,15 @@ export class DraftTableComponent implements OnInit {
 
   onEdit(draftId: number) {
     this._router.navigate([`edit/${draftId}`], { relativeTo: this._route });
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   onAddPlayer() {
     this._router.navigate([`add`], { relativeTo: this._route });
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   ngOnDestroy(): void {
     this._alive = false;
   }
-
 }
